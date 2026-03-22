@@ -3,257 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية في مصر">
-<meta name="keywords" content="قوافل طبية, جمعية خيرية, عمليات جراحية">
-<meta property="og:title" content="Social Leaders Society">
-<meta property="og:image" content="logo.png">
-<title>جمعية الليدرز الاجتماعية - SLS</title>
+<title>جمعية الليدرز الاجتماعية - SLS | الرئيسية</title>
+<!-- SEO & Meta Tags (Keep them as they are) -->
+<meta name="description" content="جمعية الليدرز الاجتماعية (SLS) جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣.">
+<link rel="canonical" href="https://sls-rho.vercel.app/">
+<meta name="theme-color" content="#0f766e">
+
+<!-- Fonts & Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- Tailwind Config -->
 <script>
 tailwind.config = {
   theme: {
     extend: {
-      fontFamily: {
-        'cairo': ['Cairo', 'sans-serif'],
-        'tajawal': ['Tajawal', 'sans-serif'],
-      },
+      fontFamily: { 'cairo': ['Cairo', 'sans-serif'], 'tajawal': ['Tajawal', 'sans-serif'] },
       colors: {
-        'sls-teal': {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          950: '#042f2e',
-        },
-        'sls-cyan': {
-          50: '#ecfeff',
-          100: '#cffafe',
-          200: '#a5f3fc',
-          300: '#67e8f9',
-          400: '#22d3ee',
-          500: '#06b6d4',
-          600: '#0891b2',
-          700: '#0e7490',
-          800: '#155e75',
-          900: '#164e63',
-          950: '#083344',
-        },
-        'sls-gold': {
-          400: '#fbbf24',
-          500: '#f59e0b',
-        }
+        'sls-teal': { 50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4', 400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e' },
+        'sls-cyan': { 50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 300: '#67e8f9', 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63', 950: '#083344' },
+        'sls-gold': { 400: '#fbbf24', 500: '#f59e0b' }
       }
     }
   }
 }
 </script>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Tajawal', 'Cairo', sans-serif; }
-
-  /* Animations */
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(-15deg); }
-    50% { transform: translateY(-20px) rotate(-10deg); }
-  }
-  
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.3), 0 0 0 8px rgba(255,255,255,0.15); }
-    50% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.6), 0 0 0 16px rgba(255,255,255,0.07); }
-  }
-  
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
-  @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
-  @keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-  .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-  .animate-slide-right { animation: slideInRight 0.6s ease-out forwards; }
-  .animate-slide-left { animation: slideInLeft 0.6s ease-out forwards; }
-  .animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
-
-  .page { display: none; }
-  .page.active { display: block; }
-  
-  .page-transition {
-    animation: fadeInUp 0.5s ease-out;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: #f0fdfa; }
-  ::-webkit-scrollbar-thumb { background: #14b8a6; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #0d9488; }
-
-  .nav-link {
-    position: relative;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    right: 0;
-    width: 0;
-    height: 2px;
-    background: #fbbf24;
-    transition: width 0.3s;
-  }
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    width: 100%;
-  }
-
-  .card-hover {
-    transition: all 0.3s ease;
-  }
-  .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(20, 184, 166, 0.2);
-  }
-
-  .gradient-border {
-    position: relative;
-  }
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #14b8a6, #06b6d4);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s;
-  }
-  .gradient-border:hover::before {
-    transform: scaleX(1);
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    transition: all 0.3s;
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
-  }
-
-  .btn-secondary {
-    border: 2px solid rgba(255,255,255,0.4);
-    transition: all 0.3s;
-  }
-  .btn-secondary:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: white;
-    transform: translateY(-2px);
-  }
-
-  .stat-card {
-    transition: all 0.3s;
-  }
-  .stat-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255,255,255,0.15);
-  }
-
-  .region-badge {
-    transition: all 0.3s;
-  }
-  .region-badge:hover {
-    background: linear-gradient(135deg, #14b8a6, #06b6d4);
-    color: white;
-    transform: translateY(-3px);
-  }
-
-  .board-card {
-    transition: all 0.3s;
-  }
-  .board-card:hover {
-    transform: translateY(-5px);
-    border-color: #14b8a6;
-  }
-
-  .partner-pill {
-    transition: all 0.3s;
-  }
-  .partner-pill:hover {
-    background: #fbbf24;
-    color: #134e4a;
-    border-color: #fbbf24;
-    transform: scale(1.05);
-  }
-
-  .info-pill {
-    transition: all 0.3s;
-  }
-  .info-pill:hover {
-    transform: translateX(-5px);
-    box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
-  }
-
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .mobile-menu { display: block; }
-  }
-  @media (min-width: 769px) {
-    .mobile-menu { display: none; }
-  }
-</style>
 </head>
 <body class="bg-white">
 
-<!-- ========== NAVIGATION ========== -->
-<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md" dir="rtl">
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logo -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
+      <a href="index.html" class="flex items-center gap-3">
         <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain shadow-lg">
         <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
-      </div>
+      </a>
 
       <!-- Desktop Nav Links -->
       <ul class="nav-links hidden lg:flex items-center gap-1">
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm active" data-page="home" onclick="showPage('home')">الرئيسية</a></li>
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm" data-page="about" onclick="showPage('about')">من نحن</a></li>
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm" data-page="services" onclick="showPage('services')">خدماتنا</a></li>
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm" data-page="regions" onclick="showPage('regions')">مناطق الخدمة</a></li>
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm" data-page="board" onclick="showPage('board')">مجلس الإدارة</a></li>
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm" data-page="partners" onclick="showPage('partners')">شركاؤنا</a></li>
-        <li><a href="#" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm" data-page="contact" onclick="showPage('contact')">تواصل معنا</a></li>
+        <li><a href="index.html" class="nav-link active px-4 py-2 text-white font-medium text-sm">الرئيسية</a></li>
+        <li><a href="about.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">من نحن</a></li>
+        <li><a href="services.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">خدماتنا</a></li>
+        <li><a href="regions.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مناطق الخدمة</a></li>
+        <li><a href="board.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مجلس الإدارة</a></li>
+        <li><a href="partners.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">شركاؤنا</a></li>
+        <li><a href="contact.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">تواصل معنا</a></li>
       </ul>
 
       <!-- Mobile Menu Button -->
       <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()">
-        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </div>
@@ -261,32 +63,29 @@ tailwind.config = {
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
     <div class="px-4 py-4 space-y-2">
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('home'); toggleMobileMenu()">الرئيسية</a>
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('about'); toggleMobileMenu()">من نحن</a>
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('services'); toggleMobileMenu()">خدماتنا</a>
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('regions'); toggleMobileMenu()">مناطق الخدمة</a>
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('board'); toggleMobileMenu()">مجلس الإدارة</a>
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('partners'); toggleMobileMenu()">شركاؤنا</a>
-      <a href="#" class="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl font-medium" onclick="showPage('contact'); toggleMobileMenu()">تواصل معنا</a>
+      <a href="index.html" class="block px-4 py-3 text-white font-medium">الرئيسية</a>
+      <a href="about.html" class="block px-4 py-3 text-white/80 hover:text-white">من نحن</a>
+      <a href="services.html" class="block px-4 py-3 text-white/80 hover:text-white">خدماتنا</a>
+      <a href="regions.html" class="block px-4 py-3 text-white/80 hover:text-white">مناطق الخدمة</a>
+      <a href="board.html" class="block px-4 py-3 text-white/80 hover:text-white">مجلس الإدارة</a>
+      <a href="partners.html" class="block px-4 py-3 text-white/80 hover:text-white">شركاؤنا</a>
+      <a href="contact.html" class="block px-4 py-3 text-white/80 hover:text-white">تواصل معنا</a>
     </div>
   </div>
 </nav>
 
-<!-- ========== HOME PAGE ========== -->
-<div id="page-home" class="page active">
+<!-- HOME PAGE CONTENT -->
+<div class="pt-16">
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900">
-    <!-- Animated Shapes -->
+    <!-- Shapes & Content (Same as original) -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute w-44 h-44 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 8%; left: 5%;"></div>
       <div class="absolute w-24 h-24 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
       <div class="absolute w-56 h-56 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 15%; right: 4%; animation-delay: 3s;"></div>
-      <div class="absolute w-20 h-20 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 30%; right: 25%; animation-delay: 2s;"></div>
-      <div class="absolute w-36 h-36 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 50%; left: 2%; animation-delay: 4s;"></div>
     </div>
 
     <div class="relative z-10 text-center px-4 py-20">
-      <!-- Logo Circle -->
       <div class="mb-8 animate-scale-in">
         <div class="relative inline-block">
           <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl animate-pulse-glow overflow-hidden bg-white">
@@ -295,47 +94,23 @@ tailwind.config = {
         </div>
       </div>
 
-      <!-- Badge -->
       <p class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 text-sls-cyan-100 text-sm mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
         مشهرة برقم ٣٣٧٧ لسنة ٢٠١٣ • وزارة التضامن الاجتماعي
       </p>
 
-      <!-- Title -->
       <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 animate-fade-in-up" style="animation-delay: 0.3s;">
         جمعية الليدرز الاجتماعية
       </h1>
+      <p class="text-xl sm:text-2xl text-sls-cyan-200 font-light mb-3 animate-fade-in-up" style="animation-delay: 0.4s;">Social Leaders Society</p>
+      <p class="text-lg sm:text-xl text-sls-gold-400 font-bold mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">ما كان لله دام و اتّصل</p>
 
-      <!-- English Name -->
-      <p class="text-xl sm:text-2xl text-sls-cyan-200 font-light mb-3 animate-fade-in-up" style="animation-delay: 0.4s;">
-        Social Leaders Society
-      </p>
-
-      <!-- Motto -->
-      <p class="text-lg sm:text-xl text-sls-gold-400 font-bold mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">
-        ما كان لله دام و اتّصل
-      </p>
-
-      <!-- Description -->
       <p class="text-sls-cyan-100 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style="animation-delay: 0.6s;">
-        منذ تأسيسنا عام 2013، نلتزم بتقديم خدمات صحية وإنسانية مجانية على أعلى مستوى، 
-        نصل إلى المناطق النائية في جميع أنحاء مصر، ونقضي على قوائم الانتظار في العمليات الجراحية.
+        منذ تأسيسنا عام 2013، نلتزم بتقديم خدمات صحية وإنسانية مجانية على أعلى مستوى.
       </p>
 
-      <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.7s;">
-        <button onclick="showPage('services')" class="btn-primary px-8 py-4 text-sls-cyan-900 font-bold rounded-full shadow-lg">
-          اكتشف خدماتنا
-        </button>
-        <button onclick="showPage('contact')" class="btn-secondary px-8 py-4 text-white font-semibold rounded-full">
-          تواصل معنا
-        </button>
-      </div>
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-        <div class="w-1.5 h-3 bg-white/50 rounded-full animate-pulse"></div>
+        <a href="services.html" class="btn-primary px-8 py-4 text-sls-cyan-900 font-bold rounded-full shadow-lg">اكتشف خدماتنا</a>
+        <a href="contact.html" class="btn-secondary px-8 py-4 text-white font-semibold rounded-full">تواصل معنا</a>
       </div>
     </div>
   </section>
@@ -344,6 +119,7 @@ tailwind.config = {
   <section class="bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 py-16">
     <div class="max-w-7xl mx-auto px-4">
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4" id="stats-container">
+        <!-- Stats Items -->
         <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
           <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="2107">+0</span>
           <span class="text-sls-cyan-100 text-sm">عملية جراحية</span>
@@ -377,657 +153,11 @@ tailwind.config = {
   </section>
 </div>
 
-<!-- ========== ABOUT PAGE ========== -->
-<div id="page-about" class="page">
-  <div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24" dir="rtl">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <div class="text-center mb-12 page-transition">
-        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">
-          من نحن
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">
-          رؤية تُحرّك المجتمع
-        </h1>
-        <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full"></div>
-      </div>
+<!-- FOOTER -->
+<footer class="bg-gradient-to-r from-sls-cyan-950 via-sls-teal-900 to-sls-cyan-950 text-center py-8">
+  <p class="text-sls-cyan-100">© 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span></p>
+</footer>
 
-      <div class="grid lg:grid-cols-2 gap-8">
-        <!-- Vision & Mission Cards -->
-        <div class="space-y-6">
-          <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-100 border-t-4 border-sls-cyan-500 card-hover page-transition">
-            <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl">
-              🎯
-            </div>
-            <h3 class="text-2xl font-bold text-sls-cyan-900 mb-4">الرؤية</h3>
-            <p class="text-gray-600 leading-relaxed">
-              منذ إنشائها عام 2013 التزمت جمعية الليدرز الاجتماعية بتوفير خدمات صحية على أعلى مستوى وبالمجان، 
-              تهدف بشكل أساسي إلى تقديم الخدمة بأعلى جودة وإلى مستحقيها وخاصة بالمناطق النائية والقضاء على قوائم الانتظار في العمليات الجراحية.
-            </p>
-          </div>
-
-          <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-100 border-t-4 border-sls-gold-400 card-hover page-transition" style="animation-delay: 0.2s;">
-            <div class="w-16 h-16 bg-gradient-to-br from-sls-gold-400 to-sls-gold-500 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl">
-              🌍
-            </div>
-            <h3 class="text-2xl font-bold text-sls-cyan-900 mb-4">الهدف</h3>
-            <p class="text-gray-600 leading-relaxed">
-              الإرتقاء بالمجتمع المصري من خلال مجموعة من الأنشطة والمشاريع التي تستهدف تقديم الخدمات الصحية والإنسانية 
-              لمستحقيها سواء في نطاق محافظة الأسكندرية أو خارجها في جميع محافظات مصر.
-            </p>
-          </div>
-        </div>
-
-        <!-- Info Cards -->
-        <div class="space-y-4">
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📅</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">تأسست عام 2013</h4>
-              <p class="text-sm text-gray-500">مشهرة برقم ٣٣٧٧ بوزارة التضامن الاجتماعي</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.1s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📍</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">الإسكندرية - باب شرق</h4>
-              <p class="text-sm text-gray-500">برج الحرية ٢ - ١١ شارع جلال الدسوقي</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.2s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">✉️</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">البريد الإلكتروني</h4>
-              <p class="text-sm text-gray-500">Socialleaders8@gmail.com</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.3s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📱</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">رقم التواصل</h4>
-              <p class="text-sm text-gray-500">01117629537</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.4s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">🌐</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">الموقع الإلكتروني</h4>
-              <p class="text-sm text-gray-500">social-leaders.org</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== SERVICES PAGE ========== -->
-<div id="page-services" class="page">
-  <div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24" dir="rtl">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <div class="text-center mb-12 page-transition">
-        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">
-          خدماتنا
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">
-          ماذا نقدّم؟
-        </h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          خدمات طبية وإنسانية متكاملة تصل إلى كل من يحتاجها في أي مكان بمصر
-        </p>
-        <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full mt-6"></div>
-      </div>
-
-      <!-- Services Grid -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover page-transition">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-            🏥
-          </div>
-          <h3 class="text-xl font-bold text-sls-cyan-900 mb-3">القوافل الطبية والجراحية</h3>
-          <p class="text-gray-600 leading-relaxed">إجراء قوافل طبية وجراحية في جميع محافظات الجمهورية لخدمة أهل المناطق النائية.</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover page-transition" style="animation-delay: 0.1s;">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-            💊
-          </div>
-          <h3 class="text-xl font-bold text-sls-cyan-900 mb-3">الكشف المجاني وتوزيع الأدوية</h3>
-          <p class="text-gray-600 leading-relaxed">الكشف الطبي بالمجان وتوزيع أدوية على المرضى غير القادرين في مختلف المحافظات.</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover page-transition" style="animation-delay: 0.2s;">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-            ♿
-          </div>
-          <h3 class="text-xl font-bold text-sls-cyan-900 mb-3">خدمة كبار السن وذوي الاحتياجات</h3>
-          <p class="text-gray-600 leading-relaxed">الوصول لكبار السن وذوي الاحتياجات الخاصة في الأماكن النائية وغير القادرين على التنقل.</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover page-transition" style="animation-delay: 0.3s;">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-            🩺
-          </div>
-          <h3 class="text-xl font-bold text-sls-cyan-900 mb-3">المسح الطبي والتثقيف الصحي</h3>
-          <p class="text-gray-600 leading-relaxed">المسح الطبي لأمراض الضغط والسكر والكلى وفقر الدم وتوعية المجتمع صحياً.</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover page-transition" style="animation-delay: 0.4s;">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-            🔬
-          </div>
-          <h3 class="text-xl font-bold text-sls-cyan-900 mb-3">العمليات الجراحية</h3>
-          <p class="text-gray-600 leading-relaxed">إجراء عمليات جراحية في جميع التخصصات للقضاء على قوائم الانتظار المرهقة.</p>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover page-transition" style="animation-delay: 0.5s;">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-            🚑
-          </div>
-          <h3 class="text-xl font-bold text-sls-cyan-900 mb-3">دورات الإسعافات الأولية</h3>
-          <p class="text-gray-600 leading-relaxed">تقديم دورات تدريبية متخصصة في الإسعافات الأولية للمجتمع وكوادر الجمعية.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== REGIONS PAGE ========== -->
-<div id="page-regions" class="page">
-  <div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24" dir="rtl">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <div class="text-center mb-12 page-transition">
-        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">
-          نطاق الخدمة
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">
-          أماكن خدمات الليدرز
-        </h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          نصل إلى المناطق النائية في جميع محافظات مصر من شمالها لجنوبها ومن شرقها لغربها
-        </p>
-        <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full mt-6"></div>
-      </div>
-
-      <!-- Regions Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
-          <span class="text-3xl mb-2 block">🏜️</span>
-          <h3 class="font-bold text-sls-cyan-900">واحة سيوة</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.05s;">
-          <span class="text-3xl mb-2 block">🌊</span>
-          <h3 class="font-bold text-sls-cyan-900">مدينة السلوم</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.1s;">
-          <span class="text-3xl mb-2 block">🏛️</span>
-          <h3 class="font-bold text-sls-cyan-900">محافظة سوهاج</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.15s;">
-          <span class="text-3xl mb-2 block">🌴</span>
-          <h3 class="font-bold text-sls-cyan-900">الفرافرة</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.2s;">
-          <span class="text-3xl mb-2 block">🏔️</span>
-          <h3 class="font-bold text-sls-cyan-900">سيدي براني</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.25s;">
-          <span class="text-3xl mb-2 block">📍</span>
-          <h3 class="font-bold text-sls-cyan-900">حلايب وشلاتين</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.3s;">
-          <span class="text-3xl mb-2 block">🌅</span>
-          <h3 class="font-bold text-sls-cyan-900">الأقصر</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.35s;">
-          <span class="text-3xl mb-2 block">🏙️</span>
-          <h3 class="font-bold text-sls-cyan-900">القاهرة</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.4s;">
-          <span class="text-3xl mb-2 block">🌾</span>
-          <h3 class="font-bold text-sls-cyan-900">كفر الشيخ</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.45s;">
-          <span class="text-3xl mb-2 block">🌊</span>
-          <h3 class="font-bold text-sls-cyan-900">البحيرة</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.5s;">
-          <span class="text-3xl mb-2 block">🏜️</span>
-          <h3 class="font-bold text-sls-cyan-900">مطروح</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.55s;">
-          <span class="text-3xl mb-2 block">🌿</span>
-          <h3 class="font-bold text-sls-cyan-900">الفيوم</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.6s;">
-          <span class="text-3xl mb-2 block">🏗️</span>
-          <h3 class="font-bold text-sls-cyan-900">الوادي الجديد</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.65s;">
-          <span class="text-3xl mb-2 block">🔴</span>
-          <h3 class="font-bold text-sls-cyan-900">البحر الأحمر</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.7s;">
-          <span class="text-3xl mb-2 block">🏖️</span>
-          <h3 class="font-bold text-sls-cyan-900">جنوب سيناء</h3>
-        </div>
-        <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition" style="animation-delay: 0.75s;">
-          <span class="text-3xl mb-2 block">🌆</span>
-          <h3 class="font-bold text-sls-cyan-900">الجيزة</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== BOARD PAGE ========== -->
-<div id="page-board" class="page">
-  <div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24" dir="rtl">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <div class="text-center mb-12 page-transition">
-        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">
-          مجلس الإدارة
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">
-          القيادة والإدارة
-        </h1>
-        <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full"></div>
-      </div>
-
-      <!-- Board Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            أل
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمد الألفي</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">رئيس الجمعية</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.1s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            مش
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمود شرف</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">الأمين العام</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.2s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            من
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمود ناصر</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">أمين الصندوق</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.3s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            مص
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمد مصطفى</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.4s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            حم
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ حسن محمد</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.5s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            أص
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ أحمد صالح</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.6s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            أع
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ أحمد عبد الباقي</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-        </div>
-
-        <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.7s;">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">
-            مع
-          </div>
-          <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمد العشري</h4>
-          <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">الرئيس السابق</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== PARTNERS PAGE ========== -->
-<div id="page-partners" class="page">
-  <div class="min-h-screen bg-gradient-to-br from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 pt-24" dir="rtl">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <div class="text-center mb-12 page-transition">
-        <span class="inline-block bg-white/10 text-sls-cyan-100 font-bold text-sm px-4 py-2 rounded-full mb-4 border border-white/20">
-          شركاء النجاح
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
-          من يسير معنا
-        </h1>
-        <p class="text-sls-cyan-200 max-w-2xl mx-auto">
-          شراكات قوية مع مؤسسات وطنية ودولية لتضخيم أثر العمل الخيري
-        </p>
-        <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-400 to-sls-teal-400 mx-auto rounded-full mt-6"></div>
-      </div>
-
-      <!-- Partners Grid -->
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition">
-          🏥 النقابة العامة لأطباء مصر
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.05s;">
-          🏥 نقابة أطباء الإسكندرية
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.1s;">
-          🎖️ القوات المسلحة المصرية
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.15s;">
-          🎓 جامعة الإسكندرية
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.2s;">
-          🌿 حزب مستقبل وطن
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.25s;">
-          ❤️ جمعية صناع الحياة
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.3s;">
-          💊 مؤسسة بنك الدواء
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.35s;">
-          🌱 مؤسسة سند للتنمية الشاملة
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.4s;">
-          💊 شركة فاركو للأدوية
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.45s;">
-          🌍 EPICO
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.5s;">
-          🎓 Profexo+ Academy
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.55s;">
-          🔄 Rotary
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.6s;">
-          🤝 مؤسسة عبد الوهاب الخيرية
-        </div>
-        <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.65s;">
-          🎓 EPSF
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== CONTACT PAGE ========== -->
-<div id="page-contact" class="page">
-  <div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24" dir="rtl">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <div class="text-center mb-12 page-transition">
-        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">
-          تواصل معنا
-        </span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">
-          نحن هنا لك
-        </h1>
-        <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full"></div>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-8">
-        <!-- Contact Info -->
-        <div class="space-y-4">
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📍</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">العنوان</h4>
-              <p class="text-sm text-gray-500">برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق - الإسكندرية</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.1s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📞</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">رقم التواصل</h4>
-              <p class="text-sm text-gray-500">01117629537</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.2s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">✉️</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">البريد الإلكتروني</h4>
-              <p class="text-sm text-gray-500">Socialleaders8@gmail.com</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.3s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">🌐</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">الموقع الإلكتروني</h4>
-              <p class="text-sm text-gray-500">social-leaders.org</p>
-            </div>
-          </div>
-
-          <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.4s;">
-            <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📘</div>
-            <div>
-              <h4 class="font-bold text-sls-cyan-900">فيسبوك</h4>
-              <p class="text-sm text-gray-500">Social Leaders Society - SLS</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-100 page-transition">
-          <h3 class="text-2xl font-bold text-sls-cyan-900 mb-6">أرسل لنا رسالة</h3>
-          
-          <!-- تم حذف action و method عشان نستخدم AJAX -->
-          <form id="contact-form" class="space-y-5">
-                <div>
-                  <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">الاسم الكامل</label>
-                  <input type="text" name="name" placeholder="اسمك هنا..." class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors" required>
-                </div>
-                
-                <div>
-                  <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">رقم الهاتف</label>
-                  <input type="tel" name="phone" placeholder="01xxxxxxxxx" class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors">
-                </div>
-                
-                <div>
-                  <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">البريد الإلكتروني</label>
-                  <input type="email" name="email" placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors" required>
-                </div>
-                
-                <div>
-                  <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">رسالتك</label>
-                  <textarea rows="4" name="message" placeholder="اكتب رسالتك هنا..." class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors resize-none" required></textarea>
-                </div>
-                
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white font-bold rounded-xl shadow-lg shadow-sls-cyan-200 hover:shadow-xl transition-all flex items-center justify-center gap-2">
-                  <span>إرسال الرسالة</span>
-                  <span>✉️</span>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========== BACK BUTTON ========== -->
-    <button id="back-btn" class="hidden fixed bottom-6 left-6 z-50 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white px-6 py-3 rounded-full shadow-lg shadow-sls-cyan-400/30 flex items-center gap-2 hover:shadow-xl transition-all" onclick="showPage('home')">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-      </svg>
-      <span class="font-semibold">الرئيسية</span>
-    </button>
-
-    <!-- ========== FOOTER ========== -->
-    <footer class="bg-gradient-to-r from-sls-cyan-950 via-sls-teal-900 to-sls-cyan-950 text-center py-8" dir="rtl">
-      <p class="text-sls-cyan-100">
-        © 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span> — ما كان لله دام و اتّصل
-      </p>
-      <p class="text-sls-cyan-300/50 text-sm mt-2">
-        مشهرة برقم ٣٣٧٧ لسنة ٢٠١٣ بوزارة التضامن الاجتماعي
-      </p>
-    </footer>
-
-    <!-- ========== JAVASCRIPT ========== -->
-    <script>
-      // Page Navigation
-      function showPage(pageName) {
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(page => {
-          page.classList.remove('active');
-        });
-        
-        // Show selected page
-        const selectedPage = document.getElementById('page-' + pageName);
-        if (selectedPage) {
-          selectedPage.classList.add('active');
-          
-          // Re-trigger animations
-          selectedPage.querySelectorAll('.page-transition').forEach(el => {
-            el.style.animation = 'none';
-            el.offsetHeight; // Trigger reflow
-            el.style.animation = null;
-          });
-        }
-        
-        // Update nav links
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.remove('active');
-          if (link.dataset.page === pageName) {
-            link.classList.add('active');
-          }
-        });
-        
-        // Show/hide back button
-        const backBtn = document.getElementById('back-btn');
-        if (pageName === 'home') {
-          backBtn.classList.add('hidden');
-        } else {
-          backBtn.classList.remove('hidden');
-        }
-        
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Animate stats if home page
-        if (pageName === 'home') {
-          animateStats();
-        }
-      }
-
-      // Mobile Menu Toggle
-      function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-      }
-
-      // Stats Counter Animation
-      function animateStats() {
-        const statNumbers = document.querySelectorAll('.stat-number');
-        
-        statNumbers.forEach(stat => {
-          const target = parseInt(stat.dataset.target);
-          const duration = 2000;
-          const steps = 60;
-          const stepDuration = duration / steps;
-          let current = 0;
-          let step = 0;
-          
-          const timer = setInterval(() => {
-            step++;
-            current = Math.floor((target * step) / steps);
-            
-            if (step >= steps) {
-              stat.textContent = '+' + target.toLocaleString('ar-EG');
-              clearInterval(timer);
-            } else {
-              stat.textContent = '+' + current.toLocaleString('ar-EG');
-            }
-          }, stepDuration);
-        });
-      }
-
-      // Navbar scroll effect
-      window.addEventListener('scroll', () => {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 20) {
-          navbar.classList.add('shadow-2xl');
-        } else {
-          navbar.classList.remove('shadow-2xl');
-        }
-      });
-
-      // Initialize
-      document.addEventListener('DOMContentLoaded', () => {
-        animateStats();
-      });
-      
-      // ========== FORMSPREE AJAX SUBMISSION ==========
-      const form = document.getElementById('contact-form');
-      
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault(); // نمنع الفورم من التحويل التقليدي
-        
-        const formData = new FormData(form);
-        const button = form.querySelector('button[type="submit"]');
-        const originalText = button.innerHTML;
-        
-        // تغيير نص الزر أثناء الإرسال
-        button.innerHTML = '<span>جاري الإرسال...</span>';
-        button.disabled = true;
-
-        try {
-          const response = await fetch('https://formspree.io/f/mgonnrdk', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-          });
-
-          if (response.ok) {
-            // نجاح الإرسال
-            alert('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
-            form.reset(); // تفريغ الفورم
-            showPage('home'); // التحويل للصفحة الرئيسية
-          } else {
-            // خطأ من السيرفر
-            alert('حدث خطأ أثناء الإرسال. برجاء المحاولة مرة أخرى.');
-          }
-        } catch (error) {
-          // خطأ في الاتصال
-          alert('حدث خطأ في الاتصال بالإنترنت.');
-        }
-
-        // إعادة الزر لحالته الطبيعية
-        button.innerHTML = originalText;
-        button.disabled = false;
-      });
-    </script>
-
-    </body>
-    </html>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شركاؤنا - جمعية الليدرز الاجتماعية</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { 'cairo': ['Cairo', 'sans-serif'], 'tajawal': ['Tajawal', 'sans-serif'] },
+      colors: {
+        'sls-teal': { 50: '#f0fdfa', 400: '#2dd4bf', 500: '#14b8a6', 800: '#115e59', 900: '#134e4a' },
+        'sls-cyan': { 100: '#cffafe', 200: '#a5f3fc', 400: '#22d3ee', 800: '#155e75', 900: '#164e63' },
+        'sls-gold': { 400: '#fbbf24', 500: '#f59e0b' }
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-white">
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain shadow-lg">
+        <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
+      </a>
+      <ul class="nav-links hidden lg:flex items-center gap-1">
+        <li><a href="index.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">الرئيسية</a></li>
+        <li><a href="about.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">من نحن</a></li>
+        <li><a href="services.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">خدماتنا</a></li>
+        <li><a href="regions.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مناطق الخدمة</a></li>
+        <li><a href="board.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مجلس الإدارة</a></li>
+        <li><a href="partners.html" class="nav-link active px-4 py-2 text-white font-medium text-sm">شركاؤنا</a></li>
+        <li><a href="contact.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">تواصل معنا</a></li>
+      </ul>
+      <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+    <div class="px-4 py-4 space-y-2">
+      <a href="partners.html" class="block px-4 py-3 text-white font-medium">شركاؤنا</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PARTNERS CONTENT -->
+<div class="min-h-screen bg-gradient-to-br from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 pt-24">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="text-center mb-12 page-transition">
+      <span class="inline-block bg-white/10 text-sls-cyan-100 font-bold text-sm px-4 py-2 rounded-full mb-4 border border-white/20">شركاء النجاح</span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">من يسير معنا</h1>
+      <p class="text-sls-cyan-200 max-w-2xl mx-auto">شراكات قوية مع مؤسسات وطنية ودولية لتضخيم أثر العمل الخيري</p>
+      <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-400 to-sls-teal-400 mx-auto rounded-full mt-6"></div>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition">🏥 النقابة العامة لأطباء مصر</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.05s;">🏥 نقابة أطباء الإسكندرية</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.1s;">🎖️ القوات المسلحة المصرية</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.15s;">🎓 جامعة الإسكندرية</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.2s;">🌿 حزب مستقبل وطن</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.25s;">❤️ جمعية صناع الحياة</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.3s;">💊 مؤسسة بنك الدواء</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.35s;">🌱 مؤسسة سند للتنمية الشاملة</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.4s;">💊 شركة فاركو للأدوية</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.45s;">🌍 EPICO</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.5s;">🎓 Profexo+ Academy</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.55s;">🔄 Rotary</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.6s;">🤝 مؤسسة عبد الوهاب الخيرية</div>
+      <div class="partner-pill bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-semibold cursor-pointer page-transition" style="animation-delay: 0.65s;">🎓 EPSF</div>
+    </div>
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<a href="index.html" class="fixed bottom-6 left-6 z-50 bg-white text-sls-cyan-800 px-6 py-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-sls-gold-400 transition-all">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  <span class="font-semibold">الرئيسية</span>
+</a>
+
+<footer class="bg-sls-cyan-950 text-center py-8">
+  <p class="text-sls-cyan-100">© 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تواصل معنا - جمعية الليدرز الاجتماعية</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { 'cairo': ['Cairo', 'sans-serif'], 'tajawal': ['Tajawal', 'sans-serif'] },
+      colors: {
+        'sls-teal': { 50: '#f0fdfa', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e' },
+        'sls-cyan': { 50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63', 950: '#083344' },
+        'sls-gold': { 400: '#fbbf24', 500: '#f59e0b' }
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-white">
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain shadow-lg">
+        <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
+      </a>
+      <ul class="nav-links hidden lg:flex items-center gap-1">
+        <li><a href="index.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">الرئيسية</a></li>
+        <li><a href="about.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">من نحن</a></li>
+        <li><a href="services.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">خدماتنا</a></li>
+        <li><a href="regions.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مناطق الخدمة</a></li>
+        <li><a href="board.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مجلس الإدارة</a></li>
+        <li><a href="partners.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">شركاؤنا</a></li>
+        <li><a href="contact.html" class="nav-link active px-4 py-2 text-white font-medium text-sm">تواصل معنا</a></li>
+      </ul>
+      <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+    <div class="px-4 py-4 space-y-2">
+      <a href="contact.html" class="block px-4 py-3 text-white font-medium">تواصل معنا</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTACT CONTENT -->
+<div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="text-center mb-12 page-transition">
+      <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">تواصل معنا</span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">نحن هنا لك</h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Contact Info -->
+      <div class="space-y-4">
+        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition">
+          <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📍</div>
+          <div>
+            <h4 class="font-bold text-sls-cyan-900">العنوان</h4>
+            <p class="text-sm text-gray-500">برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق - الإسكندرية</p>
+          </div>
+        </div>
+        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.1s;">
+          <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📞</div>
+          <div>
+            <h4 class="font-bold text-sls-cyan-900">رقم التواصل</h4>
+            <p class="text-sm text-gray-500">01117629537</p>
+          </div>
+        </div>
+        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.2s;">
+          <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">✉️</div>
+          <div>
+            <h4 class="font-bold text-sls-cyan-900">البريد الإلكتروني</h4>
+            <p class="text-sm text-gray-500">Socialleaders8@gmail.com</p>
+          </div>
+        </div>
+        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition" style="animation-delay: 0.3s;">
+          <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📘</div>
+          <div>
+            <h4 class="font-bold text-sls-cyan-900">فيسبوك</h4>
+            <p class="text-sm text-gray-500">Social Leaders Society - SLS</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-100 page-transition">
+        <h3 class="text-2xl font-bold text-sls-cyan-900 mb-6">أرسل لنا رسالة</h3>
+        <form id="contact-form" class="space-y-5">
+          <div>
+            <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">الاسم الكامل</label>
+            <input type="text" name="name" placeholder="اسمك هنا..." class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors" required>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">رقم الهاتف</label>
+            <input type="tel" name="phone" placeholder="01xxxxxxxxx" class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">البريد الإلكتروني</label>
+            <input type="email" name="email" placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors" required>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-sls-cyan-900 mb-2">رسالتك</label>
+            <textarea rows="4" name="message" placeholder="اكتب رسالتك هنا..." class="w-full px-4 py-3 rounded-xl border-2 border-sls-cyan-200 focus:border-sls-cyan-500 outline-none transition-colors resize-none" required></textarea>
+          </div>
+          <button type="submit" class="w-full py-4 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white font-bold rounded-xl shadow-lg shadow-sls-cyan-200 hover:shadow-xl transition-all flex items-center justify-center gap-2">
+            <span>إرسال الرسالة</span>
+            <span>✉️</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<a href="index.html" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white px-6 py-3 rounded-full shadow-lg shadow-sls-cyan-400/30 flex items-center gap-2 hover:shadow-xl transition-all">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  <span class="font-semibold">الرئيسية</span>
+</a>
+
+<footer class="bg-gradient-to-r from-sls-cyan-950 via-sls-teal-900 to-sls-cyan-950 text-center py-8">
+  <p class="text-sls-cyan-100">© 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

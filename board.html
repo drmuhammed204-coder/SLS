@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مجلس الإدارة - جمعية الليدرز الاجتماعية</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { 'cairo': ['Cairo', 'sans-serif'], 'tajawal': ['Tajawal', 'sans-serif'] },
+      colors: {
+        'sls-teal': { 50: '#f0fdfa', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e' },
+        'sls-cyan': { 50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63', 950: '#083344' },
+        'sls-gold': { 400: '#fbbf24', 500: '#f59e0b' }
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-white">
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain shadow-lg">
+        <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
+      </a>
+      <ul class="nav-links hidden lg:flex items-center gap-1">
+        <li><a href="index.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">الرئيسية</a></li>
+        <li><a href="about.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">من نحن</a></li>
+        <li><a href="services.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">خدماتنا</a></li>
+        <li><a href="regions.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">مناطق الخدمة</a></li>
+        <li><a href="board.html" class="nav-link active px-4 py-2 text-white font-medium text-sm">مجلس الإدارة</a></li>
+        <li><a href="partners.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">شركاؤنا</a></li>
+        <li><a href="contact.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">تواصل معنا</a></li>
+      </ul>
+      <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+    <div class="px-4 py-4 space-y-2">
+      <a href="index.html" class="block px-4 py-3 text-white/80 hover:text-white">الرئيسية</a>
+      <a href="board.html" class="block px-4 py-3 text-white font-medium">مجلس الإدارة</a>
+      <!-- Add others -->
+    </div>
+  </div>
+</nav>
+
+<!-- BOARD CONTENT -->
+<div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="text-center mb-12 page-transition">
+      <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">مجلس الإدارة</span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">القيادة والإدارة</h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Member 1 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">أل</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمد الألفي</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">رئيس الجمعية</span>
+      </div>
+      <!-- Member 2 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.1s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">مش</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمود شرف</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">الأمين العام</span>
+      </div>
+      <!-- Member 3 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.2s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">من</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمود ناصر</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">أمين الصندوق</span>
+      </div>
+      <!-- Member 4 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.3s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">مص</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمد مصطفى</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+      </div>
+      <!-- Member 5 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.4s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">حم</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ حسن محمد</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+      </div>
+      <!-- Member 6 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.5s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">أص</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ أحمد صالح</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+      </div>
+      <!-- Member 7 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.6s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">أع</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ أحمد عبد الباقي</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+      </div>
+      <!-- Member 8 -->
+      <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition" style="animation-delay: 0.7s;">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-sls-cyan-600 to-sls-teal-600 flex items-center justify-center text-white text-2xl font-black">مع</div>
+        <h4 class="font-bold text-sls-cyan-900 mb-2">د/ محمد العشري</h4>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">الرئيس السابق</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<a href="index.html" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white px-6 py-3 rounded-full shadow-lg shadow-sls-cyan-400/30 flex items-center gap-2 hover:shadow-xl transition-all">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  <span class="font-semibold">الرئيسية</span>
+</a>
+
+<footer class="bg-gradient-to-r from-sls-cyan-950 via-sls-teal-900 to-sls-cyan-950 text-center py-8">
+  <p class="text-sls-cyan-100">© 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
