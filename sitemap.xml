@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<!-- الصفحة الرئيسية -->
+<url>
+  <loc>https://sls-rho.vercel.app/</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>1.00</priority>
+</url>
+
+<!-- باقي الصفحات -->
+<url>
+  <loc>https://sls-rho.vercel.app/about.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sls-rho.vercel.app/services.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sls-rho.vercel.app/regions.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sls-rho.vercel.app/board.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sls-rho.vercel.app/partners.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sls-rho.vercel.app/contact.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.90</priority>
+</url>
+<url>
+  <loc>https://sls-rho.vercel.app/thank-you.html</loc>
+  <lastmod>2025-01-01</lastmod>
+  <priority>0.50</priority>
+</url>
+
+</urlset>

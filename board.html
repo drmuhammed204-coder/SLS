@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مجلس الإدارة - جمعية الليدرز الاجتماعية</title>
+<meta name="description" content="تعرف على مجلس إدارة جمعية الليدرز الاجتماعية وفريق القيادة المسؤول عن تنظيم القوافل الطبية والمبادرات المجتمعية.">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <script>
 tailwind.config = {
   theme: {
@@ -29,7 +31,7 @@ tailwind.config = {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
       <a href="index.html" class="flex items-center gap-3">
-        <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain shadow-lg">
+        <img src="images/logo.png" alt="SLS Logo" class="w-10 h-10 ...">
         <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
       </a>
       <ul class="nav-links hidden lg:flex items-center gap-1">
@@ -44,11 +46,15 @@ tailwind.config = {
       <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </div>
   </div>
-  <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+    <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
     <div class="px-4 py-4 space-y-2">
       <a href="index.html" class="block px-4 py-3 text-white/80 hover:text-white">الرئيسية</a>
-      <a href="board.html" class="block px-4 py-3 text-white font-medium">مجلس الإدارة</a>
-      <!-- Add others -->
+      <a href="about.html" class="block px-4 py-3 text-white/80 hover:text-white">من نحن</a>
+      <a href="services.html" class="block px-4 py-3 text-white/80 hover:text-white">خدماتنا</a>
+      <a href="regions.html" class="block px-4 py-3 text-white/80 hover:text-white">مناطق الخدمة</a>
+      <a href="board.html" class="block px-4 py-3 text-white/80 hover:text-white">مجلس الإدارة</a>
+      <a href="partners.html" class="block px-4 py-3 text-white/80 hover:text-white">شركاؤنا</a>
+      <a href="contact.html" class="block px-4 py-3 text-white/80 hover:text-white">تواصل معنا</a>
     </div>
   </div>
 </nav>
@@ -115,14 +121,71 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- BACK BUTTON -->
-<a href="index.html" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white px-6 py-3 rounded-full shadow-lg shadow-sls-cyan-400/30 flex items-center gap-2 hover:shadow-xl transition-all">
-  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-  <span class="font-semibold">الرئيسية</span>
-</a>
 
-<footer class="bg-gradient-to-r from-sls-cyan-950 via-sls-teal-900 to-sls-cyan-950 text-center py-8">
-  <p class="text-sls-cyan-100">© 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span></p>
+<!-- FOOTER PROFESSIONAL -->
+<footer class="bg-sls-cyan-950 text-white pt-12 pb-6" dir="rtl">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
+      <!-- Logo & About -->
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="images/logo.png" alt="SLS Logo" class="w-12 h-12 ...">
+          <div>
+            <h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4>
+            <span class="text-sls-gold-400 text-xs font-bold">SLS</span>
+          </div>
+        </div>
+        <p class="text-sls-cyan-100/70 text-sm leading-relaxed">
+          جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-white">روابط سريعة</h4>
+        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+          <li><a href="about.html" class="hover:text-sls-gold-400 transition-colors">من نحن</a></li>
+          <li><a href="services.html" class="hover:text-sls-gold-400 transition-colors">خدماتنا</a></li>
+          <li><a href="regions.html" class="hover:text-sls-gold-400 transition-colors">مناطق الخدمة</a></li>
+          <li><a href="partners.html" class="hover:text-sls-gold-400 transition-colors">شركاؤنا</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-white">تواصل معنا</h4>
+        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+          <li class="flex items-center gap-2">
+            <span>📞</span> <span>01117629537</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span>✉️</span> <span>Socialleaders8@gmail.com</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span>📍</span> <span>باب شرق - الإسكندرية</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Donate -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-white">تابعنا</h4>
+        <div class="flex gap-3 mb-4">
+          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+          </a>
+        </div>
+        <a href="contact.html" class="inline-block bg-sls-gold-500 text-sls-cyan-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">
+          ساهم معنا
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-sls-cyan-100/50 text-xs">
+      <p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p>
+    </div>
+  </div>
 </footer>
 
 <script src="script.js"></script>

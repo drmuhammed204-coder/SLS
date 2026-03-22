@@ -29,7 +29,7 @@ function animateStats() {
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
   const navbar = document.getElementById('navbar');
-  if (navbar) { // Check if element exists
+  if (navbar) { 
     if (window.scrollY > 20) {
       navbar.classList.add('shadow-2xl');
     } else {
@@ -50,7 +50,7 @@ function toggleMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
   animateStats();
   
-  // Form Submission Logic (Only runs if form exists on the page)
+  // Form Submission Logic
   const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -73,19 +73,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          alert('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
-          form.reset();
-          // Optional: redirect to home
-          // window.location.href = 'index.html'; 
+          // === تم التعديل هنا: التوجيه لصفحة الشكر ===
+          window.location.href = 'thank-you.html';
         } else {
           alert('حدث خطأ أثناء الإرسال. برجاء المحاولة مرة أخرى.');
         }
       } catch (error) {
         alert('حدث خطأ في الاتصال بالإنترنت.');
       }
+      
+      // في حالة الخطأ فقط نعيد الزر لحالته، لأن في حالة النجاح سيتم الانتقال لصفحة أخرى
+      if (!response.ok) {
+          button.innerHTML = originalText;
+          button.disabled = false;
+      }
+    });
+  }
+  
+  // === كود زر العودة للأعلى (Back to Top) ===
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('opacity-0', 'invisible');
+        backToTopBtn.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'invisible');
+        backToTopBtn.classList.remove('opacity-100', 'visible');
+      }
+    });
 
-      button.innerHTML = originalText;
-      button.disabled = false;
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 });

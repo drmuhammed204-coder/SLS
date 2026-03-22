@@ -165,3 +165,26 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
 @media (min-width: 769px) {
   .mobile-menu { display: none; }
 }
+/* Toast Notification Styles */
+.toast-success {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* أو left للعربية حسب التصميم، سنضعه بالوسط ليكون واضح */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #14b8a6, #06b6d4);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    font-weight: bold;
+}
+.toast-success.show {
+    opacity: 1;
+    visibility: visible;
+    bottom: 40px;
+}

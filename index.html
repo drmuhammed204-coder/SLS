@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>جمعية الليدرز الاجتماعية - SLS | الرئيسية</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <!-- SEO & Meta Tags (Keep them as they are) -->
-<meta name="description" content="جمعية الليدرز الاجتماعية (SLS) جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣.">
+<meta name="description" content="جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية وتنموية في جميع محافظات مصر بقيادة فريق طبي متخصص.">
 <link rel="canonical" href="https://sls-rho.vercel.app/">
 <meta name="theme-color" content="#0f766e">
 
@@ -38,7 +39,7 @@ tailwind.config = {
     <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logo -->
       <a href="index.html" class="flex items-center gap-3">
-        <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain shadow-lg">
+        <img src="images/logo.png" alt="SLS Logo" class="w-10 h-10 ...">
         <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
       </a>
 
@@ -76,23 +77,26 @@ tailwind.config = {
 
 <!-- HOME PAGE CONTENT -->
 <div class="pt-16">
-  <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900">
-    <!-- Shapes & Content (Same as original) -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute w-44 h-44 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 8%; left: 5%;"></div>
-      <div class="absolute w-24 h-24 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
-      <div class="absolute w-56 h-56 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 15%; right: 4%; animation-delay: 3s;"></div>
-    </div>
+ <!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900">
 
-    <div class="relative z-10 text-center px-4 py-20">
-      <div class="mb-8 animate-scale-in">
-        <div class="relative inline-block">
-          <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl animate-pulse-glow overflow-hidden bg-white">
-            <img src="https://z-cdn-media.chatglm.cn/files/162c4f49-54d9-41e4-8085-ee8cfad20a1f.png?auth_key=1873685677-d5888f23cbea4e4783bff32abf7cc1c3-0-20f39a0c0c2cad81ce8442a778346f70" alt="SLS Logo" class="w-full h-full object-contain">
-          </div>
+  <!-- Shapes & Content -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute w-44 h-44 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 8%; left: 5%;"></div>
+    <div class="absolute w-24 h-24 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
+    <div class="absolute w-56 h-56 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 15%; right: 4%; animation-delay: 3s;"></div>
+  </div> <!-- تم إغلاق div الأشكال بشكل صحيح هنا -->
+
+  <div class="relative z-10 text-center px-4 py-20">
+    <div class="mb-8 animate-scale-in">
+      <div class="relative inline-block">
+        <!-- التعديل هنا: إضافة flex items-center justify-center -->
+        <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl animate-pulse-glow overflow-hidden bg-white flex items-center justify-center">
+          <!-- التعديل هنا: استخدام object-contain وظبط المقاس -->
+          <img src="images/logo.png" alt="SLS Logo" class="w-full h-full object-contain">
         </div>
       </div>
+    </div>
 
       <p class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 text-sls-cyan-100 text-sm mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
         مشهرة برقم ٣٣٧٧ لسنة ٢٠١٣ • وزارة التضامن الاجتماعي
@@ -153,9 +157,70 @@ tailwind.config = {
   </section>
 </div>
 
-<!-- FOOTER -->
-<footer class="bg-gradient-to-r from-sls-cyan-950 via-sls-teal-900 to-sls-cyan-950 text-center py-8">
-  <p class="text-sls-cyan-100">© 2025 جمعية الليدرز الاجتماعية <span class="text-sls-gold-400 font-bold">SLS</span></p>
+<!-- FOOTER PROFESSIONAL -->
+<footer class="bg-sls-cyan-950 text-white pt-12 pb-6" dir="rtl">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
+      <!-- Logo & About -->
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="images/logo.png" alt="SLS Logo" class="w-12 h-12 ...">
+          <div>
+            <h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4>
+            <span class="text-sls-gold-400 text-xs font-bold">SLS</span>
+          </div>
+        </div>
+        <p class="text-sls-cyan-100/70 text-sm leading-relaxed">
+          جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-white">روابط سريعة</h4>
+        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+          <li><a href="about.html" class="hover:text-sls-gold-400 transition-colors">من نحن</a></li>
+          <li><a href="services.html" class="hover:text-sls-gold-400 transition-colors">خدماتنا</a></li>
+          <li><a href="regions.html" class="hover:text-sls-gold-400 transition-colors">مناطق الخدمة</a></li>
+          <li><a href="partners.html" class="hover:text-sls-gold-400 transition-colors">شركاؤنا</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-white">تواصل معنا</h4>
+        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+          <li class="flex items-center gap-2">
+            <span>📞</span> <span>01117629537</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span>✉️</span> <span>Socialleaders8@gmail.com</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span>📍</span> <span>باب شرق - الإسكندرية</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Donate -->
+      <div>
+        <h4 class="font-bold text-lg mb-4 text-white">تابعنا</h4>
+        <div class="flex gap-3 mb-4">
+          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+          </a>
+        </div>
+        <a href="contact.html" class="inline-block bg-sls-gold-500 text-sls-cyan-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">
+          ساهم معنا
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-sls-cyan-100/50 text-xs">
+      <p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p>
+    </div>
+  </div>
 </footer>
 
 <script src="script.js"></script>
