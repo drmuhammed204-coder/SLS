@@ -59,74 +59,72 @@
     <div class="space-y-12">
 
         <!-- 1. المستوى الأول: الرئيس (في المنتصف) -->
-        <div class="flex justify-center">
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <!-- صورة الرئيس (حجم أكبر قليلاً وإطار ذهبي) -->
-                <img src="images/alfy.webp" alt="د/ محمد الألفي" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-lg border-4 border-sls-gold-400">
-                <h3 class="text-xl font-bold text-sls-cyan-900 mb-1">د/ محمد الألفي</h3>
-                <p class="text-gray-500 text-sm mb-2">أخصائي جراحة العظام</p>
-                
-                <!-- شارة الرئيس (لون ذهبي مميز) -->
-                <span class="inline-block bg-sls-gold-400 text-sls-cyan-900 text-sm px-4 py-1 rounded-full font-bold shadow-sm">رئيس الجمعية</span>
-            </div>
-        </div>
+<div class="flex justify-center">
+    <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-full max-w-sm page-transition">
+        <!-- تصحيح: h-24 بدلاً من h-25 -->
+        <img src="images/alfy.webp" alt="د/ محمد الألفي" class="w-24 h-24 mx-auto mb-4 rounded-full object-cover shadow-lg border-4 border-sls-gold-400">
+        <h3 class="text-xl font-bold text-sls-cyan-900 mb-1">د/ محمد الألفي</h3>
+        <p class="text-gray-500 text-sm mb-2">أخصائي جراحة العظام</p>
+        <span class="inline-block bg-sls-gold-400 text-sls-cyan-900 text-sm px-4 py-1 rounded-full font-bold shadow-sm">رئيس الجمعية</span>
+    </div>
+</div>
 
-        <!-- 2. المستوى الثاني: المكتب التنفيذي (النائب - السكرتير - أمين الصندوق) -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-            
-            <!-- النائب -->
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <img src="images/mohamed.webp" alt="د/محمد مصطفى" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
-                <h4 class="font-bold text-sls-cyan-900 mb-1">د/ محمد مصطفى</h4>
-                <p class="text-gray-500 text-sm mb-2">طبيب امتياز بمستشفيات جامعة الاسكندرية</p>
-                <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">نائب الرئيس</span>
-            </div>
+<!-- 2. المستوى الثاني: المكتب التنفيذي -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+    
+    <!-- النائب -->
+    <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <img src="images/mohamed.webp" alt="د/محمد مصطفى" class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
+        <h4 class="font-bold text-sls-cyan-900 mb-1">د/ محمد مصطفى</h4>
+        <p class="text-gray-500 text-sm mb-2">طبيب امتياز</p>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">نائب الرئيس</span>
+    </div>
 
-            <!-- السكرتير -->
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <img src="images/sha.webp" alt="د/محمود شرف" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
-                <h4 class="font-bold text-sls-cyan-900 mb-1">د/ محمود شرف</h4>
-                <p class="text-gray-500 text-sm mb-2">أخصائي جراحة العظام</p>
-                <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">الأمين العام</span>
-            </div>
+    <!-- السكرتير -->
+    <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <img src="images/sha.webp" alt="د/محمود شرف" class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
+        <h4 class="font-bold text-sls-cyan-900 mb-1">د/ محمود شرف</h4>
+        <p class="text-gray-500 text-sm mb-2">أخصائي جراحة العظام</p>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">الأمين العام</span>
+    </div>
 
-            <!-- أمين الصندوق -->
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <img src="images/nasser.webp" alt="د/محمود ناصر" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
-                <h4 class="font-bold text-sls-cyan-900 mb-1">د/ محمود ناصر</h4>
-                <p class="text-gray-500 text-sm mb-2">طبيب طب وجراحة الفم والأسنان</p>
-                <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">أمين الصندوق</span>
-            </div>
+    <!-- أمين الصندوق -->
+    <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <img src="images/nasser.webp" alt="د/محمود ناصر" class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
+        <h4 class="font-bold text-sls-cyan-900 mb-1">د/ محمود ناصر</h4>
+        <p class="text-gray-500 text-sm mb-2">طبيب أسنان</p>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">أمين الصندوق</span>
+    </div>
+</div>
 
-        </div>
+<!-- 3. المستوى الثالث: أعضاء مجلس الإدارة -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+    
+    <!-- عضو 1 -->
+    <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <img src="images/salah.webp" alt="د/أحمد صلاح" class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
+        <h4 class="font-bold text-sls-cyan-900 mb-1">د/ أحمد صلاح</h4>
+        <p class="text-gray-500 text-sm mb-2">أخصائي أسنان</p>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+    </div>
 
-        <!-- 3. المستوى الثالث: أعضاء مجلس الإدارة (3 أعضاء) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            
-            <!-- عضو 1 -->
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <img src="images/salah.webp" alt="د/أحمد صلاح" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
-                <h4 class="font-bold text-sls-cyan-900 mb-1">د/ أحمد صلاح</h4>
-                <p class="text-gray-500 text-sm mb-2">أخصائي طب وجراحة الفم والأسنان</p>
-                <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-            </div>
+    <!-- عضو 2 -->
+    <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <img src="images/hassan.webp" alt="د/حسن محمد" class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
+        <h4 class="font-bold text-sls-cyan-900 mb-1">د/ حسن محمد</h4>
+        <p class="text-gray-500 text-sm mb-2">جراحة عامة</p>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+    </div>
 
-            <!-- عضو 2 -->
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <img src="images/hassan.webp" alt="د/حسن محمد" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
-                <h4 class="font-bold text-sls-cyan-900 mb-1">د/ حسن محمد</h4>
-                <p class="text-gray-500 text-sm mb-2">أخصائي الجراحة العامة</p>
-                <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-            </div>
-            <!-- عضو 3 -->
-            <div class="board-card bg-white rounded-3xl p-8 text-center shadow-xl shadow-sls-cyan-50 border-2 border-sls-gold-400 w-10-w-sm page-transition">
-                <img src="" alt="د/أحمد عبدالباقي" class="w-20 h-25 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
-                <h4 class="font-bold text-sls-cyan-900 mb-1">د/ أحمد عبدالباقي</h4>
-                <p class="text-gray-500 text-sm mb-2">طبيب طب وجراحة الفم والأسنان</p>
-                <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
-            </div>
-
-        </div>
+    <!-- عضو 3 -->
+    <div class="board-card bg-white rounded-3xl p-6 text-center shadow-xl shadow-sls-cyan-50 border-2 border-transparent page-transition">
+        <!-- تصحيح: وضعت صورة placeholder لأن المصدر كان فارغاً -->
+        <img src="images/member3.webp" alt="د/أحمد عبدالباقي" class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-md border-4 border-sls-cyan-100">
+        <h4 class="font-bold text-sls-cyan-900 mb-1">د/ أحمد عبدالباقي</h4>
+        <p class="text-gray-500 text-sm mb-2">طبيب أسنان</p>
+        <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 text-sm px-3 py-1 rounded-full">عضو مجلس الإدارة</span>
+    </div>
+</div>
 
     </div>
   </div>
