@@ -1,0 +1,22 @@
+{
+  "name": "sls-charity-website",
+  "version": "1.0.0",
+  "description": "الموقع الرسمي لجمعية الليدرز الاجتماعية - قالب احترافي",
+  "main": "index.html",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./style.css",
+    "watch": "tailwindcss -i ./src/input.css -o ./style.css --watch",
+    "prod": "tailwindcss -i ./src/input.css -o ./style.css --minify"
+  },
+  "keywords": [
+    "charity",
+    "egypt",
+    "sls",
+    "tailwindcss"
+  ],
+  "author": "SLS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  }
+}
