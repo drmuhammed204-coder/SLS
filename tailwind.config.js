@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html",
-    "./**/*.html",
-    "./**/*.js"
+    "./*.html",      // يفحص ملفات HTML في المجلد الرئيسي
+    "./script.js"    // يفحص ملف الـ JS الخاص بك فقط
   ],
   theme: {
     extend: {
