@@ -1731,7 +1731,7 @@ body {
   }
 
   .mobile-menu {
-    display: block;
+    display: none;
   }
 }
 
