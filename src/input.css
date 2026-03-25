@@ -178,14 +178,6 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
   box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
 }
 
-/* Mobile Menu Media Queries */
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .mobile-menu { display: block; }
-}
-@media (min-width: 769px) {
-  .mobile-menu { display: none; }
-}
 
 /* Toast Notification Styles */
 .toast-success {
