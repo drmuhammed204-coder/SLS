@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - SLS Admin</title>
+  
+  <!-- منع جوجل من أرشفة الصفحة دي -->
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- مكتبة فيرسل السهلة (CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-sls-cyan-950 font-tajawal">
+
+  <!-- 1. شاشة تسجيل الدخول -->
+  <div id="login-section" class="min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white rounded-3xl p-8 shadow-2xl w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="w-20 h-20 bg-sls-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">🔒</div>
+        <h1 class="text-2xl font-black text-sls-cyan-900">لوحة التحكم</h1>
+        <p class="text-gray-500 text-sm mt-2">مخصص لإدارة جمعية الليدرز الاجتماعية</p>
+      </div>
+
+      <div id="login-error" class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-4 text-sm text-center"></div>
+
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-sls-cyan-900 mb-2">البريد الإلكتروني</label>
+          <input type="email" id="email" placeholder="admin@sls.com" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-sls-cyan-900 mb-2">كلمة المرور</label>
+          <input type="password" id="password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+        </div>
+        <button type="submit" class="w-full py-4 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all">
+          تسجيل الدخول
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. شاشة الداشبورد (مخفية لحد ما يدخل) -->
+  <div id="dashboard-section" class="hidden min-h-screen">
+    
+    <!-- الهيدر -->
+    <header class="bg-sls-cyan-900 border-b border-white/10 p-4 flex justify-between items-center">
+      <h2 class="text-white font-bold text-lg">مرحباً بك في لوحة التحكم 👋</h2>
+      <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition">
+        تسجيل خروج
+      </button>
+    </header>
+
+    <!-- المحتوى الأساسي -->
+    <div class="max-w-6xl mx-auto p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- كرت 1 -->
+        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-cyan-500">
+          <h3 class="text-gray-500 text-sm mb-2">رسائل التواصل الجديدة</h3>
+          <p class="text-3xl font-black text-sls-cyan-900">0</p>
+        </div>
+        <!-- كرت 2 -->
+        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-gold-400">
+          <h3 class="text-gray-500 text-sm mb-2">أعضاء مجلس الإدارة</h3>
+          <p class="text-3xl font-black text-sls-cyan-900">7</p>
+        </div>
+        <!-- كرت 3 -->
+        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-teal-500">
+          <h3 class="text-gray-500 text-sm mb-2">مناطق الخدمة</h3>
+          <p class="text-3xl font-black text-sls-cyan-900">16</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
+        <p class="text-gray-400 text-lg">🎯 تم بناء نظام الدخول بنجاح! في الخطوة الجاية ه نربط هنا رسائل التواصل وأزرار التعديل.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- كود الفيربيس الخاص بيك -->
+  <script>
+    // بيانات الاتصال اللي جبتها من فيرسل
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
+      authDomain: "sls-admin-panel.firebaseapp.com",
+      projectId: "sls-admin-panel",
+      storageBucket: "sls-admin-panel.firebasestorage.app",
+      messagingSenderId: "545641823357",
+      appId: "1:545641823357:web:e0a0ee7f62205156850514",
+      measurementId: "G-9YX9L874BR"
+    };
+
+    // تشغيل فيرسل
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // العناصر في الصفحة
+    const loginSection = document.getElementById('login-section');
+    const dashboardSection = document.getElementById('dashboard-section');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    // 1. عملية تسجيل الدخول
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // الدخول تم بنجاح
+        })
+        .catch((error) => {
+          loginError.classList.remove('hidden');
+          if(error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+            loginError.innerText = "خطأ في كلمة المرور أو الإيميل!";
+          } else {
+            loginError.innerText = "حدث خطأ أثناء تسجيل الدخول";
+          }
+        });
+    });
+
+    // 2. عملية تسجيل الخروج
+    logoutBtn.addEventListener('click', () => {
+      auth.signOut();
+    });
+
+    // 3. مراقبة حالة الدخول (أنت داخل ولا بره)
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // لو داخل -> اخفي شاشة اللوجين واظهر الداشبورد
+        loginSection.classList.add('hidden');
+        dashboardSection.classList.remove('hidden');
+        loginError.classList.add('hidden');
+      } else {
+        // لو بره -> اظهر شاشة اللوجين واخفي الداشبورد
+        loginSection.classList.remove('hidden');
+        dashboardSection.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
