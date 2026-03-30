@@ -7,13 +7,55 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <!-- SEO & Meta Tags (Keep them as they are) -->
 <meta name="description" content="جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية وتنموية في جميع محافظات مصر بقيادة فريق طبي متخصص.">
+<!-- Open Graph Tags -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="جمعية الليدرز الاجتماعية - SLS | الرئيسية">
+<meta property="og:description" content="جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية وتنموية في جميع محافظات مصر بقيادة فريق طبي متخصص.">
+<meta property="og:url" content="https://sls-rho.vercel.app/">
+<meta property="og:image" content="https://sls-rho.vercel.app/og-image.png">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:site_name" content="جمعية الليدرز الاجتماعية">
 <link rel="canonical" href="https://sls-rho.vercel.app/">
 <meta name="theme-color" content="#0f766e">
 
 <!-- Fonts & Tailwind -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
+<!--- structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "جمعية الليدرز الاجتماعية",
+  "alternateName": "Social Leaders Society - SLS",
+  "url": "https://sls-rho.vercel.app/",
+  "logo": "https://sls-rho.vercel.app/images/logo.webp",
+  "description": "جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية في جميع محافظات مصر",
+  "foundingDate": "2013",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "الإسكندرية، مصر"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق",
+    "addressLocality": "الإسكندرية",
+    "addressCountry": "EG"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+201117629537",
+    "contactType": "customer service",
+    "availableLanguage": ["ar"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/share/1C1RqpGpdJ/"
+  ]
+}
+</script>
 </head>
 <body class="bg-white">
 <!-- NAVIGATION -->
@@ -22,7 +64,7 @@
     <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logo -->
       <a href="index.html" class="flex items-center gap-3">
-        <img src="images/logo.webp" alt="SLS Logo" class="w-10 h-10 ...">
+        <img src="images/logo.webp" alt="SLS Logo" class="w-10 h-10 rounded-full object-contain">
         <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
       </a>
 
@@ -147,7 +189,7 @@
       <!-- Logo & About -->
       <div class="md:col-span-1">
         <div class="flex items-center gap-3 mb-4">
-          <img src="images/logo.webp" alt="SLS Logo" class="w-12 h-12 ...">
+          <img src="images/logo.webp" alt="SLS Logo" class="w-12 h-12 rounded-full object-contain">
           <div>
             <h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4>
             <span class="text-sls-gold-400 text-xs font-bold">SLS</span>
@@ -189,7 +231,7 @@
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تابعنا</h4>
         <div class="flex gap-3 mb-4">
-          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" area-label="تابعنا على فيسبوك"  target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
+          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك"  target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
           </a>
         </div>
