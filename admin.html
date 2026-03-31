@@ -4,157 +4,1335 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة التحكم - SLS Admin</title>
-  
-  <!-- منع جوجل من أرشفة الصفحة دي -->
   <meta name="robots" content="noindex, nofollow">
   
-  <!-- Fonts & Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-
-  <!-- مكتبة فيرسل السهلة (CDN) -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+  <style>
+    :root {
+      --cyan-50: #ecfeff;
+      --cyan-100: #cffafe;
+      --cyan-200: #a5f3fc;
+      --cyan-300: #67e8f9;
+      --cyan-400: #22d3ee;
+      --cyan-500: #06b6d4;
+      --cyan-600: #0891b2;
+      --cyan-700: #0e7490;
+      --cyan-800: #155e75;
+      --cyan-900: #164e63;
+      --cyan-950: #083344;
+      --teal-500: #14b8a6;
+      --teal-600: #0d9488;
+      --gold-400: #fbbf24;
+      --gold-500: #f59e0b;
+      --gold-600: #d97706;
+      --bg-main: #083344;
+      --bg-sidebar: #0c3d4f;
+      --bg-card: #0e4a5c;
+      --bg-card-light: #115e73;
+      --bg-input: #0a3a4b;
+      --border: rgba(6,182,212,0.15);
+      --border-light: rgba(6,182,212,0.25);
+      --text-white: #ffffff;
+      --text-light: #cffafe;
+      --text-muted: #67e8f9;
+      --text-dim: #a5f3fc;
+      --shadow: 0 4px 24px rgba(0,0,0,0.3);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== تسجيل الدخول ===== */
+    #login-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #login-section::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%);
+      top: -150px;
+      right: -100px;
+      animation: blobFloat 10s ease-in-out infinite;
+    }
+
+    #login-section::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(20,184,166,0.08), transparent 70%);
+      bottom: -100px;
+      left: -80px;
+      animation: blobFloat 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes blobFloat {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(25px,-25px) scale(1.08); }
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--cyan-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+    }
+
+    .login-card h1 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--cyan-900);
+      margin-bottom: 6px;
+    }
+
+    .login-card .subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+
+    .login-error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .login-error.show { display: block; }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan-900);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: 'Tajawal', sans-serif;
+      outline: none;
+      transition: border-color 0.3s;
+      background: white;
+      color: #1f2937;
+    }
+
+    .form-input:focus { border-color: var(--cyan-500); }
+    .form-input::placeholder { color: #9ca3af; }
+
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to left, var(--cyan-600), var(--teal-600));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(6,182,212,0.3);
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(6,182,212,0.4);
+    }
+
+    /* ===== السايدبار ===== */
+    .sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 260px;
+      background: var(--bg-sidebar);
+      border-left: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
+    }
+
+    .sidebar-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--cyan-500), var(--teal-500));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .sidebar-brand-text { font-weight: 800; font-size: 15px; }
+    .sidebar-brand-sub { font-size: 11px; color: var(--text-dim); opacity: 0.7; }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 14px 10px;
+      overflow-y: auto;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      color: var(--cyan-400);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 14px 14px 8px;
+      font-weight: 700;
+      opacity: 0.6;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px;
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover {
+      background: rgba(6,182,212,0.08);
+      color: var(--text-light);
+    }
+
+    .nav-link.active {
+      background: rgba(6,182,212,0.12);
+      color: var(--cyan-300);
+      border-color: var(--border-light);
+    }
+
+    .nav-link i { width: 20px; text-align: center; font-size: 14px; }
+
+    .nav-badge {
+      margin-right: auto;
+      margin-left: 0;
+      background: #ef4444;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .sidebar-foot {
+      padding: 12px 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== المحتوى ===== */
+    .main-area {
+      margin-right: 260px;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8,51,68,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-title { font-size: 18px; font-weight: 800; }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+
+    .topbar-btn:hover {
+      background: var(--bg-card-light);
+      color: var(--text-light);
+    }
+
+    .btn-logout {
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: #fca5a5;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .btn-logout:hover {
+      background: rgba(239,68,68,0.25);
+      color: #fecaca;
+    }
+
+    .page-body { padding: 24px 28px; }
+
+    /* ===== الصفحات ===== */
+    .page { display: none; }
+    .page.active { display: block; animation: pageFade 0.3s ease; }
+
+    @keyframes pageFade {
+      from { opacity:0; transform:translateY(6px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* ===== كروت الإحصائيات ===== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--cyan-500);
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover { transform: translateY(-3px); }
+    .stat-card.gold { border-top-color: var(--gold-400); }
+    .stat-card.teal { border-top-color: var(--teal-500); }
+
+    .stat-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--cyan-900);
+      line-height: 1;
+    }
+
+    /* ===== الكروت البيضاء ===== */
+    .white-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--cyan-900);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title i { color: var(--cyan-600); }
+
+    /* ===== الفورم ===== */
+    .dash-form-group { margin-bottom: 18px; }
+
+    .dash-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan-900);
+      margin-bottom: 8px;
+    }
+
+    .dash-input, .dash-select, .dash-textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: 'Tajawal', sans-serif;
+      outline: none;
+      transition: border-color 0.3s;
+      background: white;
+      color: #1f2937;
+    }
+
+    .dash-input:focus, .dash-select:focus, .dash-textarea:focus {
+      border-color: var(--cyan-500);
+    }
+
+    .dash-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 14px center;
+      padding-left: 36px;
+    }
+
+    .dash-textarea { resize: vertical; min-height: 80px; }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .dash-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 20px;
+    }
+
+    .dash-check input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--cyan-600);
+    }
+
+    .dash-check label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan-900);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to left, var(--cyan-600), var(--teal-600));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(6,182,212,0.25);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(6,182,212,0.35);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ===== خيار نوع التاريخ ===== */
+    .date-type-options { display:flex; gap:10px; margin-bottom:16px; }
+    .date-type-opt { flex:1; padding:12px 16px; border:2px solid #e5e7eb; border-radius:12px; text-align:center; cursor:pointer; transition:all 0.2s; background:#fff; font-family:'Tajawal',sans-serif; }
+    .date-type-opt:hover { border-color:var(--cyan-300); background:var(--cyan-50); }
+    .date-type-opt.selected { border-color:var(--cyan-500); background:var(--cyan-50); box-shadow:0 0 0 3px rgba(6,182,212,0.12); }
+    .date-type-opt i { display:block; font-size:20px; margin-bottom:6px; color:var(--cyan-600); }
+    .date-type-opt .opt-label { font-size:13px; font-weight:700; color:var(--cyan-900); }
+    .date-type-opt .opt-desc { font-size:11px; color:#9ca3af; margin-top:2px; }
+    .date-range-row { display:none; }
+    .date-range-row.show { display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:end; }
+    .range-sep { padding-bottom:14px; color:#9ca3af; font-weight:700; font-size:14px; }
+    .date-single-row.hide { display:none; }
+
+    /* ===== رفع الصور ===== */
+    .upload-box {
+      border: 2px dashed #d1d5db;
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: #f9fafb;
+    }
+
+    .upload-box:hover, .upload-box.dragover {
+      border-color: var(--cyan-500);
+      background: var(--cyan-50);
+    }
+
+    .upload-box i {
+      font-size: 32px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .upload-box p { color: #6b7280; font-size: 13px; }
+    .upload-box span { color: var(--cyan-600); font-weight: 700; }
+    .upload-box .hint { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+
+    .img-preview {
+      display: none;
+      position: relative;
+      margin-top: 14px;
+    }
+
+    .img-preview.show { display: block; }
+
+    .img-preview img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+    }
+
+    .img-preview .remove-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(239,68,68,0.9);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .img-preview .remove-btn:hover { background: #dc2626; }
+
+    /* ===== الرسائل ===== */
+    .msg-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 12px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .msg-card:hover { border-color: var(--cyan-300); }
+
+    .msg-del {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      color: #f87171;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .msg-del:hover { color: #dc2626; }
+
+    .msg-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .msg-avatar {
+      width: 42px;
+      height: 42px;
+      background: var(--cyan-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--cyan-700);
+      flex-shrink: 0;
+    }
+
+    .msg-name { font-weight: 700; color: var(--cyan-900); font-size: 14px; }
+    .msg-time { font-size: 11px; color: #9ca3af; }
+
+    .msg-info {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .msg-info span { font-weight: 700; }
+
+    .msg-body {
+      background: white;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    /* ===== جدول ===== */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    th {
+      padding: 12px 16px;
+      text-align: right;
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 700;
+      background: #f9fafb;
+      border-bottom: 2px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--cyan-50); }
+
+    .tbl-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 2px solid #e5e7eb;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-pill.main { background: var(--cyan-100); color: var(--cyan-700); }
+    .status-pill.normal { background: #f3f4f6; color: #4b5563; }
+
+    .act-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background: white;
+      color: #6b7280;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 12px;
+    }
+
+    .act-btn:hover { background: #f3f4f6; color: #1f2937; }
+    .act-btn.del:hover { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+
+    /* ===== Toast ===== */
+    .toast-box {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2937;
+      animation: toastIn 0.3s ease;
+      min-width: 280px;
+    }
+
+    .toast.ok { border-right: 4px solid var(--cyan-500); }
+    .toast.ok i { color: var(--cyan-600); }
+    .toast.err { border-right: 4px solid #ef4444; }
+    .toast.err i { color: #ef4444; }
+
+    @keyframes toastIn {
+      from { opacity:0; transform:translateX(-20px); }
+      to { opacity:1; transform:translateX(0); }
+    }
+
+    @keyframes toastOut {
+      from { opacity:1; transform:translateX(0); }
+      to { opacity:0; transform:translateX(-20px); }
+    }
+
+    .empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: #9ca3af;
+    }
+
+    .empty i { font-size: 42px; margin-bottom: 14px; opacity: 0.4; display: block; }
+    .empty p { font-size: 14px; margin-bottom: 16px; }
+
+    /* ===== مودال ===== */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-bg.show { display: flex; }
+
+    .modal-box {
+      background: white;
+      border-radius: 20px;
+      width: 600px;
+      max-width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      animation: modalPop 0.3s ease;
+    }
+
+    @keyframes modalPop {
+      from { opacity:0; transform:scale(0.95); }
+      to { opacity:1; transform:scale(1); }
+    }
+
+    .modal-head {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-head h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--cyan-900);
+    }
+
+    .modal-x {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      border: none;
+      color: #6b7280;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-x:hover { background: #fef2f2; color: #dc2626; }
+
+    .modal-body { padding: 24px; }
+
+    .modal-foot {
+      padding: 14px 24px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-primary-sm {
+      padding: 10px 20px;
+      background: linear-gradient(to left, var(--cyan-600), var(--teal-600));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .btn-primary-sm:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
+
+    .btn-ghost-sm {
+      padding: 10px 20px;
+      background: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .btn-ghost-sm:hover { background: #e5e7eb; }
+
+    .btn-red-sm {
+      padding: 10px 20px;
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .btn-red-sm:hover { background: #fee2e2; }
+
+    /* ===== الإعدادات ===== */
+    .settings-block {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .settings-head {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--cyan-900);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-head i { color: var(--cyan-600); }
+
+    .settings-desc {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-item-label {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .info-item-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cyan-900);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== Mobile ===== */
+    .mob-toggle { display: none; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-area { margin-right: 0; }
+      .mob-toggle { display: flex; }
+      .page-body { padding: 16px; }
+      .topbar { padding: 12px 16px; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .date-range-row.show { grid-template-columns: 1fr; }
+      .range-sep { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-800); border-radius: 3px; }
+
+    #sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 99;
+    }
+  </style>
 </head>
-<body class="bg-sls-cyan-950 font-tajawal">
+<body>
 
-  <!-- 1. شاشة تسجيل الدخول -->
-  <div id="login-section" class="min-h-screen flex items-center justify-center px-4">
-    <div class="bg-white rounded-3xl p-8 shadow-2xl w-full max-w-md">
-      <div class="text-center mb-8">
-        <div class="w-20 h-20 bg-sls-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">🔒</div>
-        <h1 class="text-2xl font-black text-sls-cyan-900">لوحة التحكم</h1>
-        <p class="text-gray-500 text-sm mt-2">مخصص لإدارة جمعية الليدرز الاجتماعية</p>
-      </div>
+  <div class="toast-box" id="toastBox"></div>
 
-      <div id="login-error" class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-4 text-sm text-center"></div>
-
-      <form id="login-form" class="space-y-4">
+  <!-- ===== تسجيل الدخول ===== -->
+  <div id="login-section">
+    <div class="login-card">
+      <div class="login-icon">🔒</div>
+      <h1>لوحة التحكم</h1>
+      <p class="subtitle">مخصص لإدارة جمعية الليدرز الاجتماعية</p>
+      <div class="login-error" id="login-error"></div>
+      <form id="login-form" style="display:flex; flex-direction:column; gap:16px;">
         <div>
-          <label class="block text-sm font-bold text-sls-cyan-900 mb-2">البريد الإلكتروني</label>
-          <input type="email" id="email" placeholder="admin@sls.com" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+          <label class="form-label">البريد الإلكتروني</label>
+          <input type="email" id="email" placeholder="admin@sls.com" class="form-input" required>
         </div>
         <div>
-          <label class="block text-sm font-bold text-sls-cyan-900 mb-2">كلمة المرور</label>
-          <input type="password" id="password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+          <label class="form-label">كلمة المرور</label>
+          <input type="password" id="password" placeholder="••••••••" class="form-input" required>
         </div>
-        <button type="submit" class="w-full py-4 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all">
-          تسجيل الدخول
-        </button>
+        <button type="submit" class="btn-login">تسجيل الدخول</button>
       </form>
     </div>
   </div>
 
-  <!-- 2. شاشة الداشبورد (مخفية لحد ما يدخل) -->
-  <div id="dashboard-section" class="hidden min-h-screen">
-    
-    <!-- الهيدر -->
-    <header class="bg-sls-cyan-900 border-b border-white/10 p-4 flex justify-between items-center">
-      <h2 class="text-white font-bold text-lg">مرحباً بك في لوحة التحكم 👋</h2>
-      <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition">
-        تسجيل خروج
-      </button>
-    </header>
+  <!-- ===== الداشبورد ===== -->
+  <div id="dashboard-section" class="hidden">
 
-    <!-- المحتوى الأساسي -->
-    <div class="max-w-6xl mx-auto p-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <!-- كرت 1 -->
-        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-cyan-500">
-          <h3 class="text-gray-500 text-sm mb-2">رسائل التواصل الجديدة</h3>
-          <p id="msg-count" class="text-3xl font-black text-sls-cyan-900">0</p>
-        </div>
-        <!-- كرت 2 -->
-        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-gold-400">
-          <h3 class="text-gray-500 text-sm mb-2">أعضاء مجلس الإدارة</h3>
-          <p class="text-3xl font-black text-sls-cyan-900">7</p>
-        </div>
-        <!-- كرت 3 -->
-        <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-teal-500">
-          <h3 class="text-gray-500 text-sm mb-2">مناطق الخدمة</h3>
-          <p class="text-3xl font-black text-sls-cyan-900">16</p>
-        </div>
-      </div>
-
-      <!-- قسم الرسائل -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
-        <h3 class="text-xl font-bold text-sls-cyan-900 mb-6">📩 الرسائل الواردة</h3>
-        <div id="messages-container" class="space-y-4">
-          <p class="text-gray-400 text-center">جاري تحميل الرسائل...</p>
-        </div>
-      </div>
-
-      <!-- ========================================== -->
-      <!-- قسم إضافة قوافل وأنشطة جديدة -->
-      <!-- ========================================== -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
-        <h3 class="text-xl font-bold text-sls-cyan-900 mb-6">🚑 إضافة قافلة أو نشاط جديد</h3>
-        
-        <form id="convoy-form" class="space-y-5">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <!-- عنوان القافلة -->
-            <div class="md:col-span-2">
-              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">عنوان القافلة / النشاط</label>
-              <input type="text" id="convoy-title" placeholder="مثال: القافلة الطبية الكبرى بمحافظة البحيرة" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
-            </div>
-            
-            <!-- نوع النشاط -->
-            <div>
-              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">نوع النشاط</label>
-              <select id="convoy-type" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition bg-white">
-                <option value="قافلة طبية">🏥 قافلة طبية</option>
-                <option value="مبادرة إنسانية">🧥 مبادرة إنسانية</option>
-                <option value="تبرع بالدم">🩸 تبرع بالدم</option>
-                <option value="نشاط توعوي">📢 نشاط توعوي</option>
-              </select>
-            </div>
-
-            <!-- الموقع -->
-            <div>
-              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">موقع القافلة</label>
-              <input type="text" id="convoy-location" placeholder="مثال: دسوق - البحيرة" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
-            </div>
-
-            <!-- التاريخ -->
-            <div>
-              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">التاريخ</label>
-              <input type="date" id="convoy-date" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
-            </div>
-
-            <!-- إظهار كقافلة رئيسية -->
-            <div class="flex items-center gap-3 pt-6">
-              <input type="checkbox" id="convoy-featured" class="w-5 h-5 accent-sls-cyan-600">
-              <label for="convoy-featured" class="text-sm font-bold text-sls-cyan-900">اظهار كقافلة رئيسية (في أعلى الصفحة)</label>
-            </div>
-          </div>
-
-          <!-- وصف قصير (للكارت) -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <div class="sidebar-brand">
+          <div class="sidebar-logo">SLS</div>
           <div>
-            <label class="block text-sm font-bold text-sls-cyan-900 mb-2">وصف قصير (يظهر في الكارت)</label>
-            <textarea rows="2" id="convoy-desc" placeholder="ملخص سطرين عن القافلة..." class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition resize-none" required></textarea>
+            <div class="sidebar-brand-text">الليدرز الاجتماعية</div>
+            <div class="sidebar-brand-sub">لوحة التحكم</div>
           </div>
-
-          <!-- المقال كامل (لصفحة التفاصيل) -->
-          <div>
-            <label class="block text-sm font-bold text-sls-cyan-900 mb-2">المقال كامل / تفاصيل القافلة (يظهر لما الزائر يدوس على الكرت)</label>
-            <textarea rows="8" id="convoy-article" placeholder="اكتب هنا التفاصيل الكاملة للقافلة، الأقسام الطبية، الأرقام، الشهادات... (كل سطر في الـ textarea هيتحول لفقرة في المقال)" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required></textarea>
-          </div>
-
-          <button type="submit" id="convoy-submit-btn" class="w-full py-4 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all">
-            حفظ القافلة وإضافتها للموقع
-          </button>
-        </form>
+        </div>
       </div>
 
+      <nav class="sidebar-nav">
+        <div class="nav-label">الرئيسية</div>
+        <div class="nav-link active" data-page="home" onclick="goPage('home',this)">
+          <i class="fas fa-chart-pie"></i> نظرة عامة
+        </div>
+
+        <div class="nav-label">الإدارة</div>
+        <div class="nav-link" data-page="convoys" onclick="goPage('convoys',this)">
+          <i class="fas fa-truck-medical"></i> القوافل
+        </div>
+        <div class="nav-link" data-page="add" onclick="goPage('add',this)">
+          <i class="fas fa-plus-circle"></i> إضافة قافلة
+        </div>
+        <div class="nav-link" data-page="msgs" onclick="goPage('msgs',this)">
+          <i class="fas fa-envelope"></i> الرسائل
+          <span class="nav-badge" id="msgBadge" style="display:none;">0</span>
+        </div>
+
+        <div class="nav-label">النظام</div>
+        <div class="nav-link" data-page="settings" onclick="goPage('settings',this)">
+          <i class="fas fa-cog"></i> الإعدادات
+        </div>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="nav-link" onclick="doLogout()" style="color:#f87171;">
+          <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+        </div>
+      </div>
+    </aside>
+
+    <div id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="topbar-btn mob-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+          <h2 class="topbar-title" id="pageTitle">نظرة عامة</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="topbar-btn" onclick="document.documentElement.requestFullscreen?.()"><i class="fas fa-expand"></i></button>
+          <button class="btn-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt" style="margin-left:6px;"></i>خروج</button>
+        </div>
+      </header>
+
+      <div class="page-body">
+
+        <!-- ===== نظرة عامة ===== -->
+        <section class="page active" id="pg-home">
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-label">رسائل التواصل الجديدة</div>
+              <div class="stat-value" id="statMsgs">0</div>
+            </div>
+            <div class="stat-card gold">
+              <div class="stat-label">القوافل المضافة</div>
+              <div class="stat-value" id="statConvoys">0</div>
+            </div>
+            <div class="stat-card teal">
+              <div class="stat-label">أعضاء مجلس الإدارة</div>
+              <div class="stat-value">7</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">مناطق الخدمة</div>
+              <div class="stat-value">16</div>
+            </div>
+          </div>
+          <div class="white-card">
+            <div class="card-title"><i class="fas fa-envelope"></i> آخر الرسائل الواردة</div>
+            <div id="homeMsgs"><p style="color:#9ca3af;text-align:center;">جاري التحميل...</p></div>
+          </div>
+          <div class="white-card">
+            <div class="card-title"><i class="fas fa-truck-medical"></i> آخر القوافل المضافة</div>
+            <div id="homeConvoys"><p style="color:#9ca3af;text-align:center;">جاري التحميل...</p></div>
+          </div>
+        </section>
+
+        <!-- ===== القوافل ===== -->
+        <section class="page" id="pg-convoys">
+          <div class="white-card">
+            <div class="card-title" style="justify-content:space-between;">
+              <span><i class="fas fa-truck-medical"></i> جميع القوافل</span>
+              <button class="btn-primary-sm" onclick="goPage('add',document.querySelector('[data-page=add]'))">
+                <i class="fas fa-plus" style="margin-left:6px;"></i> إضافة جديدة
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>الصورة</th>
+                    <th>العنوان</th>
+                    <th>النوع</th>
+                    <th>الموقع</th>
+                    <th>التاريخ</th>
+                    <th>الحالة</th>
+                    <th>إجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="convoyTableBody">
+                  <tr><td colspan="7"><div class="empty"><i class="fas fa-inbox"></i><p>جاري التحميل...</p></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== إضافة قافلة ===== -->
+        <section class="page" id="pg-add">
+          <div class="white-card">
+            <div class="card-title" id="formTitle"><i class="fas fa-plus-circle"></i> إضافة قافلة أو نشاط جديد</div>
+            <form id="convoy-form" class="dash-form-group">
+              <input type="hidden" id="editId" value="">
+              <div class="dash-form-group">
+                <label class="dash-label">صورة القافلة</label>
+                <div class="upload-box" id="uploadBox" onclick="document.getElementById('convoyImg').click()">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>اسحب الصورة هنا أو <span>اختر ملف</span></p>
+                  <p class="hint">PNG, JPG, WEBP - حد أقصى 2MB</p>
+                </div>
+                <input type="file" id="convoyImg" accept="image/*" style="display:none;" onchange="handleImg(event)">
+                <div class="img-preview" id="imgPreview">
+                  <img id="previewSrc" src="" alt="">
+                  <button type="button" class="remove-btn" onclick="removeImg()"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-label">عنوان القافلة / النشاط *</label>
+                <input type="text" id="convoy-title" placeholder="مثال: القافلة الطبية الكبرى بمحافظة البحيرة" class="dash-input" required>
+              </div>
+              <div class="form-row-2">
+                <div class="dash-form-group">
+                  <label class="dash-label">نوع النشاط</label>
+                  <select id="convoy-type" class="dash-select">
+                    <option value="قافلة طبية">🏥 قافلة طبية</option>
+                    <option value="مبادرة إنسانية">🧥 مبادرة إنسانية</option>
+                    <option value="تبرع بالدم">🩸 تبرع بالدم</option>
+                    <option value="نشاط توعوي">📢 نشاط توعوي</option>
+                  </select>
+                </div>
+                <div class="dash-form-group">
+                  <label class="dash-label">موقع القافلة *</label>
+                  <input type="text" id="convoy-location" placeholder="مثال: دسوق - البحيرة" class="dash-input" required>
+                </div>
+              </div>
+
+              <!-- ===== نوع التاريخ ===== -->
+              <div class="dash-form-group">
+                <label class="dash-label">نوع التاريخ *</label>
+                <div class="date-type-options">
+                  <div class="date-type-opt selected" id="optSingle" onclick="setDateType('single')">
+                    <i class="fas fa-calendar-day"></i>
+                    <div class="opt-label">يوم واحد</div>
+                    <div class="opt-desc">القافلة في يوم محدد</div>
+                  </div>
+                  <div class="date-type-opt" id="optRange" onclick="setDateType('range')">
+                    <i class="fas fa-calendar-week"></i>
+                    <div class="opt-label">فترة زمنية</div>
+                    <div class="opt-desc">من يوم ليوم</div>
+                  </div>
+                </div>
+                <div class="date-single-row" id="singleDateRow">
+                  <label class="dash-label">تاريخ القافلة *</label>
+                  <input type="date" id="convoy-date-single" class="dash-input">
+                </div>
+                <div class="date-range-row" id="rangeDateRow">
+                  <div>
+                    <label class="dash-label">من تاريخ *</label>
+                    <input type="date" id="convoy-date-from" class="dash-input">
+                  </div>
+                  <div class="range-sep">→</div>
+                  <div>
+                    <label class="dash-label">إلى تاريخ *</label>
+                    <input type="date" id="convoy-date-to" class="dash-input">
+                  </div>
+                </div>
+              </div>
+
+              <div class="dash-check">
+                <input type="checkbox" id="convoy-featured">
+                <label for="convoy-featured">اظهار كقافلة رئيسية (في أعلى الصفحة)</label>
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-label">وصف قصير (للكارت) *</label>
+                <textarea rows="2" id="convoy-desc" placeholder="ملخص سطرين عن القافلة..." class="dash-textarea" required></textarea>
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-label">المقال كامل / تفاصيل القافلة *</label>
+                <textarea rows="8" id="convoy-article" placeholder="اكتب هنا التفاصيل الكاملة للقافلة..." class="dash-textarea" required></textarea>
+              </div>
+              <button type="submit" id="convoy-submit-btn" class="btn-submit">حفظ القافلة وإضافتها للموقع</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ===== الرسائل ===== -->
+        <section class="page" id="pg-msgs">
+          <div class="white-card">
+            <div class="card-title" style="justify-content:space-between;">
+              <span><i class="fas fa-envelope"></i> الرسائل الواردة</span>
+              <button class="btn-red-sm" onclick="deleteAllMsgs()"><i class="fas fa-trash" style="margin-left:6px;"></i> حذف الكل</button>
+            </div>
+            <div id="allMsgs"><p style="color:#9ca3af;text-align:center;">جاري التحميل...</p></div>
+          </div>
+        </section>
+
+        <!-- ===== الإعدادات ===== -->
+        <section class="page" id="pg-settings">
+
+          <div class="settings-block">
+            <div class="settings-head">
+              <i class="fas fa-key"></i> تغيير كلمة المرور
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-label">كلمة المرور الحالية</label>
+              <input type="password" id="oldPass" class="dash-input" placeholder="أدخل كلمة المرور الحالية">
+            </div>
+            <div class="form-row-2">
+              <div class="dash-form-group">
+                <label class="dash-label">كلمة المرور الجديدة</label>
+                <input type="password" id="newPass" class="dash-input" placeholder="6 أحرف على الأقل">
+              </div>
+              <div class="dash-form-group">
+                <label class="dash-label">تأكيد كلمة المرور الجديدة</label>
+                <input type="password" id="confirmPass" class="dash-input" placeholder="أعد كتابتها">
+              </div>
+            </div>
+            <button class="btn-primary-sm" onclick="changePassword()">
+              <i class="fas fa-save" style="margin-left:6px;"></i> تحديث كلمة المرور
+            </button>
+          </div>
+
+          <div class="settings-block">
+            <div class="settings-head">
+              <i class="fas fa-database"></i> إدارة البيانات
+            </div>
+            <p class="settings-desc">
+              جميع البيانات محفوظة في Firebase Realtime Database. يمكنك تصدير نسخة احتياطية أو مسح البيانات بالكامل.
+            </p>
+            <div class="btn-row">
+              <button class="btn-primary-sm" onclick="exportData()">
+                <i class="fas fa-download" style="margin-left:6px;"></i> تصدير نسخة احتياطية
+              </button>
+              <label class="btn-ghost-sm" style="cursor:pointer;">
+                <i class="fas fa-upload" style="margin-left:6px;"></i> استيراد بيانات
+                <input type="file" accept=".json" style="display:none;" onchange="importData(event)">
+              </label>
+              <button class="btn-red-sm" onclick="clearAllFirebase()">
+                <i class="fas fa-trash-alt" style="margin-left:6px;"></i> مسح كل البيانات
+              </button>
+            </div>
+          </div>
+
+          <div class="settings-block">
+            <div class="settings-head">
+              <i class="fas fa-info-circle"></i> معلومات النظام
+            </div>
+            <div class="info-grid">
+              <div>
+                <div class="info-item-label">الإصدار</div>
+                <div class="info-item-value">2.0.0</div>
+              </div>
+              <div>
+                <div class="info-item-label">المستخدم الحالي</div>
+                <div class="info-item-value" id="settingsEmail">-</div>
+              </div>
+              <div>
+                <div class="info-item-label">عدد القوافل</div>
+                <div class="info-item-value" id="settingsConvoyCount">0</div>
+              </div>
+              <div>
+                <div class="info-item-label">عدد الرسائل</div>
+                <div class="info-item-value" id="settingsMsgCount">0</div>
+              </div>
+              <div>
+                <div class="info-item-label">آخر تحديث للقوافل</div>
+                <div class="info-item-value" id="settingsLastUpdate">-</div>
+              </div>
+              <div>
+                <div class="info-item-label">حالة الاتصال</div>
+                <div class="info-item-value" id="settingsConnStatus" style="color:var(--teal-500);">
+                  <i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> متصل
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- مودال تأكيد -->
+  <div class="modal-bg" id="confirmModal">
+    <div class="modal-box" style="width:400px;">
+      <div class="modal-body" style="text-align:center; padding:30px;">
+        <i class="fas fa-exclamation-triangle" style="font-size:48px; color:#f59e0b; margin-bottom:16px;"></i>
+        <p id="confirmText" style="font-size:15px; color:#4b5563; line-height:1.8;"></p>
+      </div>
+      <div class="modal-foot" style="justify-content:center;">
+        <button class="btn-red-sm" id="confirmYes">تأكيد</button>
+        <button class="btn-ghost-sm" onclick="closeConfirm()">إلغاء</button>
+      </div>
     </div>
   </div>
 
-  <!-- كود الفيربيس الخاص بيك -->
   <script>
-    // بيانات الاتصال اللي جبتها من فيرسل
+    // ===== فيرسل (نفس بياناتك) =====
     const firebaseConfig = {
       apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
       authDomain: "sls-admin-panel.firebaseapp.com",
@@ -166,156 +1344,514 @@
       measurementId: "G-9YX9L874BR"
     };
 
-    // تشغيل فيرسل
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.database();
 
-    // العناصر في الصفحة
     const loginSection = document.getElementById('login-section');
     const dashboardSection = document.getElementById('dashboard-section');
     const loginForm = document.getElementById('login-form');
     const loginError = document.getElementById('login-error');
-    const logoutBtn = document.getElementById('logout-btn');
-    const messagesContainer = document.getElementById('messages-container');
-    const msgCountEl = document.getElementById('msg-count');
 
-    // 1. عملية تسجيل الدخول
+    // مراقبة اتصال فيرسل
+    db.ref('.info/connected').on('value', (snap) => {
+      const el = document.getElementById('settingsConnStatus');
+      if (snap.val() === true) {
+        el.innerHTML = '<i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> متصل';
+        el.style.color = 'var(--teal-500)';
+      } else {
+        el.innerHTML = '<i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> غير متصل';
+        el.style.color = '#ef4444';
+      }
+    });
+
+    // ===== 1. تسجيل الدخول =====
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
       auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // الدخول تم بنجاح
-        })
+        .then(() => {})
         .catch((error) => {
-          loginError.classList.remove('hidden');
-          if(error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-            loginError.innerText = "خطأ في كلمة المرور أو الإيميل!";
+          loginError.classList.add('show');
+          if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+            loginError.innerText = 'خطأ في كلمة المرور أو الإيميل!';
+          } else if (error.code === 'auth/too-many-requests') {
+            loginError.innerText = 'محاولات كثيرة! انتظر قليلاً ثم حاول تاني.';
           } else {
-            loginError.innerText = "حدث خطأ أثناء تسجيل الدخول";
+            loginError.innerText = 'حدث خطأ أثناء تسجيل الدخول';
           }
         });
     });
 
-    // 2. عملية تسجيل الخروج
-    logoutBtn.addEventListener('click', () => {
-      auth.signOut();
-    });
+    function doLogout() { auth.signOut(); }
 
-    // 3. مراقبة حالة الدخول (أنت داخل ولا بره)
+    // ===== 2. مراقبة الدخول =====
     auth.onAuthStateChanged((user) => {
       if (user) {
-        loginSection.classList.add('hidden');
+        loginSection.style.display = 'none';
         dashboardSection.classList.remove('hidden');
-        loginError.classList.add('hidden');
-        loadMessages(); 
+        loginError.classList.remove('show');
+        document.getElementById('settingsEmail').textContent = user.email || '-';
+        loadMessages();
+        loadConvoys();
       } else {
-        loginSection.classList.remove('hidden');
+        loginSection.style.display = 'flex';
         dashboardSection.classList.add('hidden');
       }
     });
 
-    // ==========================================
-    // 4. دالة جلب وعرض الرسائل من فيرسل
-    // ==========================================
-    function loadMessages() {
-      messagesContainer.innerHTML = ""; 
-
-      db.ref('messages').on('value', (snapshot) => {
-        messagesContainer.innerHTML = ""; 
-        const data = snapshot.val();
-        
-        if (!data) {
-          messagesContainer.innerHTML = '<p class="text-gray-400 text-center py-8">لا توجد رسائل جديدة حالياً.</p>';
-          msgCountEl.innerText = "0";
-          return;
-        }
-
-        const messagesCount = Object.values(data).length;
-        msgCountEl.innerText = messagesCount;
-
-        Object.values(data).reverse().forEach(msg => {
-          const card = document.createElement('div');
-          card.className = 'bg-gray-50 rounded-xl p-5 border border-gray-200 relative';
-          card.innerHTML = `
-            <button onclick="deleteMessage('${msg.id}')" class="absolute top-3 left-3 text-red-400 hover:text-red-600 text-sm font-bold">حذف</button>
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-10 h-10 bg-sls-cyan-100 rounded-full flex items-center justify-center text-sls-cyan-700 font-bold">${msg.name.charAt(0)}</div>
-              <div>
-                <h4 class="font-bold text-sls-cyan-900">${msg.name}</h4>
-                <p class="text-xs text-gray-500">${msg.time}</p>
-              </div>
-            </div>
-            <div class="space-y-1 text-sm text-gray-600 mb-3">
-              <p><span class="font-bold">📞 الهاتف:</span> ${msg.phone || 'غير متوفر'}</p>
-              <p><span class="font-bold">✉️ الإيميل:</span> ${msg.email}</p>
-            </div>
-            <div class="bg-white p-3 rounded-lg border">
-              <p class="text-gray-700">${msg.message}</p>
-            </div>
-          `;
-          messagesContainer.appendChild(card);
-        });
-      }, 
-      (error) => {
-        console.error("Firebase Error:", error);
-        messagesContainer.innerHTML = '<p class="text-red-500 text-center py-8">حدث خطأ في تحميل الرسائل! تأكد إنك ضغطت Publish في صفحة الـ Rules.</p>';
-      });
+    // ===== التنقل =====
+    function goPage(id, el) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('pg-' + id).classList.add('active');
+      document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+      if (el) el.classList.add('active');
+      const titles = { home:'نظرة عامة', convoys:'القوافل', add:'إضافة قافلة', msgs:'الرسائل', settings:'الإعدادات' };
+      document.getElementById('pageTitle').textContent = titles[id] || '';
+      closeSidebar();
     }
 
-    // ==========================================
-    // 5. دالة حذف الرسالة
-    // ==========================================
-    function deleteMessage(id) {
-      if(confirm("هل أنت متأكد من حذف هذه الرسالة؟")) {
-        db.ref('messages/' + id).remove();
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebar-overlay').style.display =
+        document.getElementById('sidebar').classList.contains('open') ? 'block' : 'none';
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').style.display = 'none';
+    }
+
+    // ===== Toast =====
+    function toast(msg, type = 'ok') {
+      const box = document.getElementById('toastBox');
+      const icons = { ok:'fa-check-circle', err:'fa-times-circle' };
+      const t = document.createElement('div');
+      t.className = 'toast ' + type;
+      t.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+      box.appendChild(t);
+      setTimeout(() => { t.style.animation = 'toastOut 0.3s ease forwards'; setTimeout(() => t.remove(), 300); }, 3000);
+    }
+
+    // ===== تأكيد =====
+    let confirmCb = null;
+    function showConfirm(text, cb) {
+      document.getElementById('confirmText').textContent = text;
+      confirmCb = cb;
+      document.getElementById('confirmModal').classList.add('show');
+    }
+    function closeConfirm() {
+      document.getElementById('confirmModal').classList.remove('show');
+      confirmCb = null;
+    }
+    document.getElementById('confirmYes').addEventListener('click', () => {
+      if (confirmCb) confirmCb();
+      closeConfirm();
+    });
+
+    // ===== نوع التاريخ =====
+    let currentDateType = 'single';
+
+    function setDateType(type) {
+      currentDateType = type;
+      if (type === 'single') {
+        document.getElementById('optSingle').classList.add('selected');
+        document.getElementById('optRange').classList.remove('selected');
+        document.getElementById('singleDateRow').classList.remove('hide');
+        document.getElementById('rangeDateRow').classList.remove('show');
+      } else {
+        document.getElementById('optSingle').classList.remove('selected');
+        document.getElementById('optRange').classList.add('selected');
+        document.getElementById('singleDateRow').classList.add('hide');
+        document.getElementById('rangeDateRow').classList.add('show');
       }
     }
 
-    // ==========================================
-    // 6. كود إضافة قوافل جديدة
-    // ==========================================
+    document.getElementById('optSingle').addEventListener('click', () => {
+      document.getElementById('convoy-date-from').value = '';
+      document.getElementById('convoy-date-to').value = '';
+    });
+
+    document.getElementById('optRange').addEventListener('click', () => {
+      document.getElementById('convoy-date-single').value = '';
+    });
+
+    // ===== رفع الصور =====
+    let currentImg = '';
+
+    function handleImg(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) { toast('حجم الصورة كبير (الحد 2MB)', 'err'); return; }
+      if (!file.type.startsWith('image/')) { toast('الملف مش صورة', 'err'); return; }
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        currentImg = ev.target.result;
+        document.getElementById('previewSrc').src = currentImg;
+        document.getElementById('imgPreview').classList.add('show');
+        document.getElementById('uploadBox').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImg() {
+      currentImg = '';
+      document.getElementById('convoyImg').value = '';
+      document.getElementById('imgPreview').classList.remove('show');
+      document.getElementById('uploadBox').style.display = '';
+    }
+
+    const uploadBox = document.getElementById('uploadBox');
+    uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
+    uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
+    uploadBox.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadBox.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) { document.getElementById('convoyImg').files = e.dataTransfer.files; handleImg({ target: { files: [file] } }); }
+    });
+
+    // ===== إضافة / تعديل قافلة =====
     const convoyForm = document.getElementById('convoy-form');
     const convoySubmitBtn = document.getElementById('convoy-submit-btn');
 
-    if (convoyForm) {
-      convoyForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        convoySubmitBtn.innerText = "جاري الحفظ...";
-        convoySubmitBtn.disabled = true;
+    convoyForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      convoySubmitBtn.innerText = 'جاري الحفظ...';
+      convoySubmitBtn.disabled = true;
 
+      const editId = document.getElementById('editId').value;
+
+      // تجميع التاريخ حسب النوع
+      let dateValue = '';
+      let dateType = currentDateType;
+
+      if (dateType === 'single') {
+        dateValue = document.getElementById('convoy-date-single').value;
+        if (!dateValue) {
+          toast('اختر تاريخ القافلة', 'err');
+          convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
+          convoySubmitBtn.disabled = false;
+          return;
+        }
+      } else {
+        const from = document.getElementById('convoy-date-from').value;
+        const to = document.getElementById('convoy-date-to').value;
+        if (!from || !to) {
+          toast('اختر تاريخ البداية والنهاية', 'err');
+          convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
+          convoySubmitBtn.disabled = false;
+          return;
+        }
+        if (new Date(to) < new Date(from)) {
+          toast('تاريخ النهاية لازم يكون بعد تاريخ البداية', 'err');
+          convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
+          convoySubmitBtn.disabled = false;
+          return;
+        }
+        dateValue = from + ' → ' + to;
+      }
+
+      const convoyData = {
+        title: document.getElementById('convoy-title').value,
+        type: document.getElementById('convoy-type').value,
+        location: document.getElementById('convoy-location').value,
+        date: dateValue,
+        dateType: dateType,
+        dateFrom: dateType === 'range' ? document.getElementById('convoy-date-from').value : '',
+        dateTo: dateType === 'range' ? document.getElementById('convoy-date-to').value : '',
+        desc: document.getElementById('convoy-desc').value,
+        article: document.getElementById('convoy-article').value,
+        featured: document.getElementById('convoy-featured').checked,
+        image: currentImg || '',
+        updatedAt: new Date().toISOString()
+      };
+
+      if (editId) {
+        db.ref('convoys/' + editId).update(convoyData)
+          .then(() => { toast('تم تحديث القافلة بنجاح'); resetConvoyForm(); goPage('convoys', document.querySelector('[data-page=convoys]')); })
+          .catch((err) => { toast('حدث خطأ أثناء التحديث', 'err'); console.error(err); });
+      } else {
         const convoyId = db.ref('convoys').push().key;
-
-        const convoyData = {
-          id: convoyId,
-          title: document.getElementById('convoy-title').value,
-          type: document.getElementById('convoy-type').value,
-          location: document.getElementById('convoy-location').value,
-          date: document.getElementById('convoy-date').value,
-          desc: document.getElementById('convoy-desc').value,
-          article: document.getElementById('convoy-article').value,
-          featured: document.getElementById('convoy-featured').checked
-        };
-
+        convoyData.id = convoyId;
+        convoyData.createdAt = new Date().toISOString();
         db.ref('convoys/' + convoyId).set(convoyData)
-          .then(() => {
-            convoySubmitBtn.innerText = "✅ تم الحفظ بنجاح!";
-            convoyForm.reset();
-            setTimeout(() => {
-              convoySubmitBtn.innerText = "حفظ القافلة وإضافتها للموقع";
-              convoySubmitBtn.disabled = false;
-            }, 2000);
-          })
-          .catch((error) => {
-            console.error("Error saving convoy:", error);
-            alert("حدث خطأ أثناء الحفظ! تأكد من صلاحيات الـ Rules.");
-            convoySubmitBtn.innerText = "حفظ القافلة وإضافتها للموقع";
-            convoySubmitBtn.disabled = false;
+          .then(() => { toast('تم حفظ القافلة بنجاح'); resetConvoyForm(); })
+          .catch((err) => { toast('حدث خطأ! تأكد من صلاحيات الـ Rules', 'err'); console.error(err); });
+      }
+
+      convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
+      convoySubmitBtn.disabled = false;
+    });
+
+    function resetConvoyForm() {
+      convoyForm.reset();
+      document.getElementById('editId').value = '';
+      document.getElementById('formTitle').innerHTML = '<i class="fas fa-plus-circle"></i> إضافة قافلة أو نشاط جديد';
+      convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
+      removeImg();
+      setDateType('single');
+      document.getElementById('convoy-date-single').value = '';
+      document.getElementById('convoy-date-from').value = '';
+      document.getElementById('convoy-date-to').value = '';
+    }
+
+    function editConvoy(id) {
+      db.ref('convoys/' + id).once('value', (snap) => {
+        const d = snap.val();
+        if (!d) return;
+        document.getElementById('editId').value = id;
+        document.getElementById('convoy-title').value = d.title || '';
+        document.getElementById('convoy-type').value = d.type || 'قافلة طبية';
+        document.getElementById('convoy-location').value = d.location || '';
+        document.getElementById('convoy-desc').value = d.desc || '';
+        document.getElementById('convoy-article').value = d.article || '';
+        document.getElementById('convoy-featured').checked = d.featured || false;
+
+        // استعادة نوع التاريخ
+        if (d.dateType === 'range') {
+          setDateType('range');
+          document.getElementById('convoy-date-from').value = d.dateFrom || '';
+          document.getElementById('convoy-date-to').value = d.dateTo || '';
+        } else {
+          setDateType('single');
+          document.getElementById('convoy-date-single').value = d.dateType === 'single' ? (d.date || '') : '';
+        }
+
+        if (d.image) {
+          currentImg = d.image;
+          document.getElementById('previewSrc').src = d.image;
+          document.getElementById('imgPreview').classList.add('show');
+          document.getElementById('uploadBox').style.display = 'none';
+        }
+
+        document.getElementById('formTitle').innerHTML = '<i class="fas fa-edit"></i> تعديل القافلة';
+        convoySubmitBtn.innerText = 'تحديث القافلة';
+        goPage('add', document.querySelector('[data-page=add]'));
+      });
+    }
+
+    function deleteConvoy(id) {
+      showConfirm('هل أنت متأكد من حذف هذه القافلة؟', () => {
+        db.ref('convoys/' + id).remove().then(() => toast('تم حذف القافلة')).catch(() => toast('حدث خطأ', 'err'));
+      });
+    }
+
+    // ===== عرض القوافل =====
+    function loadConvoys() {
+      db.ref('convoys').on('value', (snap) => {
+        const data = snap.val();
+        const statEl = document.getElementById('statConvoys');
+        const tbody = document.getElementById('convoyTableBody');
+        const homeEl = document.getElementById('homeConvoys');
+        const settCount = document.getElementById('settingsConvoyCount');
+        const settUpdate = document.getElementById('settingsLastUpdate');
+
+        if (!data) {
+          statEl.textContent = '0';
+          settCount.textContent = '0';
+          settUpdate.textContent = '-';
+          const emptyHtml = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد قوافل بعد</p><button class="btn-primary-sm" onclick="goPage(\'add\',document.querySelector(\'[data-page=add]\'))"><i class="fas fa-plus" style="margin-left:6px;"></i>أضف أول قافلة</button></div>';
+          tbody.innerHTML = '<tr><td colspan="7">' + emptyHtml + '</td></tr>';
+          homeEl.innerHTML = emptyHtml;
+          return;
+        }
+
+        const all = Object.values(data).reverse();
+        statEl.textContent = all.length;
+        settCount.textContent = all.length;
+
+        const latest = all[0];
+        if (latest.updatedAt || latest.createdAt) {
+          settUpdate.textContent = new Date(latest.updatedAt || latest.createdAt).toLocaleDateString('ar-EG', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+        }
+
+        tbody.innerHTML = all.map(c => `
+          <tr>
+            <td><img src="${c.image || 'https://picsum.photos/seed/' + (c.id||'x') + '/50/50.jpg'}" class="tbl-img" onerror="this.src='https://picsum.photos/seed/${c.id||'x'}/50/50.jpg'"></td>
+            <td style="font-weight:700; color:var(--cyan-900);">${c.title}</td>
+            <td>${c.type}</td>
+            <td style="color:#6b7280;">${c.location}</td>
+            <td style="color:#6b7280; font-size:12px; white-space:nowrap;">
+              ${c.dateType === 'range' ? '<i class="fas fa-calendar-week" style="margin-left:4px;color:var(--cyan-500);"></i>' : '<i class="fas fa-calendar-day" style="margin-left:4px;color:var(--cyan-500);"></i>'}
+              ${c.date || '-'}
+            </td>
+            <td><span class="status-pill ${c.featured ? 'main' : 'normal'}"><i class="fas fa-${c.featured ? 'star' : 'minus'}" style="font-size:9px;"></i>${c.featured ? 'رئيسية' : 'عادية'}</span></td>
+            <td>
+              <div style="display:flex;gap:6px;">
+                <button class="act-btn" title="تعديل" onclick="editConvoy('${c.id}')"><i class="fas fa-pen"></i></button>
+                <button class="act-btn del" title="حذف" onclick="deleteConvoy('${c.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+
+        homeEl.innerHTML = all.slice(0,3).map(c => `
+          <div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s;border:1px solid #e5e7eb;margin-bottom:8px;" onmouseover="this.style.borderColor='#a5f3fc'" onmouseout="this.style.borderColor='#e5e7eb'" onclick="editConvoy('${c.id}')">
+            <img src="${c.image || 'https://picsum.photos/seed/' + (c.id||'x') + '/50/50.jpg'}" style="width:48px;height:48px;border-radius:10px;object-fit:cover;border:2px solid #e5e7eb;" onerror="this.src='https://picsum.photos/seed/${c.id||'x'}/48/48.jpg'">
+            <div style="flex:1;min-width:0;">
+              <div style="font-weight:700;color:var(--cyan-900);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.title}</div>
+              <div style="font-size:12px;color:#6b7280;">${c.type} - ${c.location}</div>
+            </div>
+            <span class="status-pill ${c.featured ? 'main' : 'normal'}" style="font-size:10px;">${c.featured ? 'رئيسية' : 'عادية'}</span>
+          </div>
+        `).join('');
+      });
+    }
+
+    // ===== الرسائل =====
+    function loadMessages() {
+      db.ref('messages').on('value', (snap) => {
+        const data = snap.val();
+        const statEl = document.getElementById('statMsgs');
+        const allMsgsEl = document.getElementById('allMsgs');
+        const homeMsgsEl = document.getElementById('homeMsgs');
+        const badge = document.getElementById('msgBadge');
+        const settCount = document.getElementById('settingsMsgCount');
+
+        if (!data) {
+          statEl.textContent = '0';
+          badge.style.display = 'none';
+          settCount.textContent = '0';
+          const emptyHtml = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد رسائل جديدة حالياً</p></div>';
+          allMsgsEl.innerHTML = emptyHtml;
+          homeMsgsEl.innerHTML = emptyHtml;
+          return;
+        }
+
+        const msgs = Object.values(data).reverse();
+        statEl.textContent = msgs.length;
+        badge.style.display = '';
+        badge.textContent = msgs.length;
+        settCount.textContent = msgs.length;
+
+        function renderMsg(m, showDel = true) {
+          return `
+            <div class="msg-card">
+              ${showDel ? `<button class="msg-del" onclick="deleteMsg('${m.id}')">حذف</button>` : ''}
+              <div class="msg-head">
+                <div class="msg-avatar">${m.name.charAt(0)}</div>
+                <div>
+                  <div class="msg-name">${m.name}</div>
+                  <div class="msg-time">${m.time || ''}</div>
+                </div>
+              </div>
+              <div class="msg-info">
+                <div><span>📞 الهاتف:</span> ${m.phone || 'غير متوفر'}</div>
+                <div><span>✉️ الإيميل:</span> ${m.email || '-'}</div>
+              </div>
+              <div class="msg-body">${m.message}</div>
+            </div>
+          `;
+        }
+
+        allMsgsEl.innerHTML = msgs.map(m => renderMsg(m)).join('');
+        homeMsgsEl.innerHTML = msgs.slice(0,3).map(m => renderMsg(m)).join('');
+      }, (error) => {
+        console.error('Firebase Error:', error);
+        const errHtml = '<div class="empty"><i class="fas fa-exclamation-circle" style="color:#ef4444;"></i><p style="color:#ef4444;">حدث خطأ في تحميل الرسائل! تأكد إنك ضغطت Publish في صفحة الـ Rules.</p></div>';
+        document.getElementById('allMsgs').innerHTML = errHtml;
+        document.getElementById('homeMsgs').innerHTML = errHtml;
+      });
+    }
+
+    function deleteMsg(id) {
+      showConfirm('هل أنت متأكد من حذف هذه الرسالة؟', () => {
+        db.ref('messages/' + id).remove().then(() => toast('تم حذف الرسالة')).catch(() => toast('حدث خطأ', 'err'));
+      });
+    }
+
+    function deleteAllMsgs() {
+      showConfirm('هل أنت متأكد من حذف جميع الرسائل؟ لا يمكن التراجع.', () => {
+        db.ref('messages').remove().then(() => toast('تم حذف جميع الرسائل')).catch(() => toast('حدث خطأ', 'err'));
+      });
+    }
+
+    // ===== الإعدادات =====
+
+    function changePassword() {
+      const user = auth.currentUser;
+      if (!user) { toast('لا يوجد مستخدم مسجل', 'err'); return; }
+
+      const oldPass = document.getElementById('oldPass').value;
+      const newPass = document.getElementById('newPass').value;
+      const confirmPass = document.getElementById('confirmPass').value;
+
+      if (!oldPass) { toast('أدخل كلمة المرور الحالية', 'err'); return; }
+      if (!newPass || newPass.length < 6) { toast('كلمة المرور الجديدة لازم تكون 6 أحرف على الأقل', 'err'); return; }
+      if (newPass !== confirmPass) { toast('كلمة المرور الجديدة مش متطابقة', 'err'); return; }
+
+      const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPass);
+
+      user.reauthenticateWithCredential(credential)
+        .then(() => {
+          return user.updatePassword(newPass);
+        })
+        .then(() => {
+          toast('تم تغيير كلمة المرور بنجاح');
+          document.getElementById('oldPass').value = '';
+          document.getElementById('newPass').value = '';
+          document.getElementById('confirmPass').value = '';
+        })
+        .catch((err) => {
+          if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+            toast('كلمة المرور الحالية غلط', 'err');
+          } else if (err.code === 'auth/weak-password') {
+            toast('كلمة المرور ضعيفة', 'err');
+          } else {
+            toast('حدث خطأ: ' + err.message, 'err');
+          }
+        });
+    }
+
+    function exportData() {
+      db.ref().once('value', (snap) => {
+        const data = snap.val();
+        const exportObj = {
+          exportDate: new Date().toISOString(),
+          data: data
+        };
+        const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'sls-backup-' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        toast('تم تصدير النسخة الاحتياطية');
+      }).catch(() => toast('حدث خطأ أثناء التصدير', 'err'));
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!imported.data) { toast('ملف غير صالح', 'err'); return; }
+
+          showConfirm('هيتم استبدال كل البيانات الحالية بالبيانات المستوردة. متأكد؟', () => {
+            db.ref().set(imported.data)
+              .then(() => toast('تم استيراد البيانات بنجاح'))
+              .catch(() => toast('حدث خطأ أثناء الاستيراد', 'err'));
           });
+        } catch {
+          toast('ملف غير صالح', 'err');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function clearAllFirebase() {
+      showConfirm('تحذير: سيتم مسح كل البيانات من فيرسل نهائياً (القوافل والرسائل). لا يمكن التراجع!', () => {
+        db.ref().remove()
+          .then(() => toast('تم مسح كل البيانات'))
+          .catch(() => toast('حدث خطأ', 'err'));
       });
     }
   </script>
