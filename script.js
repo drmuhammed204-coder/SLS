@@ -63,33 +63,34 @@ function toggleMobileMenu() {
 }
 
 // ==========================================
-// 1. إعدادات فيرسل (بنشغلها مرة واحدة بس بره الفورم)
-// ==========================================
-const firebaseConfig = {
-  apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
-  authDomain: "sls-admin-panel.firebaseapp.com",
-  // ⬅️ ده كان ناقص ومسبب المشكلة الأساسية
-  databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "sls-admin-panel",
-  storageBucket: "sls-admin-panel.firebasestorage.app",
-  messagingSenderId: "545641823357",
-  appId: "1:545641823357:web:e0a0ee7f62205156850514",
-  measurementId: "G-9YX9L874BR"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-
 // Initialize on Load
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+  
+  // 1. تحريك الأرقام (هيشتغل فوراً)
   animateStats();
 
   // ==========================================
-  // 2. Form Submission Logic
+  // 2. كود فيرسل والفورم (هيشتغل في صفحة التواصل بس)
   // ==========================================
   const form = document.getElementById('contact-form');
+  
   if (form) {
+    // بيانات الاتصال بفيرسيل
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
+      authDomain: "sls-admin-panel.firebaseapp.com",
+      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "sls-admin-panel",
+      storageBucket: "sls-admin-panel.firebasestorage.app",
+      messagingSenderId: "545641823357",
+      appId: "1:545641823357:web:e0a0ee7f62205156850514",
+      measurementId: "G-9YX9L874BR"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -97,29 +98,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!button) return;
 
       const originalText = button.innerHTML;
-
       button.innerHTML = '<span>جاري الإرسال...</span>';
       button.disabled = true;
 
-      // جلب بيانات الفورم
       const name = form.querySelector('[name="name"]').value;
       const phone = form.querySelector('[name="phone"]').value;
       const email = form.querySelector('[name="email"]').value;
       const message = form.querySelector('[name="message"]').value;
 
-      // ⬅️ إنشاء ID فريد عشان زرار الحذف في الأدمن يشتغل
       const messageId = db.ref('messages').push().key;
 
-      // حفظ الرسالة في قاعدة البيانات
       db.ref('messages/' + messageId).set({
-        id: messageId, // ⬅️ ده كان ناقص، مهم جداً جداً
+        id: messageId,
         name: name,
         phone: phone,
         email: email,
         message: message,
         time: new Date().toLocaleString('ar-EG')
       }).then(() => {
-        // لو نجح، يروح صفحة الشكر
         window.location.href = 'thank-you.html';
       }).catch((error) => {
         console.error("خطأ في الإرسال:", error);
@@ -131,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Back to Top click handler
+  // 3. Back to Top click handler
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
