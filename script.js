@@ -4,13 +4,11 @@
 function animateStats() {
   const statNumbers = document.querySelectorAll('.stat-number');
 
-  // تحسين 3: لو مفيش عناصر إحصائية خروج فوري
   if (statNumbers.length === 0) return;
 
   statNumbers.forEach(stat => {
     const target = parseInt(stat.dataset.target);
 
-    // تحسين 2: حماية من NaN لو data-target فاضي أو غلط
     if (isNaN(target)) return;
 
     const duration = 2000;
@@ -33,9 +31,8 @@ function animateStats() {
   });
 }
 
-// تحسين 3: دمج scroll listeners في واحد بدل اثنين
+// تحسين: دمج scroll listeners في واحد بدل اثنين
 window.addEventListener('scroll', () => {
-  // Navbar shadow
   const navbar = document.getElementById('navbar');
   if (navbar) {
     if (window.scrollY > 20) {
@@ -45,7 +42,6 @@ window.addEventListener('scroll', () => {
     }
   }
 
-  // Back to Top button
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     if (window.scrollY > 300) {
@@ -66,20 +62,38 @@ function toggleMobileMenu() {
   }
 }
 
+// ==========================================
+// 1. إعدادات فيرسل (بنشغلها مرة واحدة بس بره الفورم)
+// ==========================================
+const firebaseConfig = {
+  apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
+  authDomain: "sls-admin-panel.firebaseapp.com",
+  // ⬅️ ده كان ناقص ومسبب المشكلة الأساسية
+  databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "sls-admin-panel",
+  storageBucket: "sls-admin-panel.firebasestorage.app",
+  messagingSenderId: "545641823357",
+  appId: "1:545641823357:web:e0a0ee7f62205156850514",
+  measurementId: "G-9YX9L874BR"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
   animateStats();
 
-  // Form Submission Logic
+  // ==========================================
+  // 2. Form Submission Logic
+  // ==========================================
   const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const formData = new FormData(form);
       const button = form.querySelector('button[type="submit"]');
-
-      // تحسين 1: حماية لو الزر مش موجود
       if (!button) return;
 
       const originalText = button.innerHTML;
@@ -87,26 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
       button.innerHTML = '<span>جاري الإرسال...</span>';
       button.disabled = true;
 
-          // بيانات الاتصال بفيرسيل
-      const firebaseConfig = {
-        apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
-        authDomain: "sls-admin-panel.firebaseapp.com",
-        projectId: "sls-admin-panel",
-        storageBucket: "sls-admin-panel.firebasestorage.app",
-        messagingSenderId: "545641823357",
-        appId: "1:545641823357:web:e0a0ee7f62205156850514"
-      };
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.database();
-
       // جلب بيانات الفورم
       const name = form.querySelector('[name="name"]').value;
       const phone = form.querySelector('[name="phone"]').value;
       const email = form.querySelector('[name="email"]').value;
       const message = form.querySelector('[name="message"]').value;
 
+      // ⬅️ إنشاء ID فريد عشان زرار الحذف في الأدمن يشتغل
+      const messageId = db.ref('messages').push().key;
+
       // حفظ الرسالة في قاعدة البيانات
-      db.ref('messages').push({
+      db.ref('messages/' + messageId).set({
+        id: messageId, // ⬅️ ده كان ناقص، مهم جداً جداً
         name: name,
         phone: phone,
         email: email,
@@ -116,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // لو نجح، يروح صفحة الشكر
         window.location.href = 'thank-you.html';
       }).catch((error) => {
+        console.error("خطأ في الإرسال:", error);
         alert('حدث خطأ أثناء الإرسال. حاول مرة أخرى.');
         button.innerHTML = originalText;
         button.disabled = false;

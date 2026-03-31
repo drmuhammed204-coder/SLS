@@ -160,22 +160,24 @@
     // ==========================================
     // 4. دالة جلب وعرض الرسائل من فيرسل (الكود اللي أضفناه)
     // ==========================================
-    function loadMessages() {
+        function loadMessages() {
+      // 1. هنمسح كلمة "جاري التحميل" فوراً هنا بره الـ callback
+      messagesContainer.innerHTML = ""; 
+
+      // 2. جلب البيانات
       db.ref('messages').on('value', (snapshot) => {
         messagesContainer.innerHTML = ""; // مسح القديم
         const data = snapshot.val();
         
         if (!data) {
           messagesContainer.innerHTML = '<p class="text-gray-400 text-center py-8">لا توجد رسائل جديدة حالياً.</p>';
-          msgCountEl.innerText = "0"; // تحديث العداد
+          msgCountEl.innerText = "0";
           return;
         }
 
-        // تحديث عداد الرسائل في الكرت
         const messagesCount = Object.values(data).length;
         msgCountEl.innerText = messagesCount;
 
-        // قلب البيانات عشان نعرض الأحدث فوق
         Object.values(data).reverse().forEach(msg => {
           const card = document.createElement('div');
           card.className = 'bg-gray-50 rounded-xl p-5 border border-gray-200 relative';
@@ -198,6 +200,11 @@
           `;
           messagesContainer.appendChild(card);
         });
+      }, 
+      // 3. ده الجديد: لو حصل أي خطأ (زي ان الصلاحيات مقفولة) هيظهر رسالة بدل ما ييقف
+      (error) => {
+        console.error("Firebase Error:", error);
+        messagesContainer.innerHTML = '<p class="text-red-500 text-center py-8">حدث خطأ في تحميل الرسائل! تأكد إنك ضغطت Publish في صفحة الـ Rules.</p>';
       });
     }
 
