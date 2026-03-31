@@ -79,13 +79,76 @@
         </div>
       </div>
 
-            <!-- قسم الرسائل -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg">
+      <!-- قسم الرسائل -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
         <h3 class="text-xl font-bold text-sls-cyan-900 mb-6">📩 الرسائل الواردة</h3>
         <div id="messages-container" class="space-y-4">
           <p class="text-gray-400 text-center">جاري تحميل الرسائل...</p>
         </div>
       </div>
+
+      <!-- ========================================== -->
+      <!-- قسم إضافة قوافل وأنشطة جديدة -->
+      <!-- ========================================== -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+        <h3 class="text-xl font-bold text-sls-cyan-900 mb-6">🚑 إضافة قافلة أو نشاط جديد</h3>
+        
+        <form id="convoy-form" class="space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- عنوان القافلة -->
+            <div class="md:col-span-2">
+              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">عنوان القافلة / النشاط</label>
+              <input type="text" id="convoy-title" placeholder="مثال: القافلة الطبية الكبرى بمحافظة البحيرة" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+            </div>
+            
+            <!-- نوع النشاط -->
+            <div>
+              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">نوع النشاط</label>
+              <select id="convoy-type" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition bg-white">
+                <option value="قافلة طبية">🏥 قافلة طبية</option>
+                <option value="مبادرة إنسانية">🧥 مبادرة إنسانية</option>
+                <option value="تبرع بالدم">🩸 تبرع بالدم</option>
+                <option value="نشاط توعوي">📢 نشاط توعوي</option>
+              </select>
+            </div>
+
+            <!-- الموقع -->
+            <div>
+              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">موقع القافلة</label>
+              <input type="text" id="convoy-location" placeholder="مثال: دسوق - البحيرة" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+            </div>
+
+            <!-- التاريخ -->
+            <div>
+              <label class="block text-sm font-bold text-sls-cyan-900 mb-2">التاريخ</label>
+              <input type="date" id="convoy-date" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required>
+            </div>
+
+            <!-- إظهار كقافلة رئيسية -->
+            <div class="flex items-center gap-3 pt-6">
+              <input type="checkbox" id="convoy-featured" class="w-5 h-5 accent-sls-cyan-600">
+              <label for="convoy-featured" class="text-sm font-bold text-sls-cyan-900">اظهار كقافلة رئيسية (في أعلى الصفحة)</label>
+            </div>
+          </div>
+
+          <!-- وصف قصير (للكارت) -->
+          <div>
+            <label class="block text-sm font-bold text-sls-cyan-900 mb-2">وصف قصير (يظهر في الكارت)</label>
+            <textarea rows="2" id="convoy-desc" placeholder="ملخص سطرين عن القافلة..." class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition resize-none" required></textarea>
+          </div>
+
+          <!-- المقال كامل (لصفحة التفاصيل) -->
+          <div>
+            <label class="block text-sm font-bold text-sls-cyan-900 mb-2">المقال كامل / تفاصيل القافلة (يظهر لما الزائر يدوس على الكرت)</label>
+            <textarea rows="8" id="convoy-article" placeholder="اكتب هنا التفاصيل الكاملة للقافلة، الأقسام الطبية، الأرقام، الشهادات... (كل سطر في الـ textarea هيتحول لفقرة في المقال)" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sls-cyan-500 outline-none transition" required></textarea>
+          </div>
+
+          <button type="submit" id="convoy-submit-btn" class="w-full py-4 bg-gradient-to-r from-sls-cyan-600 to-sls-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all">
+            حفظ القافلة وإضافتها للموقع
+          </button>
+        </form>
+      </div>
+
     </div>
   </div>
 
@@ -145,28 +208,24 @@
     // 3. مراقبة حالة الدخول (أنت داخل ولا بره)
     auth.onAuthStateChanged((user) => {
       if (user) {
-        // لو داخل -> اخفي شاشة اللوجين واظهر الداشبورد
         loginSection.classList.add('hidden');
         dashboardSection.classList.remove('hidden');
         loginError.classList.add('hidden');
-        loadMessages(); // <-- هنا قمنا بتفعيل دالة جلب الرسائل
+        loadMessages(); 
       } else {
-        // لو بره -> اظهر شاشة اللوجين واخفي الداشبورد
         loginSection.classList.remove('hidden');
         dashboardSection.classList.add('hidden');
       }
     });
 
     // ==========================================
-    // 4. دالة جلب وعرض الرسائل من فيرسل (الكود اللي أضفناه)
+    // 4. دالة جلب وعرض الرسائل من فيرسل
     // ==========================================
-        function loadMessages() {
-      // 1. هنمسح كلمة "جاري التحميل" فوراً هنا بره الـ callback
+    function loadMessages() {
       messagesContainer.innerHTML = ""; 
 
-      // 2. جلب البيانات
       db.ref('messages').on('value', (snapshot) => {
-        messagesContainer.innerHTML = ""; // مسح القديم
+        messagesContainer.innerHTML = ""; 
         const data = snapshot.val();
         
         if (!data) {
@@ -201,7 +260,6 @@
           messagesContainer.appendChild(card);
         });
       }, 
-      // 3. ده الجديد: لو حصل أي خطأ (زي ان الصلاحيات مقفولة) هيظهر رسالة بدل ما ييقف
       (error) => {
         console.error("Firebase Error:", error);
         messagesContainer.innerHTML = '<p class="text-red-500 text-center py-8">حدث خطأ في تحميل الرسائل! تأكد إنك ضغطت Publish في صفحة الـ Rules.</p>';
@@ -209,12 +267,56 @@
     }
 
     // ==========================================
-    // 5. دالة حذف الرسالة (الكود اللي أضفناه)
+    // 5. دالة حذف الرسالة
     // ==========================================
     function deleteMessage(id) {
       if(confirm("هل أنت متأكد من حذف هذه الرسالة؟")) {
         db.ref('messages/' + id).remove();
       }
+    }
+
+    // ==========================================
+    // 6. كود إضافة قوافل جديدة
+    // ==========================================
+    const convoyForm = document.getElementById('convoy-form');
+    const convoySubmitBtn = document.getElementById('convoy-submit-btn');
+
+    if (convoyForm) {
+      convoyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        convoySubmitBtn.innerText = "جاري الحفظ...";
+        convoySubmitBtn.disabled = true;
+
+        const convoyId = db.ref('convoys').push().key;
+
+        const convoyData = {
+          id: convoyId,
+          title: document.getElementById('convoy-title').value,
+          type: document.getElementById('convoy-type').value,
+          location: document.getElementById('convoy-location').value,
+          date: document.getElementById('convoy-date').value,
+          desc: document.getElementById('convoy-desc').value,
+          article: document.getElementById('convoy-article').value,
+          featured: document.getElementById('convoy-featured').checked
+        };
+
+        db.ref('convoys/' + convoyId).set(convoyData)
+          .then(() => {
+            convoySubmitBtn.innerText = "✅ تم الحفظ بنجاح!";
+            convoyForm.reset();
+            setTimeout(() => {
+              convoySubmitBtn.innerText = "حفظ القافلة وإضافتها للموقع";
+              convoySubmitBtn.disabled = false;
+            }, 2000);
+          })
+          .catch((error) => {
+            console.error("Error saving convoy:", error);
+            alert("حدث خطأ أثناء الحفظ! تأكد من صلاحيات الـ Rules.");
+            convoySubmitBtn.innerText = "حفظ القافلة وإضافتها للموقع";
+            convoySubmitBtn.disabled = false;
+          });
+      });
     }
   </script>
 </body>
