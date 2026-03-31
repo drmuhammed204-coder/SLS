@@ -87,27 +87,40 @@ document.addEventListener('DOMContentLoaded', () => {
       button.innerHTML = '<span>جاري الإرسال...</span>';
       button.disabled = true;
 
-      try {
-        const response = await fetch('https://formspree.io/f/mgonnrdk', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
+          // بيانات الاتصال بفيرسيل
+      const firebaseConfig = {
+        apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
+        authDomain: "sls-admin-panel.firebaseapp.com",
+        projectId: "sls-admin-panel",
+        storageBucket: "sls-admin-panel.firebasestorage.app",
+        messagingSenderId: "545641823357",
+        appId: "1:545641823357:web:e0a0ee7f62205156850514"
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
 
-        if (response.ok) {
-          window.location.href = 'thank-you.html';
-        } else {
-          alert('حدث خطأ أثناء الإرسال. برجاء المحاولة مرة أخرى.');
-          button.innerHTML = originalText;
-          button.disabled = false;
-        }
-      } catch (error) {
-        alert('حدث خطأ في الاتصال بالإنترنت.');
+      // جلب بيانات الفورم
+      const name = form.querySelector('[name="name"]').value;
+      const phone = form.querySelector('[name="phone"]').value;
+      const email = form.querySelector('[name="email"]').value;
+      const message = form.querySelector('[name="message"]').value;
+
+      // حفظ الرسالة في قاعدة البيانات
+      db.ref('messages').push({
+        name: name,
+        phone: phone,
+        email: email,
+        message: message,
+        time: new Date().toLocaleString('ar-EG')
+      }).then(() => {
+        // لو نجح، يروح صفحة الشكر
+        window.location.href = 'thank-you.html';
+      }).catch((error) => {
+        alert('حدث خطأ أثناء الإرسال. حاول مرة أخرى.');
         button.innerHTML = originalText;
         button.disabled = false;
-      }
+      });
+
     });
   }
 

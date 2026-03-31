@@ -16,6 +16,7 @@
 
   <!-- مكتبة فيرسل السهلة (CDN) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 </head>
 <body class="bg-sls-cyan-950 font-tajawal">
@@ -64,7 +65,7 @@
         <!-- كرت 1 -->
         <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-cyan-500">
           <h3 class="text-gray-500 text-sm mb-2">رسائل التواصل الجديدة</h3>
-          <p class="text-3xl font-black text-sls-cyan-900">0</p>
+          <p id="msg-count" class="text-3xl font-black text-sls-cyan-900">0</p>
         </div>
         <!-- كرت 2 -->
         <div class="bg-white rounded-2xl p-6 shadow-lg border-t-4 border-sls-gold-400">
@@ -78,8 +79,12 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
-        <p class="text-gray-400 text-lg">🎯 تم بناء نظام الدخول بنجاح! في الخطوة الجاية ه نربط هنا رسائل التواصل وأزرار التعديل.</p>
+            <!-- قسم الرسائل -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg">
+        <h3 class="text-xl font-bold text-sls-cyan-900 mb-6">📩 الرسائل الواردة</h3>
+        <div id="messages-container" class="space-y-4">
+          <p class="text-gray-400 text-center">جاري تحميل الرسائل...</p>
+        </div>
       </div>
     </div>
   </div>
@@ -90,6 +95,7 @@
     const firebaseConfig = {
       apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
       authDomain: "sls-admin-panel.firebaseapp.com",
+      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
       projectId: "sls-admin-panel",
       storageBucket: "sls-admin-panel.firebasestorage.app",
       messagingSenderId: "545641823357",
@@ -100,6 +106,7 @@
     // تشغيل فيرسل
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const db = firebase.database();
 
     // العناصر في الصفحة
     const loginSection = document.getElementById('login-section');
@@ -107,6 +114,8 @@
     const loginForm = document.getElementById('login-form');
     const loginError = document.getElementById('login-error');
     const logoutBtn = document.getElementById('logout-btn');
+    const messagesContainer = document.getElementById('messages-container');
+    const msgCountEl = document.getElementById('msg-count');
 
     // 1. عملية تسجيل الدخول
     loginForm.addEventListener('submit', (e) => {
@@ -140,12 +149,66 @@
         loginSection.classList.add('hidden');
         dashboardSection.classList.remove('hidden');
         loginError.classList.add('hidden');
+        loadMessages(); // <-- هنا قمنا بتفعيل دالة جلب الرسائل
       } else {
         // لو بره -> اظهر شاشة اللوجين واخفي الداشبورد
         loginSection.classList.remove('hidden');
         dashboardSection.classList.add('hidden');
       }
     });
+
+    // ==========================================
+    // 4. دالة جلب وعرض الرسائل من فيرسل (الكود اللي أضفناه)
+    // ==========================================
+    function loadMessages() {
+      db.ref('messages').on('value', (snapshot) => {
+        messagesContainer.innerHTML = ""; // مسح القديم
+        const data = snapshot.val();
+        
+        if (!data) {
+          messagesContainer.innerHTML = '<p class="text-gray-400 text-center py-8">لا توجد رسائل جديدة حالياً.</p>';
+          msgCountEl.innerText = "0"; // تحديث العداد
+          return;
+        }
+
+        // تحديث عداد الرسائل في الكرت
+        const messagesCount = Object.values(data).length;
+        msgCountEl.innerText = messagesCount;
+
+        // قلب البيانات عشان نعرض الأحدث فوق
+        Object.values(data).reverse().forEach(msg => {
+          const card = document.createElement('div');
+          card.className = 'bg-gray-50 rounded-xl p-5 border border-gray-200 relative';
+          card.innerHTML = `
+            <button onclick="deleteMessage('${msg.id}')" class="absolute top-3 left-3 text-red-400 hover:text-red-600 text-sm font-bold">حذف</button>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-sls-cyan-100 rounded-full flex items-center justify-center text-sls-cyan-700 font-bold">${msg.name.charAt(0)}</div>
+              <div>
+                <h4 class="font-bold text-sls-cyan-900">${msg.name}</h4>
+                <p class="text-xs text-gray-500">${msg.time}</p>
+              </div>
+            </div>
+            <div class="space-y-1 text-sm text-gray-600 mb-3">
+              <p><span class="font-bold">📞 الهاتف:</span> ${msg.phone || 'غير متوفر'}</p>
+              <p><span class="font-bold">✉️ الإيميل:</span> ${msg.email}</p>
+            </div>
+            <div class="bg-white p-3 rounded-lg border">
+              <p class="text-gray-700">${msg.message}</p>
+            </div>
+          `;
+          messagesContainer.appendChild(card);
+        });
+      });
+    }
+
+    // ==========================================
+    // 5. دالة حذف الرسالة (الكود اللي أضفناه)
+    // ==========================================
+    function deleteMessage(id) {
+      if(confirm("هل أنت متأكد من حذف هذه الرسالة؟")) {
+        db.ref('messages/' + id).remove();
+      }
+    }
   </script>
 </body>
 </html>
