@@ -177,6 +177,13 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
   transform: translateX(-5px);
   box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
 }
+/* Line Clamp (قص النص بعد سطرين) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 
 /* Toast Notification Styles */
@@ -200,4 +207,18 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
     opacity: 1;
     visibility: visible;
     bottom: 40px;
+}
+/* Line Clamp */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

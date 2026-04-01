@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة التحكم - SLS Admin</title>
   <meta name="robots" content="noindex, nofollow">
-  
+  <meta name="description" content="لوحة تحكم إدارة جمعية الليدرز الاجتماعية">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect rx='20' width='100' height='100' fill='%230891b2'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-size='42' font-weight='bold' font-family='sans-serif'%3ESLS%3C/text%3E%3C/svg%3E">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -58,7 +62,9 @@
       overflow-x: hidden;
     }
 
-    /* ===== تسجيل الدخول ===== */
+    /* ===== إصلاح: كلاس hidden كان مفقود ===== */
+    .hidden { display: none !important; }
+
     #login-section {
       min-height: 100vh;
       display: flex;
@@ -72,22 +78,18 @@
     #login-section::before {
       content: '';
       position: absolute;
-      width: 500px;
-      height: 500px;
+      width: 500px; height: 500px;
       background: radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%);
-      top: -150px;
-      right: -100px;
+      top: -150px; right: -100px;
       animation: blobFloat 10s ease-in-out infinite;
     }
 
     #login-section::after {
       content: '';
       position: absolute;
-      width: 400px;
-      height: 400px;
+      width: 400px; height: 400px;
       background: radial-gradient(circle, rgba(20,184,166,0.08), transparent 70%);
-      bottom: -100px;
-      left: -80px;
+      bottom: -100px; left: -80px;
       animation: blobFloat 12s ease-in-out infinite reverse;
     }
 
@@ -108,263 +110,127 @@
     }
 
     .login-icon {
-      width: 80px;
-      height: 80px;
+      width: 80px; height: 80px;
       background: var(--cyan-100);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 20px;
       font-size: 32px;
     }
 
-    .login-card h1 {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 900;
-      color: var(--cyan-900);
-      margin-bottom: 6px;
-    }
-
-    .login-card .subtitle {
-      text-align: center;
-      color: #6b7280;
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
+    .login-card h1 { text-align: center; font-size: 24px; font-weight: 900; color: var(--cyan-900); margin-bottom: 6px; }
+    .login-card .subtitle { text-align: center; color: #6b7280; font-size: 13px; margin-bottom: 28px; }
 
     .login-error {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #dc2626;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      text-align: center;
-      margin-bottom: 16px;
-      display: none;
+      background: #fef2f2; border: 1px solid #fecaca; color: #dc2626;
+      padding: 12px; border-radius: 12px; font-size: 13px; text-align: center;
+      margin-bottom: 16px; display: none;
     }
-
     .login-error.show { display: block; }
 
-    .form-label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--cyan-900);
-      margin-bottom: 8px;
-    }
+    .form-label { display: block; font-size: 13px; font-weight: 700; color: var(--cyan-900); margin-bottom: 8px; }
 
     .form-input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      font-size: 14px;
-      font-family: 'Tajawal', sans-serif;
-      outline: none;
-      transition: border-color 0.3s;
-      background: white;
-      color: #1f2937;
+      width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 12px;
+      font-size: 14px; font-family: 'Tajawal', sans-serif; outline: none;
+      transition: border-color 0.3s; background: white; color: #1f2937;
     }
-
     .form-input:focus { border-color: var(--cyan-500); }
     .form-input::placeholder { color: #9ca3af; }
 
     .btn-login {
-      width: 100%;
-      padding: 14px;
+      width: 100%; padding: 14px;
       background: linear-gradient(to left, var(--cyan-600), var(--teal-600));
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 700;
-      font-family: 'Tajawal', sans-serif;
-      cursor: pointer;
-      transition: all 0.3s;
+      color: white; border: none; border-radius: 12px;
+      font-size: 16px; font-weight: 700; font-family: 'Tajawal', sans-serif;
+      cursor: pointer; transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(6,182,212,0.3);
     }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(6,182,212,0.4); }
 
-    .btn-login:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(6,182,212,0.4);
-    }
-
-    /* ===== السايدبار ===== */
     .sidebar {
-      position: fixed;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 260px;
-      background: var(--bg-sidebar);
-      border-left: 1px solid var(--border);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s;
+      position: fixed; right: 0; top: 0; bottom: 0; width: 260px;
+      background: var(--bg-sidebar); border-left: 1px solid var(--border);
+      z-index: 100; display: flex; flex-direction: column; transition: transform 0.3s;
     }
 
-    .sidebar-head {
-      padding: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sidebar-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .sidebar-head { padding: 20px; border-bottom: 1px solid var(--border); }
+    .sidebar-brand { display: flex; align-items: center; gap: 12px; }
 
     .sidebar-logo {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       background: linear-gradient(135deg, var(--cyan-500), var(--teal-500));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 16px;
-      color: white;
-      flex-shrink: 0;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 16px; color: white; flex-shrink: 0;
     }
 
     .sidebar-brand-text { font-weight: 800; font-size: 15px; }
     .sidebar-brand-sub { font-size: 11px; color: var(--text-dim); opacity: 0.7; }
-
-    .sidebar-nav {
-      flex: 1;
-      padding: 14px 10px;
-      overflow-y: auto;
-    }
+    .sidebar-nav { flex: 1; padding: 14px 10px; overflow-y: auto; }
 
     .nav-label {
-      font-size: 10px;
-      color: var(--cyan-400);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 14px 14px 8px;
-      font-weight: 700;
-      opacity: 0.6;
+      font-size: 10px; color: var(--cyan-400); text-transform: uppercase;
+      letter-spacing: 1.5px; padding: 14px 14px 8px; font-weight: 700; opacity: 0.6;
     }
 
     .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 14px;
-      border-radius: 10px;
-      color: var(--text-dim);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 2px;
-      border: 1px solid transparent;
+      display: flex; align-items: center; gap: 12px; padding: 11px 14px;
+      border-radius: 10px; color: var(--text-dim); cursor: pointer;
+      transition: all 0.2s; font-size: 14px; font-weight: 500;
+      margin-bottom: 2px; border: 1px solid transparent;
     }
-
-    .nav-link:hover {
-      background: rgba(6,182,212,0.08);
-      color: var(--text-light);
-    }
-
-    .nav-link.active {
-      background: rgba(6,182,212,0.12);
-      color: var(--cyan-300);
-      border-color: var(--border-light);
-    }
-
+    .nav-link:hover { background: rgba(6,182,212,0.08); color: var(--text-light); }
+    .nav-link.active { background: rgba(6,182,212,0.12); color: var(--cyan-300); border-color: var(--border-light); }
     .nav-link i { width: 20px; text-align: center; font-size: 14px; }
 
     .nav-badge {
-      margin-right: auto;
-      margin-left: 0;
-      background: #ef4444;
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 20px;
-      min-width: 20px;
-      text-align: center;
+      margin-right: auto; margin-left: 0; background: #ef4444; color: white;
+      font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px;
+      min-width: 20px; text-align: center;
     }
 
-    .sidebar-foot {
-      padding: 12px 10px;
-      border-top: 1px solid var(--border);
-    }
+    .sidebar-foot { padding: 12px 10px; border-top: 1px solid var(--border); }
 
-    /* ===== المحتوى ===== */
-    .main-area {
-      margin-right: 260px;
-      min-height: 100vh;
-    }
+    .main-area { margin-right: 260px; min-height: 100vh; }
 
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(8,51,68,0.9);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(8,51,68,0.9); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between;
     }
+    .topbar-title { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    .topbar-actions { display: flex; align-items: center; gap: 10px; }
 
-    .topbar-title { font-size: 18px; font-weight: 800; }
-
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* مؤشر الاتصال في الشريط العلوي */
+    .topbar-status-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--teal-500); flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .topbar-status-dot.offline { background: #ef4444; animation: none; }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
     .topbar-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 14px;
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-dim); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; font-size: 14px;
     }
-
-    .topbar-btn:hover {
-      background: var(--bg-card-light);
-      color: var(--text-light);
-    }
+    .topbar-btn:hover { background: var(--bg-card-light); color: var(--text-light); }
 
     .btn-logout {
-      background: rgba(239,68,68,0.15);
-      border: 1px solid rgba(239,68,68,0.3);
-      color: #fca5a5;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Tajawal', sans-serif;
+      background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
+      color: #fca5a5; padding: 8px 16px; border-radius: 10px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; font-family: 'Tajawal', sans-serif;
     }
-
-    .btn-logout:hover {
-      background: rgba(239,68,68,0.25);
-      color: #fecaca;
-    }
+    .btn-logout:hover { background: rgba(239,68,68,0.25); color: #fecaca; }
 
     .page-body { padding: 24px 28px; }
-
-    /* ===== الصفحات ===== */
     .page { display: none; }
     .page.active { display: block; animation: pageFade 0.3s ease; }
 
@@ -373,153 +239,55 @@
       to { opacity:1; transform:translateY(0); }
     }
 
-    /* ===== كروت الإحصائيات ===== */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-      gap: 18px;
-      margin-bottom: 24px;
-    }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-bottom: 24px; }
 
     .stat-card {
-      background: white;
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--cyan-500);
-      transition: transform 0.2s;
+      background: white; border-radius: 16px; padding: 22px;
+      box-shadow: var(--shadow); border-top: 4px solid var(--cyan-500); transition: transform 0.2s;
     }
-
     .stat-card:hover { transform: translateY(-3px); }
     .stat-card.gold { border-top-color: var(--gold-400); }
     .stat-card.teal { border-top-color: var(--teal-500); }
+    .stat-label { font-size: 13px; color: #6b7280; margin-bottom: 6px; font-weight: 500; }
+    .stat-value { font-size: 32px; font-weight: 900; color: var(--cyan-900); line-height: 1; }
 
-    .stat-label {
-      font-size: 13px;
-      color: #6b7280;
-      margin-bottom: 6px;
-      font-weight: 500;
-    }
-
-    .stat-value {
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--cyan-900);
-      line-height: 1;
-    }
-
-    /* ===== الكروت البيضاء ===== */
-    .white-card {
-      background: white;
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--cyan-900);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .white-card { background: white; border-radius: 16px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .card-title { font-size: 18px; font-weight: 800; color: var(--cyan-900); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
     .card-title i { color: var(--cyan-600); }
 
-    /* ===== الفورم ===== */
     .dash-form-group { margin-bottom: 18px; }
-
-    .dash-label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--cyan-900);
-      margin-bottom: 8px;
-    }
+    .dash-label { display: block; font-size: 13px; font-weight: 700; color: var(--cyan-900); margin-bottom: 8px; }
 
     .dash-input, .dash-select, .dash-textarea {
-      width: 100%;
-      padding: 11px 14px;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      font-size: 14px;
-      font-family: 'Tajawal', sans-serif;
-      outline: none;
-      transition: border-color 0.3s;
-      background: white;
-      color: #1f2937;
+      width: 100%; padding: 11px 14px; border: 2px solid #e5e7eb; border-radius: 12px;
+      font-size: 14px; font-family: 'Tajawal', sans-serif; outline: none;
+      transition: border-color 0.3s; background: white; color: #1f2937;
     }
-
-    .dash-input:focus, .dash-select:focus, .dash-textarea:focus {
-      border-color: var(--cyan-500);
-    }
+    .dash-input:focus, .dash-select:focus, .dash-textarea:focus { border-color: var(--cyan-500); }
 
     .dash-select {
-      cursor: pointer;
-      appearance: none;
+      cursor: pointer; appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: left 14px center;
-      padding-left: 36px;
+      background-repeat: no-repeat; background-position: left 14px center; padding-left: 36px;
     }
-
     .dash-textarea { resize: vertical; min-height: 80px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-    .form-row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .dash-check {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-top: 20px;
-    }
-
-    .dash-check input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--cyan-600);
-    }
-
-    .dash-check label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--cyan-900);
-    }
+    .dash-check { display: flex; align-items: center; gap: 10px; padding-top: 20px; }
+    .dash-check input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--cyan-600); }
+    .dash-check label { font-size: 13px; font-weight: 700; color: var(--cyan-900); }
 
     .btn-submit {
-      width: 100%;
-      padding: 14px;
+      width: 100%; padding: 14px;
       background: linear-gradient(to left, var(--cyan-600), var(--teal-600));
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Tajawal', sans-serif;
-      cursor: pointer;
-      transition: all 0.3s;
+      color: white; border: none; border-radius: 12px;
+      font-size: 15px; font-weight: 700; font-family: 'Tajawal', sans-serif;
+      cursor: pointer; transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(6,182,212,0.25);
     }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6,182,212,0.35); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(6,182,212,0.35);
-    }
-
-    .btn-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* ===== خيار نوع التاريخ ===== */
     .date-type-options { display:flex; gap:10px; margin-bottom:16px; }
     .date-type-opt { flex:1; padding:12px 16px; border:2px solid #e5e7eb; border-radius:12px; text-align:center; cursor:pointer; transition:all 0.2s; background:#fff; font-family:'Tajawal',sans-serif; }
     .date-type-opt:hover { border-color:var(--cyan-300); background:var(--cyan-50); }
@@ -530,430 +298,210 @@
     .date-range-row { display:none; }
     .date-range-row.show { display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:end; }
     .range-sep { padding-bottom:14px; color:#9ca3af; font-weight:700; font-size:14px; }
+
+    /* ===== إصلاح: كلاس hide لتاريخ يوم واحد ===== */
     .date-single-row.hide { display:none; }
 
-    /* ===== رفع الصور ===== */
     .upload-box {
-      border: 2px dashed #d1d5db;
-      border-radius: 14px;
-      padding: 28px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: #f9fafb;
+      border: 2px dashed #d1d5db; border-radius: 14px; padding: 28px;
+      text-align: center; cursor: pointer; transition: all 0.3s; background: #f9fafb;
     }
-
-    .upload-box:hover, .upload-box.dragover {
-      border-color: var(--cyan-500);
-      background: var(--cyan-50);
-    }
-
-    .upload-box i {
-      font-size: 32px;
-      color: #9ca3af;
-      margin-bottom: 10px;
-    }
-
+    .upload-box:hover, .upload-box.dragover { border-color: var(--cyan-500); background: var(--cyan-50); }
+    .upload-box.disabled { pointer-events: none; opacity: 0.5; }
+    .upload-box i { font-size: 32px; color: #9ca3af; margin-bottom: 10px; }
     .upload-box p { color: #6b7280; font-size: 13px; }
     .upload-box span { color: var(--cyan-600); font-weight: 700; }
     .upload-box .hint { font-size: 11px; color: #9ca3af; margin-top: 4px; }
 
-    .img-preview {
-      display: none;
-      position: relative;
-      margin-top: 14px;
-    }
-
+    .img-preview { display: none; position: relative; margin-top: 14px; }
     .img-preview.show { display: block; }
-
-    .img-preview img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #e5e7eb;
-    }
+    .img-preview img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 12px; border: 2px solid #e5e7eb; }
 
     .img-preview .remove-btn {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: rgba(239,68,68,0.9);
-      color: white;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
+      position: absolute; top: 10px; left: 10px; width: 30px; height: 30px;
+      border-radius: 8px; background: rgba(239,68,68,0.9); color: white;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px;
     }
-
     .img-preview .remove-btn:hover { background: #dc2626; }
 
-    /* ===== الرسائل ===== */
-    .msg-card {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 12px;
-      position: relative;
-      transition: border-color 0.2s;
+    .img-link-box {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #166534;
+      word-break: break-all;
+      align-items: center;
+      gap: 8px;
     }
+    .img-link-box.show { display: flex; }
+    .img-link-box i { color: #22c55e; font-size: 14px; flex-shrink: 0; }
+    .img-link-box a { color: #166534; text-decoration: underline; flex: 1; }
 
+    .uploading-overlay {
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(4px);
+      border-radius: 12px; display: none; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px; z-index: 2;
+    }
+    .uploading-overlay.show { display: flex; }
+    .upload-spinner { width: 36px; height: 36px; border: 4px solid #e5e7eb; border-top-color: var(--cyan-600); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .uploading-overlay p { font-size: 13px; font-weight: 700; color: var(--cyan-700); }
+
+    .msg-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 20px; margin-bottom: 12px; position: relative; transition: border-color 0.2s; }
     .msg-card:hover { border-color: var(--cyan-300); }
-
-    .msg-del {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      color: #f87171;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: 'Tajawal', sans-serif;
-    }
-
+    .msg-del { position: absolute; top: 14px; left: 14px; color: #f87171; font-size: 13px; font-weight: 700; cursor: pointer; background: none; border: none; font-family: 'Tajawal', sans-serif; }
     .msg-del:hover { color: #dc2626; }
-
-    .msg-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .msg-avatar {
-      width: 42px;
-      height: 42px;
-      background: var(--cyan-100);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 16px;
-      color: var(--cyan-700);
-      flex-shrink: 0;
-    }
-
+    .msg-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .msg-avatar { width: 42px; height: 42px; background: var(--cyan-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: var(--cyan-700); flex-shrink: 0; }
     .msg-name { font-weight: 700; color: var(--cyan-900); font-size: 14px; }
     .msg-time { font-size: 11px; color: #9ca3af; }
-
-    .msg-info {
-      display: flex;
-      gap: 20px;
-      font-size: 13px;
-      color: #4b5563;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
+    .msg-info { display: flex; gap: 20px; font-size: 13px; color: #4b5563; margin-bottom: 12px; flex-wrap: wrap; }
     .msg-info span { font-weight: 700; }
+    .msg-body { background: white; padding: 14px; border-radius: 10px; border: 1px solid #e5e7eb; font-size: 13px; color: #374151; line-height: 1.8; }
 
-    .msg-body {
-      background: white;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      font-size: 13px;
-      color: #374151;
-      line-height: 1.8;
-    }
-
-    /* ===== جدول ===== */
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-    }
-
+    .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e5e7eb; }
     table { width: 100%; border-collapse: collapse; }
-
-    th {
-      padding: 12px 16px;
-      text-align: right;
-      font-size: 12px;
-      color: #6b7280;
-      font-weight: 700;
-      background: #f9fafb;
-      border-bottom: 2px solid #e5e7eb;
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 14px 16px;
-      font-size: 13px;
-      border-bottom: 1px solid #f3f4f6;
-      vertical-align: middle;
-    }
-
+    th { padding: 12px 16px; text-align: right; font-size: 12px; color: #6b7280; font-weight: 700; background: #f9fafb; border-bottom: 2px solid #e5e7eb; white-space: nowrap; }
+    td { padding: 14px 16px; font-size: 13px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: var(--cyan-50); }
-
-    .tbl-img {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 2px solid #e5e7eb;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
+    .tbl-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 2px solid #e5e7eb; }
+    .status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
     .status-pill.main { background: var(--cyan-100); color: var(--cyan-700); }
     .status-pill.normal { background: #f3f4f6; color: #4b5563; }
-
-    .act-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-      background: white;
-      color: #6b7280;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 12px;
-    }
-
+    .act-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #e5e7eb; background: white; color: #6b7280; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 12px; }
     .act-btn:hover { background: #f3f4f6; color: #1f2937; }
     .act-btn.del:hover { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+    .act-btn.copy:hover { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    .act-btn.eye:hover { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
 
-    /* ===== Toast ===== */
-    .toast-box {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .toast {
-      background: white;
-      border-radius: 12px;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      font-size: 14px;
-      font-weight: 600;
-      color: #1f2937;
-      animation: toastIn 0.3s ease;
-      min-width: 280px;
-    }
-
+    .toast-box { position: fixed; top: 20px; left: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+    .toast { background: white; border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-size: 14px; font-weight: 600; color: #1f2937; animation: toastIn 0.3s ease; min-width: 280px; }
     .toast.ok { border-right: 4px solid var(--cyan-500); }
     .toast.ok i { color: var(--cyan-600); }
     .toast.err { border-right: 4px solid #ef4444; }
     .toast.err i { color: #ef4444; }
+    .toast.warn { border-right: 4px solid #f59e0b; }
+    .toast.warn i { color: #f59e0b; }
+    @keyframes toastIn { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes toastOut { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-20px); } }
 
-    @keyframes toastIn {
-      from { opacity:0; transform:translateX(-20px); }
-      to { opacity:1; transform:translateX(0); }
-    }
-
-    @keyframes toastOut {
-      from { opacity:1; transform:translateX(0); }
-      to { opacity:0; transform:translateX(-20px); }
-    }
-
-    .empty {
-      text-align: center;
-      padding: 50px 20px;
-      color: #9ca3af;
-    }
-
+    .empty { text-align: center; padding: 50px 20px; color: #9ca3af; }
     .empty i { font-size: 42px; margin-bottom: 14px; opacity: 0.4; display: block; }
     .empty p { font-size: 14px; margin-bottom: 16px; }
 
-    /* ===== مودال ===== */
-    .modal-bg {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-bg.show { display: flex; }
-
-    .modal-box {
-      background: white;
-      border-radius: 20px;
-      width: 600px;
-      max-width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-      animation: modalPop 0.3s ease;
-    }
-
-    @keyframes modalPop {
-      from { opacity:0; transform:scale(0.95); }
-      to { opacity:1; transform:scale(1); }
-    }
-
-    .modal-head {
-      padding: 20px 24px;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-head h3 {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--cyan-900);
-    }
-
-    .modal-x {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: #f3f4f6;
-      border: none;
-      color: #6b7280;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    .modal-box { background: white; border-radius: 20px; width: 600px; max-width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: modalPop 0.3s ease; }
+    @keyframes modalPop { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+    .modal-head { padding: 20px 24px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; }
+    .modal-head h3 { font-size: 17px; font-weight: 800; color: var(--cyan-900); }
+    .modal-x { width: 34px; height: 34px; border-radius: 8px; background: #f3f4f6; border: none; color: #6b7280; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .modal-x:hover { background: #fef2f2; color: #dc2626; }
-
     .modal-body { padding: 24px; }
+    .modal-foot { padding: 14px 24px; border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
 
-    .modal-foot {
-      padding: 14px 24px;
-      border-top: 1px solid #e5e7eb;
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-primary-sm {
-      padding: 10px 20px;
-      background: linear-gradient(to left, var(--cyan-600), var(--teal-600));
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Tajawal', sans-serif;
-      transition: all 0.2s;
-    }
-
+    .btn-primary-sm { padding: 10px 20px; background: linear-gradient(to left, var(--cyan-600), var(--teal-600)); color: white; border: none; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; transition: all 0.2s; }
     .btn-primary-sm:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
-
-    .btn-ghost-sm {
-      padding: 10px 20px;
-      background: #f3f4f6;
-      color: #4b5563;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Tajawal', sans-serif;
-    }
-
+    .btn-ghost-sm { padding: 10px 20px; background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; }
     .btn-ghost-sm:hover { background: #e5e7eb; }
-
-    .btn-red-sm {
-      padding: 10px 20px;
-      background: #fef2f2;
-      color: #dc2626;
-      border: 1px solid #fecaca;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Tajawal', sans-serif;
-    }
-
+    .btn-ghost-sm:disabled { opacity: 0.4; pointer-events: none; }
+    .btn-red-sm { padding: 10px 20px; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; }
     .btn-red-sm:hover { background: #fee2e2; }
 
-    /* ===== الإعدادات ===== */
-    .settings-block {
-      background: white;
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-
-    .settings-head {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--cyan-900);
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid #f3f4f6;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .settings-block { background: white; border-radius: 16px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 20px; }
+    .settings-head { font-size: 16px; font-weight: 800; color: var(--cyan-900); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid #f3f4f6; display: flex; align-items: center; gap: 10px; }
     .settings-head i { color: var(--cyan-600); }
+    .settings-desc { font-size: 13px; color: #6b7280; line-height: 1.8; margin-bottom: 20px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .info-item-label { font-size: 12px; color: #9ca3af; margin-bottom: 4px; }
+    .info-item-value { font-size: 15px; font-weight: 700; color: var(--cyan-900); }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
 
-    .settings-desc {
-      font-size: 13px;
-      color: #6b7280;
-      line-height: 1.8;
-      margin-bottom: 20px;
+    /* ===== إضافة: Skeleton Loading ===== */
+    .skeleton {
+      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 10px;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* ===== إضافة: شريط البحث والفلترة ===== */
+    .table-toolbar {
+      display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .table-toolbar .dash-input { max-width: 300px; }
+    .table-toolbar .dash-select { max-width: 200px; }
+    .table-toolbar .result-count {
+      margin-right: auto; font-size: 12px; color: #9ca3af; font-weight: 500;
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    /* ===== إضافة: Pagination ===== */
+    .pagination-bar {
+      display: flex; justify-content: center; align-items: center; gap: 6px;
+      margin-top: 24px; padding-top: 20px; border-top: 1px solid #e5e7eb;
+    }
+    .pagination-bar .page-info { font-size: 12px; color: #9ca3af; margin-left: 12px; }
+    .page-btn {
+      min-width: 34px; height: 34px; border-radius: 8px; border: 1px solid #e5e7eb;
+      background: white; color: #4b5563; font-size: 13px; font-weight: 600;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-family: 'Tajawal', sans-serif; padding: 0 10px;
+    }
+    .page-btn:hover { background: #f3f4f6; }
+    .page-btn.active { background: var(--cyan-600); color: white; border-color: var(--cyan-600); }
+    .page-btn:disabled { opacity: 0.4; pointer-events: none; }
+
+    /* ===== إضافة: عداد أحرف ===== */
+    .char-counter {
+      font-size: 11px; color: #9ca3af; text-align: left; margin-top: 4px;
+    }
+    .char-counter.warn { color: #f59e0b; }
+    .char-counter.danger { color: #ef4444; }
+
+    /* ===== إضافة: تنبيه المسودة ===== */
+    .draft-notice {
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px;
+      padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: #92400e;
+    }
+    .draft-notice i { color: #f59e0b; font-size: 16px; }
+    .draft-notice button {
+      margin-right: auto; background: none; border: none; color: #dc2626;
+      font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif;
+      text-decoration: underline;
     }
 
-    .info-item-label {
-      font-size: 12px;
-      color: #9ca3af;
-      margin-bottom: 4px;
+    /* ===== إضافة: Footer ===== */
+    .dash-footer {
+      text-align: center; padding: 24px 20px; color: var(--text-dim);
+      font-size: 12px; opacity: 0.5; border-top: 1px solid var(--border); margin-top: 40px;
     }
 
-    .info-item-value {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--cyan-900);
+    /* ===== إضافة: Preview Modal ===== */
+    .preview-card { font-family: 'Tajawal', sans-serif; direction: rtl; }
+    .preview-card img { width: 100%; height: 280px; object-fit: cover; }
+    .preview-card .preview-body { padding: 24px; }
+    .preview-card .preview-badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .preview-card .preview-badge {
+      padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
     }
+    .preview-card .preview-badge.type { background: var(--cyan-100); color: var(--cyan-700); }
+    .preview-card .preview-badge.featured { background: #fef3c7; color: #d97706; }
+    .preview-card .preview-badge.date { background: #f3f4f6; color: #4b5563; }
+    .preview-card h2 { font-size: 22px; font-weight: 900; color: var(--cyan-900); margin-bottom: 8px; line-height: 1.4; }
+    .preview-card .preview-meta { color: #6b7280; font-size: 13px; margin-bottom: 16px; }
+    .preview-card .preview-desc { color: #4b5563; font-size: 14px; line-height: 1.9; margin-bottom: 16px; }
+    .preview-card .preview-divider { border: none; border-top: 2px solid #f3f4f6; margin: 16px 0; }
+    .preview-card .preview-article { color: #374151; font-size: 14px; line-height: 2; white-space: pre-wrap; }
 
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    /* ===== Mobile ===== */
     .mob-toggle { display: none; }
-
     @media (max-width: 768px) {
       .sidebar { transform: translateX(100%); }
       .sidebar.open { transform: translateX(0); }
@@ -966,22 +514,25 @@
       .info-grid { grid-template-columns: 1fr; }
       .date-range-row.show { grid-template-columns: 1fr; }
       .range-sep { display: none; }
+      .table-toolbar { flex-direction: column; }
+      .table-toolbar .dash-input, .table-toolbar .dash-select { max-width: 100%; }
+      .table-toolbar .result-count { margin-right: 0; }
     }
-
-    @media (max-width: 480px) {
-      .stats-row { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 480px) { .stats-row { grid-template-columns: 1fr; } }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg-main); }
     ::-webkit-scrollbar-thumb { background: var(--cyan-800); border-radius: 3px; }
 
-    #sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 99;
+    #sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+
+    /* ===== إضافة: طباعة ===== */
+    @media print {
+      .sidebar, .topbar, .toast-box, .modal-bg, #sidebar-overlay { display: none !important; }
+      .main-area { margin-right: 0 !important; }
+      .page-body { padding: 0 !important; }
+      .white-card { box-shadow: none !important; border: 1px solid #e5e7eb !important; }
+      .act-btn, .btn-primary-sm, .btn-red-sm, .btn-ghost-sm, .btn-logout { display: none !important; }
     }
   </style>
 </head>
@@ -989,7 +540,7 @@
 
   <div class="toast-box" id="toastBox"></div>
 
-  <!-- ===== تسجيل الدخول ===== -->
+  <!-- ===== صفحة تسجيل الدخول ===== -->
   <div id="login-section">
     <div class="login-card">
       <div class="login-icon">🔒</div>
@@ -1010,9 +561,8 @@
     </div>
   </div>
 
-  <!-- ===== الداشبورد ===== -->
+  <!-- ===== لوحة التحكم ===== -->
   <div id="dashboard-section" class="hidden">
-
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-head">
         <div class="sidebar-brand">
@@ -1023,81 +573,63 @@
           </div>
         </div>
       </div>
-
       <nav class="sidebar-nav">
         <div class="nav-label">الرئيسية</div>
-        <div class="nav-link active" data-page="home" onclick="goPage('home',this)">
-          <i class="fas fa-chart-pie"></i> نظرة عامة
-        </div>
-
+        <div class="nav-link active" data-page="home" onclick="goPage('home',this)"><i class="fas fa-chart-pie"></i> نظرة عامة</div>
         <div class="nav-label">الإدارة</div>
-        <div class="nav-link" data-page="convoys" onclick="goPage('convoys',this)">
-          <i class="fas fa-truck-medical"></i> القوافل
-        </div>
-        <div class="nav-link" data-page="add" onclick="goPage('add',this)">
-          <i class="fas fa-plus-circle"></i> إضافة قافلة
-        </div>
-        <div class="nav-link" data-page="msgs" onclick="goPage('msgs',this)">
-          <i class="fas fa-envelope"></i> الرسائل
-          <span class="nav-badge" id="msgBadge" style="display:none;">0</span>
-        </div>
-
+        <div class="nav-link" data-page="convoys" onclick="goPage('convoys',this)"><i class="fas fa-truck-medical"></i> القوافل</div>
+        <div class="nav-link" data-page="add" onclick="goPage('add',this)"><i class="fas fa-plus-circle"></i> إضافة قافلة</div>
+        <div class="nav-link" data-page="msgs" onclick="goPage('msgs',this)"><i class="fas fa-envelope"></i> الرسائل<span class="nav-badge" id="msgBadge" style="display:none;">0</span></div>
         <div class="nav-label">النظام</div>
-        <div class="nav-link" data-page="settings" onclick="goPage('settings',this)">
-          <i class="fas fa-cog"></i> الإعدادات
-        </div>
+        <div class="nav-link" data-page="settings" onclick="goPage('settings',this)"><i class="fas fa-cog"></i> الإعدادات</div>
       </nav>
-
       <div class="sidebar-foot">
-        <div class="nav-link" onclick="doLogout()" style="color:#f87171;">
-          <i class="fas fa-sign-out-alt"></i> تسجيل خروج
-        </div>
+        <div class="nav-link" onclick="doLogout()" style="color:#f87171;"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</div>
       </div>
     </aside>
-
     <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 
     <main class="main-area">
       <header class="topbar">
         <div style="display:flex;align-items:center;gap:12px;">
           <button class="topbar-btn mob-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+          <span class="topbar-status-dot" id="topbarStatusDot" title="متصل"></span>
           <h2 class="topbar-title" id="pageTitle">نظرة عامة</h2>
         </div>
         <div class="topbar-actions">
-          <button class="topbar-btn" onclick="document.documentElement.requestFullscreen?.()"><i class="fas fa-expand"></i></button>
+          <button class="topbar-btn" onclick="document.documentElement.requestFullscreen?.()" title="ملء الشاشة"><i class="fas fa-expand"></i></button>
           <button class="btn-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt" style="margin-left:6px;"></i>خروج</button>
         </div>
       </header>
 
       <div class="page-body">
-
         <!-- ===== نظرة عامة ===== -->
         <section class="page active" id="pg-home">
           <div class="stats-row">
-            <div class="stat-card">
-              <div class="stat-label">رسائل التواصل الجديدة</div>
-              <div class="stat-value" id="statMsgs">0</div>
-            </div>
-            <div class="stat-card gold">
-              <div class="stat-label">القوافل المضافة</div>
-              <div class="stat-value" id="statConvoys">0</div>
-            </div>
-            <div class="stat-card teal">
-              <div class="stat-label">أعضاء مجلس الإدارة</div>
-              <div class="stat-value">7</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">مناطق الخدمة</div>
-              <div class="stat-value">16</div>
-            </div>
+            <div class="stat-card"><div class="stat-label">رسائل التواصل الجديدة</div><div class="stat-value" id="statMsgs">0</div></div>
+            <div class="stat-card gold"><div class="stat-label">القوافل المضافة</div><div class="stat-value" id="statConvoys">0</div></div>
+            <div class="stat-card teal"><div class="stat-label">أعضاء مجلس الإدارة</div><div class="stat-value">7</div></div>
+            <div class="stat-card"><div class="stat-label">مناطق الخدمة</div><div class="stat-value">16</div></div>
           </div>
           <div class="white-card">
             <div class="card-title"><i class="fas fa-envelope"></i> آخر الرسائل الواردة</div>
-            <div id="homeMsgs"><p style="color:#9ca3af;text-align:center;">جاري التحميل...</p></div>
+            <div id="homeMsgs">
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="skeleton" style="height:80px;width:100%;"></div>
+                <div class="skeleton" style="height:80px;width:95%;"></div>
+                <div class="skeleton" style="height:80px;width:88%;"></div>
+              </div>
+            </div>
           </div>
           <div class="white-card">
             <div class="card-title"><i class="fas fa-truck-medical"></i> آخر القوافل المضافة</div>
-            <div id="homeConvoys"><p style="color:#9ca3af;text-align:center;">جاري التحميل...</p></div>
+            <div id="homeConvoys">
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="skeleton" style="height:60px;width:100%;"></div>
+                <div class="skeleton" style="height:60px;width:95%;"></div>
+                <div class="skeleton" style="height:60px;width:88%;"></div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1106,25 +638,36 @@
           <div class="white-card">
             <div class="card-title" style="justify-content:space-between;">
               <span><i class="fas fa-truck-medical"></i> جميع القوافل</span>
-              <button class="btn-primary-sm" onclick="goPage('add',document.querySelector('[data-page=add]'))">
-                <i class="fas fa-plus" style="margin-left:6px;"></i> إضافة جديدة
-              </button>
+              <button class="btn-primary-sm" onclick="goPage('add',document.querySelector('[data-page=add]'))"><i class="fas fa-plus" style="margin-left:6px;"></i> إضافة جديدة</button>
+            </div>
+            <!-- إضافة: شريط البحث والفلترة -->
+            <div class="table-toolbar">
+              <input type="text" id="searchConvoys" placeholder="🔍 ابحث بالعنوان أو الموقع..." class="dash-input" oninput="filterConvoys()">
+              <select id="filterType" class="dash-select" onchange="filterConvoys()">
+                <option value="">كل الأنواع</option>
+                <option value="قافلة طبية">قافلة طبية</option>
+                <option value="مبادرة إنسانية">مبادرة إنسانية</option>
+                <option value="تبرع بالدم">تبرع بالدم</option>
+                <option value="نشاط توعوي">نشاط توعوي</option>
+              </select>
+              <select id="filterStatus" class="dash-select" onchange="filterConvoys()">
+                <option value="">كل الحالات</option>
+                <option value="رئيسية">رئيسية فقط</option>
+                <option value="عادية">عادية فقط</option>
+              </select>
+              <span class="result-count" id="convoyResultCount"></span>
             </div>
             <div class="table-wrap">
               <table>
-                <thead>
-                  <tr>
-                    <th>الصورة</th>
-                    <th>العنوان</th>
-                    <th>النوع</th>
-                    <th>الموقع</th>
-                    <th>التاريخ</th>
-                    <th>الحالة</th>
-                    <th>إجراءات</th>
-                  </tr>
-                </thead>
+                <thead><tr><th>الصورة</th><th>العنوان</th><th>النوع</th><th>الموقع</th><th>التاريخ</th><th>الحالة</th><th>إجراءات</th></tr></thead>
                 <tbody id="convoyTableBody">
-                  <tr><td colspan="7"><div class="empty"><i class="fas fa-inbox"></i><p>جاري التحميل...</p></div></td></tr>
+                  <tr><td colspan="7">
+                    <div style="display:flex;flex-direction:column;gap:10px;padding:20px;">
+                      <div class="skeleton" style="height:50px;width:100%;"></div>
+                      <div class="skeleton" style="height:50px;width:95%;"></div>
+                      <div class="skeleton" style="height:50px;width:90%;"></div>
+                    </div>
+                  </td></tr>
                 </tbody>
               </table>
             </div>
@@ -1135,6 +678,13 @@
         <section class="page" id="pg-add">
           <div class="white-card">
             <div class="card-title" id="formTitle"><i class="fas fa-plus-circle"></i> إضافة قافلة أو نشاط جديد</div>
+            <!-- إضافة: تنبيه المسودة -->
+            <div class="draft-notice" id="draftNotice" style="display:none;">
+              <i class="fas fa-file-pen"></i>
+              <span>تم العثور على مسودة سابقة غير محفوظة</span>
+              <button onclick="restoreDraftFromNotice()">استعادتها</button>
+              <button onclick="discardDraft()" style="color:#6b7280;">تجاهل</button>
+            </div>
             <form id="convoy-form" class="dash-form-group">
               <input type="hidden" id="editId" value="">
               <div class="dash-form-group">
@@ -1142,12 +692,20 @@
                 <div class="upload-box" id="uploadBox" onclick="document.getElementById('convoyImg').click()">
                   <i class="fas fa-cloud-upload-alt"></i>
                   <p>اسحب الصورة هنا أو <span>اختر ملف</span></p>
-                  <p class="hint">PNG, JPG, WEBP - حد أقصى 2MB</p>
+                  <p class="hint">PNG, JPG, WEBP - حد أقصى 5MB (يتم ضغطها تلقائياً)</p>
                 </div>
                 <input type="file" id="convoyImg" accept="image/*" style="display:none;" onchange="handleImg(event)">
                 <div class="img-preview" id="imgPreview">
-                  <img id="previewSrc" src="" alt="">
+                  <div class="uploading-overlay" id="uploadingOverlay">
+                    <div class="upload-spinner"></div>
+                    <p>جاري ضغط ورفع الصورة...</p>
+                  </div>
+                  <img id="previewSrc" src="" alt="معاينة الصورة">
                   <button type="button" class="remove-btn" onclick="removeImg()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="img-link-box" id="imgLinkBox">
+                  <i class="fas fa-check-circle"></i>
+                  <a id="imgLinkText" href="#" target="_blank"></a>
                 </div>
               </div>
               <div class="dash-form-group">
@@ -1169,49 +727,30 @@
                   <input type="text" id="convoy-location" placeholder="مثال: دسوق - البحيرة" class="dash-input" required>
                 </div>
               </div>
-
-              <!-- ===== نوع التاريخ ===== -->
               <div class="dash-form-group">
                 <label class="dash-label">نوع التاريخ *</label>
                 <div class="date-type-options">
-                  <div class="date-type-opt selected" id="optSingle" onclick="setDateType('single')">
-                    <i class="fas fa-calendar-day"></i>
-                    <div class="opt-label">يوم واحد</div>
-                    <div class="opt-desc">القافلة في يوم محدد</div>
-                  </div>
-                  <div class="date-type-opt" id="optRange" onclick="setDateType('range')">
-                    <i class="fas fa-calendar-week"></i>
-                    <div class="opt-label">فترة زمنية</div>
-                    <div class="opt-desc">من يوم ليوم</div>
-                  </div>
+                  <div class="date-type-opt selected" id="optSingle" onclick="setDateType('single')"><i class="fas fa-calendar-day"></i><div class="opt-label">يوم واحد</div><div class="opt-desc">القافلة في يوم محدد</div></div>
+                  <div class="date-type-opt" id="optRange" onclick="setDateType('range')"><i class="fas fa-calendar-week"></i><div class="opt-label">فترة زمنية</div><div class="opt-desc">من يوم ليوم</div></div>
                 </div>
-                <div class="date-single-row" id="singleDateRow">
-                  <label class="dash-label">تاريخ القافلة *</label>
-                  <input type="date" id="convoy-date-single" class="dash-input">
-                </div>
+                <div class="date-single-row" id="singleDateRow"><label class="dash-label">تاريخ القافلة *</label><input type="date" id="convoy-date-single" class="dash-input"></div>
                 <div class="date-range-row" id="rangeDateRow">
-                  <div>
-                    <label class="dash-label">من تاريخ *</label>
-                    <input type="date" id="convoy-date-from" class="dash-input">
-                  </div>
+                  <div><label class="dash-label">من تاريخ *</label><input type="date" id="convoy-date-from" class="dash-input"></div>
                   <div class="range-sep">→</div>
-                  <div>
-                    <label class="dash-label">إلى تاريخ *</label>
-                    <input type="date" id="convoy-date-to" class="dash-input">
-                  </div>
+                  <div><label class="dash-label">إلى تاريخ *</label><input type="date" id="convoy-date-to" class="dash-input"></div>
                 </div>
               </div>
-
-              <div class="dash-check">
-                <input type="checkbox" id="convoy-featured">
-                <label for="convoy-featured">اظهار كقافلة رئيسية (في أعلى الصفحة)</label>
-              </div>
+              <div class="dash-check"><input type="checkbox" id="convoy-featured"><label for="convoy-featured">اظهار كقافلة رئيسية (في أعلى الصفحة)</label></div>
               <div class="dash-form-group">
                 <label class="dash-label">وصف قصير (للكارت) *</label>
                 <textarea rows="2" id="convoy-desc" placeholder="ملخص سطرين عن القافلة..." class="dash-textarea" required></textarea>
+                <div class="char-counter" id="descCounter">0 حرف</div>
               </div>
               <div class="dash-form-group">
-                <label class="dash-label">المقال كامل / تفاصيل القافلة *</label>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <label class="dash-label" style="margin-bottom:0;">المقال كامل / تفاصيل القافلة *</label>
+                  <span class="char-counter" id="articleCounter">0 حرف</span>
+                </div>
                 <textarea rows="8" id="convoy-article" placeholder="اكتب هنا التفاصيل الكاملة للقافلة..." class="dash-textarea" required></textarea>
               </div>
               <button type="submit" id="convoy-submit-btn" class="btn-submit">حفظ القافلة وإضافتها للموقع</button>
@@ -1226,98 +765,67 @@
               <span><i class="fas fa-envelope"></i> الرسائل الواردة</span>
               <button class="btn-red-sm" onclick="deleteAllMsgs()"><i class="fas fa-trash" style="margin-left:6px;"></i> حذف الكل</button>
             </div>
-            <div id="allMsgs"><p style="color:#9ca3af;text-align:center;">جاري التحميل...</p></div>
+            <div id="allMsgs">
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="skeleton" style="height:120px;width:100%;"></div>
+                <div class="skeleton" style="height:120px;width:95%;"></div>
+                <div class="skeleton" style="height:120px;width:90%;"></div>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- ===== الإعدادات ===== -->
         <section class="page" id="pg-settings">
-
+          <!-- إضافة: بيانات الحساب -->
           <div class="settings-block">
-            <div class="settings-head">
-              <i class="fas fa-key"></i> تغيير كلمة المرور
-            </div>
+            <div class="settings-head"><i class="fas fa-user-edit"></i> بيانات الحساب</div>
             <div class="dash-form-group">
-              <label class="dash-label">كلمة المرور الحالية</label>
-              <input type="password" id="oldPass" class="dash-input" placeholder="أدخل كلمة المرور الحالية">
+              <label class="dash-label">اسم العرض</label>
+              <input type="text" id="displayName" class="dash-input" placeholder="مثال: أحمد محمد - مدير الجمعية">
             </div>
+            <button class="btn-primary-sm" onclick="updateDisplayName()"><i class="fas fa-save" style="margin-left:6px;"></i> حفظ الاسم</button>
+          </div>
+          <div class="settings-block">
+            <div class="settings-head"><i class="fas fa-key"></i> تغيير كلمة المرور</div>
+            <div class="dash-form-group"><label class="dash-label">كلمة المرور الحالية</label><input type="password" id="oldPass" class="dash-input" placeholder="أدخل كلمة المرور الحالية"></div>
             <div class="form-row-2">
-              <div class="dash-form-group">
-                <label class="dash-label">كلمة المرور الجديدة</label>
-                <input type="password" id="newPass" class="dash-input" placeholder="6 أحرف على الأقل">
-              </div>
-              <div class="dash-form-group">
-                <label class="dash-label">تأكيد كلمة المرور الجديدة</label>
-                <input type="password" id="confirmPass" class="dash-input" placeholder="أعد كتابتها">
-              </div>
+              <div class="dash-form-group"><label class="dash-label">كلمة المرور الجديدة</label><input type="password" id="newPass" class="dash-input" placeholder="6 أحرف على الأقل"></div>
+              <div class="dash-form-group"><label class="dash-label">تأكيد كلمة المرور الجديدة</label><input type="password" id="confirmPass" class="dash-input" placeholder="أعد كتابتها"></div>
             </div>
-            <button class="btn-primary-sm" onclick="changePassword()">
-              <i class="fas fa-save" style="margin-left:6px;"></i> تحديث كلمة المرور
-            </button>
+            <button class="btn-primary-sm" onclick="changePassword()"><i class="fas fa-save" style="margin-left:6px;"></i> تحديث كلمة المرور</button>
           </div>
-
           <div class="settings-block">
-            <div class="settings-head">
-              <i class="fas fa-database"></i> إدارة البيانات
-            </div>
-            <p class="settings-desc">
-              جميع البيانات محفوظة في Firebase Realtime Database. يمكنك تصدير نسخة احتياطية أو مسح البيانات بالكامل.
-            </p>
+            <div class="settings-head"><i class="fas fa-database"></i> إدارة البيانات</div>
+            <p class="settings-desc">جميع البيانات محفوظة في Firebase Realtime Database. يمكنك تصدير نسخة احتياطية أو مسح البيانات بالكامل.</p>
             <div class="btn-row">
-              <button class="btn-primary-sm" onclick="exportData()">
-                <i class="fas fa-download" style="margin-left:6px;"></i> تصدير نسخة احتياطية
-              </button>
-              <label class="btn-ghost-sm" style="cursor:pointer;">
-                <i class="fas fa-upload" style="margin-left:6px;"></i> استيراد بيانات
-                <input type="file" accept=".json" style="display:none;" onchange="importData(event)">
-              </label>
-              <button class="btn-red-sm" onclick="clearAllFirebase()">
-                <i class="fas fa-trash-alt" style="margin-left:6px;"></i> مسح كل البيانات
-              </button>
+              <button class="btn-primary-sm" onclick="exportData()"><i class="fas fa-download" style="margin-left:6px;"></i> تصدير نسخة احتياطية</button>
+              <label class="btn-ghost-sm" style="cursor:pointer;"><i class="fas fa-upload" style="margin-left:6px;"></i> استيراد بيانات<input type="file" accept=".json" style="display:none;" onchange="importData(event)"></label>
+              <button class="btn-red-sm" onclick="clearAllFirebase()"><i class="fas fa-trash-alt" style="margin-left:6px;"></i> مسح كل البيانات</button>
             </div>
           </div>
-
           <div class="settings-block">
-            <div class="settings-head">
-              <i class="fas fa-info-circle"></i> معلومات النظام
-            </div>
+            <div class="settings-head"><i class="fas fa-info-circle"></i> معلومات النظام</div>
             <div class="info-grid">
-              <div>
-                <div class="info-item-label">الإصدار</div>
-                <div class="info-item-value">2.0.0</div>
-              </div>
-              <div>
-                <div class="info-item-label">المستخدم الحالي</div>
-                <div class="info-item-value" id="settingsEmail">-</div>
-              </div>
-              <div>
-                <div class="info-item-label">عدد القوافل</div>
-                <div class="info-item-value" id="settingsConvoyCount">0</div>
-              </div>
-              <div>
-                <div class="info-item-label">عدد الرسائل</div>
-                <div class="info-item-value" id="settingsMsgCount">0</div>
-              </div>
-              <div>
-                <div class="info-item-label">آخر تحديث للقوافل</div>
-                <div class="info-item-value" id="settingsLastUpdate">-</div>
-              </div>
-              <div>
-                <div class="info-item-label">حالة الاتصال</div>
-                <div class="info-item-value" id="settingsConnStatus" style="color:var(--teal-500);">
-                  <i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> متصل
-                </div>
-              </div>
+              <div><div class="info-item-label">الإصدار</div><div class="info-item-value">2.2.0</div></div>
+              <div><div class="info-item-label">المستخدم الحالي</div><div class="info-item-value" id="settingsEmail">-</div></div>
+              <div><div class="info-item-label">عدد القوافل</div><div class="info-item-value" id="settingsConvoyCount">0</div></div>
+              <div><div class="info-item-label">عدد الرسائل</div><div class="info-item-value" id="settingsMsgCount">0</div></div>
+              <div><div class="info-item-label">آخر تحديث للقوافل</div><div class="info-item-value" id="settingsLastUpdate">-</div></div>
+              <div><div class="info-item-label">حالة الاتصال</div><div class="info-item-value" id="settingsConnStatus" style="color:var(--teal-500);"><i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> متصل</div></div>
             </div>
           </div>
-
         </section>
-
       </div>
+
+      <!-- إضافة: Footer -->
+      <footer class="dash-footer">
+        SLS Admin Panel v2.2.0 &copy; <span id="footerYear"></span> — جمعية الليدرز الاجتماعية | تم التطوير باحترافية 🇪🇬
+      </footer>
     </main>
   </div>
 
-  <!-- مودال تأكيد -->
+  <!-- ===== مودال التأكيد ===== -->
   <div class="modal-bg" id="confirmModal">
     <div class="modal-box" style="width:400px;">
       <div class="modal-body" style="text-align:center; padding:30px;">
@@ -1331,8 +839,22 @@
     </div>
   </div>
 
+  <!-- ===== إضافة: مودال المعاينة ===== -->
+  <div class="modal-bg" id="previewModal">
+    <div class="modal-box" style="width:700px;">
+      <div class="modal-head">
+        <h3><i class="fas fa-eye" style="margin-left:8px;color:var(--cyan-600);"></i> معاينة القافلة</h3>
+        <button class="modal-x" onclick="closePreview()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="previewContent" style="padding:0;"></div>
+      <div class="modal-foot" style="justify-content:center;">
+        <button class="btn-ghost-sm" onclick="closePreview()">إغلاق المعاينة</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // ===== فيرسل (نفس بياناتك) =====
+    // ===== Firebase Config =====
     const firebaseConfig = {
       apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
       authDomain: "sls-admin-panel.firebaseapp.com",
@@ -1353,49 +875,225 @@
     const loginForm = document.getElementById('login-form');
     const loginError = document.getElementById('login-error');
 
-    // مراقبة اتصال فيرسل
-    db.ref('.info/connected').on('value', (snap) => {
-      const el = document.getElementById('settingsConnStatus');
-      if (snap.val() === true) {
+    // ===== إضافة: دالة الحماية من XSS =====
+    function esc(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // ===== إضافة: صورة بديلة ثابتة =====
+    var PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' rx='12' fill='%230e4a5c'/%3E%3Crect x='70' y='60' width='60' height='45' rx='4' fill='%23a5f3fc' opacity='.3'/%3E%3Ccircle cx='88' cy='78' r='6' fill='%23a5f3fc' opacity='.5'/%3E%3Cpath d='M70 95l20-15 15 10 15-12 10 8v14H70z' fill='%23a5f3fc' opacity='.4'/%3E%3C/svg%3E";
+
+    // ===== إضافة: سنة الـ Footer =====
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    // ===== ImgBB =====
+    const IMGBB_KEY = '4d7b9457bcea3a7dc6dae1a8843dbb3a';
+
+    function readFileAsBase64(file) {
+      return new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function() { resolve(reader.result); };
+        reader.onerror = function() { reject(new Error('فشل قراءة الملف')); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ===== إضافة: دالة ضغط الصور =====
+    function compressImage(file, maxWidth, quality) {
+      return new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var img = new Image();
+          img.onload = function() {
+            var canvas = document.createElement('canvas');
+            var w = img.width, h = img.height;
+            if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = function() { reject(new Error('فشل تحميل الصورة للضغط')); };
+          img.src = e.target.result;
+        };
+        reader.onerror = function() { reject(new Error('فشل قراءة الملف للضغط')); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function uploadToImgBB(base64DataUrl) {
+      var pureBase64 = base64DataUrl.split(',')[1];
+      var formBody = 'key=' + encodeURIComponent(IMGBB_KEY) + '&image=' + encodeURIComponent(pureBase64);
+
+      return fetch('https://api.imgbb.com/1/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formBody
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(result) {
+        if (result.success && result.data && result.data.url) {
+          return result.data.url;
+        } else {
+          throw new Error(result.error ? result.error.message : 'رد غير معروف من ImgBB');
+        }
+      });
+    }
+
+    // ===== حالة رفع الصورة =====
+    var currentImg = '';
+    var isUploadingImg = false;
+
+    async function handleImg(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+
+      // زيادة الحد لـ 5MB لأننا بنضغط
+      if (file.size > 5 * 1024 * 1024) {
+        toast('حجم الصورة كبير جداً (الحد 5MB)', 'err');
+        document.getElementById('convoyImg').value = '';
+        return;
+      }
+      if (!file.type.startsWith('image/')) {
+        toast('الملف مش صورة', 'err');
+        document.getElementById('convoyImg').value = '';
+        return;
+      }
+
+      if (isUploadingImg) {
+        toast('استنى لحد ما الصورة الحالية تخلص', 'err');
+        document.getElementById('convoyImg').value = '';
+        return;
+      }
+
+      isUploadingImg = true;
+      document.getElementById('uploadBox').classList.add('disabled');
+      document.getElementById('convoy-submit-btn').disabled = true;
+      document.getElementById('convoy-submit-btn').innerText = 'جاري رفع الصورة...';
+
+      document.getElementById('imgPreview').classList.add('show');
+      document.getElementById('uploadingOverlay').classList.add('show');
+      document.getElementById('uploadBox').style.display = 'none';
+      document.getElementById('imgLinkBox').classList.remove('show');
+      document.getElementById('previewSrc').src = '';
+
+      try {
+        // ضغط الصورة أولاً ثم رفعها
+        var base64DataUrl = await compressImage(file, 1200, 0.8);
+
+        document.getElementById('previewSrc').src = base64DataUrl;
+
+        var imgbbUrl = await uploadToImgBB(base64DataUrl);
+
+        currentImg = imgbbUrl;
+        document.getElementById('previewSrc').src = imgbbUrl;
+        document.getElementById('uploadingOverlay').classList.remove('show');
+
+        document.getElementById('imgLinkBox').classList.add('show');
+        document.getElementById('imgLinkText').href = imgbbUrl;
+        document.getElementById('imgLinkText').innerText = imgbbUrl;
+
+        toast('تم رفع الصورة بنجاح ✓');
+
+      } catch (err) {
+        console.error('ImgBB upload failed:', err);
+        toast('فشل رفع الصورة: ' + err.message, 'err');
+        removeImg();
+        return;
+      }
+
+      isUploadingImg = false;
+      document.getElementById('uploadBox').classList.remove('disabled');
+      document.getElementById('convoy-submit-btn').disabled = false;
+      var editId = document.getElementById('editId').value;
+      document.getElementById('convoy-submit-btn').innerText = editId ? 'تحديث القافلة' : 'حفظ القافلة وإضافتها للموقع';
+    }
+
+    function removeImg() {
+      currentImg = '';
+      isUploadingImg = false;
+      document.getElementById('convoyImg').value = '';
+      document.getElementById('imgPreview').classList.remove('show');
+      document.getElementById('uploadingOverlay').classList.remove('show');
+      document.getElementById('imgLinkBox').classList.remove('show');
+      document.getElementById('previewSrc').src = '';
+      document.getElementById('uploadBox').style.display = '';
+      document.getElementById('uploadBox').classList.remove('disabled');
+    }
+
+    // Drag & Drop
+    var uploadBox = document.getElementById('uploadBox');
+    uploadBox.addEventListener('dragover', function(e) {
+      if (isUploadingImg) return;
+      e.preventDefault();
+      uploadBox.classList.add('dragover');
+    });
+    uploadBox.addEventListener('dragleave', function() { uploadBox.classList.remove('dragover'); });
+    uploadBox.addEventListener('drop', function(e) {
+      if (isUploadingImg) return;
+      e.preventDefault();
+      uploadBox.classList.remove('dragover');
+      var file = e.dataTransfer.files[0];
+      if (file) {
+        var dt = new DataTransfer();
+        dt.items.add(file);
+        document.getElementById('convoyImg').files = dt.files;
+        handleImg({ target: { files: [file] } });
+      }
+    });
+
+    // ===== مراقبة اتصال فيرسل (مع تحديث الشريط العلوي) =====
+    db.ref('.info/connected').on('value', function(snap) {
+      var connected = snap.val() === true;
+      var dot = document.getElementById('topbarStatusDot');
+      var el = document.getElementById('settingsConnStatus');
+      if (connected) {
+        dot.className = 'topbar-status-dot';
+        dot.title = 'متصل بـ Firebase';
         el.innerHTML = '<i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> متصل';
         el.style.color = 'var(--teal-500)';
       } else {
+        dot.className = 'topbar-status-dot offline';
+        dot.title = 'غير متصل';
         el.innerHTML = '<i class="fas fa-circle" style="font-size:8px;margin-left:4px;"></i> غير متصل';
         el.style.color = '#ef4444';
       }
     });
 
-    // ===== 1. تسجيل الدخول =====
-    loginForm.addEventListener('submit', (e) => {
+    // ===== تسجيل الدخول =====
+    loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      auth.signInWithEmailAndPassword(email, password)
-        .then(() => {})
-        .catch((error) => {
-          loginError.classList.add('show');
-          if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-            loginError.innerText = 'خطأ في كلمة المرور أو الإيميل!';
-          } else if (error.code === 'auth/too-many-requests') {
-            loginError.innerText = 'محاولات كثيرة! انتظر قليلاً ثم حاول تاني.';
-          } else {
-            loginError.innerText = 'حدث خطأ أثناء تسجيل الدخول';
-          }
-        });
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      auth.signInWithEmailAndPassword(email, password).then(function() {}).catch(function(error) {
+        loginError.classList.add('show');
+        if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+          loginError.innerText = 'خطأ في كلمة المرور أو الإيميل!';
+        } else if (error.code === 'auth/too-many-requests') {
+          loginError.innerText = 'محاولات كثيرة! انتظر قليلاً ثم حاول تاني.';
+        } else if (error.code === 'auth/user-not-found') {
+          loginError.innerText = 'الحساب مش موجود! تأكد من الإيميل.';
+        } else {
+          loginError.innerText = 'حدث خطأ أثناء تسجيل الدخول';
+        }
+      });
     });
 
     function doLogout() { auth.signOut(); }
 
-    // ===== 2. مراقبة الدخول =====
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(function(user) {
       if (user) {
         loginSection.style.display = 'none';
         dashboardSection.classList.remove('hidden');
         loginError.classList.remove('show');
         document.getElementById('settingsEmail').textContent = user.email || '-';
+        document.getElementById('displayName').value = user.displayName || '';
         loadMessages();
         loadConvoys();
+        // إضافة: رسالة ترحيب
+        toast('مرحباً بك، ' + (user.displayName || user.email));
       } else {
         loginSection.style.display = 'flex';
         dashboardSection.classList.add('hidden');
@@ -1404,56 +1102,49 @@
 
     // ===== التنقل =====
     function goPage(id, el) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
       document.getElementById('pg-' + id).classList.add('active');
-      document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(function(n) { n.classList.remove('active'); });
       if (el) el.classList.add('active');
-      const titles = { home:'نظرة عامة', convoys:'القوافل', add:'إضافة قافلة', msgs:'الرسائل', settings:'الإعدادات' };
+      var titles = { home:'نظرة عامة', convoys:'القوافل', add:'إضافة قافلة', msgs:'الرسائل', settings:'الإعدادات' };
       document.getElementById('pageTitle').textContent = titles[id] || '';
       closeSidebar();
+
+      // إضافة: فحص المسودة لما نروح صفحة الإضافة
+      if (id === 'add' && !document.getElementById('editId').value) {
+        checkDraft();
+      }
     }
 
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('open');
-      document.getElementById('sidebar-overlay').style.display =
-        document.getElementById('sidebar').classList.contains('open') ? 'block' : 'none';
+      document.getElementById('sidebar-overlay').style.display = document.getElementById('sidebar').classList.contains('open') ? 'block' : 'none';
     }
-
     function closeSidebar() {
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('sidebar-overlay').style.display = 'none';
     }
 
-    // ===== Toast =====
-    function toast(msg, type = 'ok') {
-      const box = document.getElementById('toastBox');
-      const icons = { ok:'fa-check-circle', err:'fa-times-circle' };
-      const t = document.createElement('div');
+    // ===== Toast (مع حماية XSS) =====
+    function toast(msg, type) {
+      type = type || 'ok';
+      var box = document.getElementById('toastBox');
+      var icons = { ok:'fa-check-circle', err:'fa-times-circle', warn:'fa-exclamation-circle' };
+      var t = document.createElement('div');
       t.className = 'toast ' + type;
-      t.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+      t.innerHTML = '<i class="fas ' + icons[type] + '"></i><span>' + esc(msg) + '</span>';
       box.appendChild(t);
-      setTimeout(() => { t.style.animation = 'toastOut 0.3s ease forwards'; setTimeout(() => t.remove(), 300); }, 3000);
+      setTimeout(function() { t.style.animation = 'toastOut 0.3s ease forwards'; setTimeout(function() { t.remove(); }, 300); }, 3500);
     }
 
     // ===== تأكيد =====
-    let confirmCb = null;
-    function showConfirm(text, cb) {
-      document.getElementById('confirmText').textContent = text;
-      confirmCb = cb;
-      document.getElementById('confirmModal').classList.add('show');
-    }
-    function closeConfirm() {
-      document.getElementById('confirmModal').classList.remove('show');
-      confirmCb = null;
-    }
-    document.getElementById('confirmYes').addEventListener('click', () => {
-      if (confirmCb) confirmCb();
-      closeConfirm();
-    });
+    var confirmCb = null;
+    function showConfirm(text, cb) { document.getElementById('confirmText').textContent = text; confirmCb = cb; document.getElementById('confirmModal').classList.add('show'); }
+    function closeConfirm() { document.getElementById('confirmModal').classList.remove('show'); confirmCb = null; }
+    document.getElementById('confirmYes').addEventListener('click', function() { if (confirmCb) confirmCb(); closeConfirm(); });
 
     // ===== نوع التاريخ =====
-    let currentDateType = 'single';
-
+    var currentDateType = 'single';
     function setDateType(type) {
       currentDateType = type;
       if (type === 'single') {
@@ -1468,93 +1159,160 @@
         document.getElementById('rangeDateRow').classList.add('show');
       }
     }
+    document.getElementById('optSingle').addEventListener('click', function() { document.getElementById('convoy-date-from').value = ''; document.getElementById('convoy-date-to').value = ''; });
+    document.getElementById('optRange').addEventListener('click', function() { document.getElementById('convoy-date-single').value = ''; });
 
-    document.getElementById('optSingle').addEventListener('click', () => {
-      document.getElementById('convoy-date-from').value = '';
-      document.getElementById('convoy-date-to').value = '';
+    // ===== إضافة: عداد الأحرف =====
+    function updateCharCount(textareaId, counterId, max) {
+      var len = document.getElementById(textareaId).value.length;
+      var el = document.getElementById(counterId);
+      el.textContent = len + ' حرف';
+      el.className = 'char-counter';
+      if (max && len > max * 0.9) el.classList.add('danger');
+      else if (max && len > max * 0.7) el.classList.add('warn');
+    }
+    document.getElementById('convoy-desc').addEventListener('input', function() { updateCharCount('convoy-desc', 'descCounter', 200); });
+    document.getElementById('convoy-article').addEventListener('input', function() { updateCharCount('convoy-article', 'articleCounter', 0); });
+
+    // ===== إضافة: تحذير القافلة الرئيسية =====
+    document.getElementById('convoy-featured').addEventListener('change', function() {
+      if (this.checked) {
+        db.ref('convoys').orderByChild('featured').equalTo(true).once('value', function(snap) {
+          var count = snap.numChildren();
+          if (count > 0) {
+            toast('⚠️ يوجد ' + count + ' قوافل رئيسية بالفعل. الأفضل قافلة رئيسية واحدة فقط.', 'warn');
+          }
+        });
+      }
     });
 
-    document.getElementById('optRange').addEventListener('click', () => {
-      document.getElementById('convoy-date-single').value = '';
-    });
+    // ===== إضافة: نظام المسودة التلقائي =====
+    var DRAFT_KEY = 'sls_convoy_draft';
+    var formDirty = false;
+    var draftSaveTimer = null;
 
-    // ===== رفع الصور =====
-    let currentImg = '';
-
-    function handleImg(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      if (file.size > 2 * 1024 * 1024) { toast('حجم الصورة كبير (الحد 2MB)', 'err'); return; }
-      if (!file.type.startsWith('image/')) { toast('الملف مش صورة', 'err'); return; }
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        currentImg = ev.target.result;
-        document.getElementById('previewSrc').src = currentImg;
-        document.getElementById('imgPreview').classList.add('show');
-        document.getElementById('uploadBox').style.display = 'none';
+    function saveDraft() {
+      var editId = document.getElementById('editId').value;
+      if (editId) return; // لا نحفظ مسودة في وضع التعديل
+      var draft = {
+        title: document.getElementById('convoy-title').value,
+        type: document.getElementById('convoy-type').value,
+        location: document.getElementById('convoy-location').value,
+        desc: document.getElementById('convoy-desc').value,
+        article: document.getElementById('convoy-article').value,
+        dateType: currentDateType,
+        dateSingle: document.getElementById('convoy-date-single').value,
+        dateFrom: document.getElementById('convoy-date-from').value,
+        dateTo: document.getElementById('convoy-date-to').value,
+        featured: document.getElementById('convoy-featured').checked,
+        savedAt: new Date().toISOString()
       };
-      reader.readAsDataURL(file);
+      if (draft.title || draft.desc || draft.article) {
+        try { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); } catch(e) {}
+      }
     }
 
-    function removeImg() {
-      currentImg = '';
-      document.getElementById('convoyImg').value = '';
-      document.getElementById('imgPreview').classList.remove('show');
-      document.getElementById('uploadBox').style.display = '';
+    function getDraft() {
+      try {
+        var saved = localStorage.getItem(DRAFT_KEY);
+        if (!saved) return null;
+        var draft = JSON.parse(saved);
+        if (!draft.title && !draft.desc && !draft.article) { localStorage.removeItem(DRAFT_KEY); return null; }
+        var age = Date.now() - new Date(draft.savedAt).getTime();
+        if (age > 48 * 60 * 60 * 1000) { localStorage.removeItem(DRAFT_KEY); return null; }
+        return draft;
+      } catch(e) { return null; }
     }
 
-    const uploadBox = document.getElementById('uploadBox');
-    uploadBox.addEventListener('dragover', (e) => { e.preventDefault(); uploadBox.classList.add('dragover'); });
-    uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
-    uploadBox.addEventListener('drop', (e) => {
-      e.preventDefault();
-      uploadBox.classList.remove('dragover');
-      const file = e.dataTransfer.files[0];
-      if (file) { document.getElementById('convoyImg').files = e.dataTransfer.files; handleImg({ target: { files: [file] } }); }
+    function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch(e) {} }
+
+    function checkDraft() {
+      var draft = getDraft();
+      var notice = document.getElementById('draftNotice');
+      if (draft) {
+        notice.style.display = 'flex';
+      } else {
+        notice.style.display = 'none';
+      }
+    }
+
+    function restoreDraftFromNotice() {
+      var draft = getDraft();
+      if (!draft) return;
+      restoreDraftData(draft);
+      document.getElementById('draftNotice').style.display = 'none';
+    }
+
+    function discardDraft() {
+      clearDraft();
+      document.getElementById('draftNotice').style.display = 'none';
+    }
+
+    function restoreDraftData(draft) {
+      document.getElementById('convoy-title').value = draft.title || '';
+      document.getElementById('convoy-type').value = draft.type || 'قافلة طبية';
+      document.getElementById('convoy-location').value = draft.location || '';
+      document.getElementById('convoy-desc').value = draft.desc || '';
+      document.getElementById('convoy-article').value = draft.article || '';
+      document.getElementById('convoy-featured').checked = draft.featured || false;
+      setDateType(draft.dateType || 'single');
+      document.getElementById('convoy-date-single').value = draft.dateSingle || '';
+      document.getElementById('convoy-date-from').value = draft.dateFrom || '';
+      document.getElementById('convoy-date-to').value = draft.dateTo || '';
+      updateCharCount('convoy-desc', 'descCounter', 200);
+      updateCharCount('convoy-article', 'articleCounter', 0);
+      formDirty = false;
+      toast('تم استعادة المسودة السابقة');
+    }
+
+    // مراقبة التعديلات على الفورم
+    document.getElementById('convoy-form').addEventListener('input', function() {
+      formDirty = true;
+      // حفظ مسودة كل 3 ثواني
+      clearTimeout(draftSaveTimer);
+      draftSaveTimer = setTimeout(saveDraft, 3000);
+    });
+
+    // إضافة: تنبيه مغادرة الصفحة
+    window.addEventListener('beforeunload', function(e) {
+      if (formDirty) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
     });
 
     // ===== إضافة / تعديل قافلة =====
-    const convoyForm = document.getElementById('convoy-form');
-    const convoySubmitBtn = document.getElementById('convoy-submit-btn');
+    var convoyForm = document.getElementById('convoy-form');
+    var convoySubmitBtn = document.getElementById('convoy-submit-btn');
 
-    convoyForm.addEventListener('submit', (e) => {
+    convoyForm.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      if (isUploadingImg) {
+        toast('استنى لحد ما الصورة تخلص رفع', 'err');
+        return;
+      }
+
       convoySubmitBtn.innerText = 'جاري الحفظ...';
       convoySubmitBtn.disabled = true;
 
-      const editId = document.getElementById('editId').value;
-
-      // تجميع التاريخ حسب النوع
-      let dateValue = '';
-      let dateType = currentDateType;
+      var editId = document.getElementById('editId').value;
+      var dateValue = '';
+      var dateType = currentDateType;
+      var submitBtnText = editId ? 'تحديث القافلة' : 'حفظ القافلة وإضافتها للموقع';
 
       if (dateType === 'single') {
         dateValue = document.getElementById('convoy-date-single').value;
-        if (!dateValue) {
-          toast('اختر تاريخ القافلة', 'err');
-          convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
-          convoySubmitBtn.disabled = false;
-          return;
-        }
+        if (!dateValue) { toast('اختر تاريخ القافلة', 'err'); convoySubmitBtn.innerText = submitBtnText; convoySubmitBtn.disabled = false; return; }
       } else {
-        const from = document.getElementById('convoy-date-from').value;
-        const to = document.getElementById('convoy-date-to').value;
-        if (!from || !to) {
-          toast('اختر تاريخ البداية والنهاية', 'err');
-          convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
-          convoySubmitBtn.disabled = false;
-          return;
-        }
-        if (new Date(to) < new Date(from)) {
-          toast('تاريخ النهاية لازم يكون بعد تاريخ البداية', 'err');
-          convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
-          convoySubmitBtn.disabled = false;
-          return;
-        }
+        var from = document.getElementById('convoy-date-from').value;
+        var to = document.getElementById('convoy-date-to').value;
+        if (!from || !to) { toast('اختر تاريخ البداية والنهاية', 'err'); convoySubmitBtn.innerText = submitBtnText; convoySubmitBtn.disabled = false; return; }
+        if (new Date(to) < new Date(from)) { toast('تاريخ النهاية لازم يكون بعد تاريخ البداية', 'err'); convoySubmitBtn.innerText = submitBtnText; convoySubmitBtn.disabled = false; return; }
         dateValue = from + ' → ' + to;
       }
 
-      const convoyData = {
+      var convoyData = {
         title: document.getElementById('convoy-title').value,
         type: document.getElementById('convoy-type').value,
         location: document.getElementById('convoy-location').value,
@@ -1569,20 +1327,27 @@
         updatedAt: new Date().toISOString()
       };
 
+      if (convoyData.image && convoyData.image.startsWith('data:')) {
+        toast('الصورة لسه مش مرفوعة! حاول تاني.', 'err');
+        convoySubmitBtn.innerText = submitBtnText;
+        convoySubmitBtn.disabled = false;
+        return;
+      }
+
       if (editId) {
         db.ref('convoys/' + editId).update(convoyData)
-          .then(() => { toast('تم تحديث القافلة بنجاح'); resetConvoyForm(); goPage('convoys', document.querySelector('[data-page=convoys]')); })
-          .catch((err) => { toast('حدث خطأ أثناء التحديث', 'err'); console.error(err); });
+          .then(function() { toast('تم تحديث القافلة بنجاح'); resetConvoyForm(); goPage('convoys', document.querySelector('[data-page=convoys]')); })
+          .catch(function(err) { toast('حدث خطأ أثناء التحديث', 'err'); console.error(err); });
       } else {
-        const convoyId = db.ref('convoys').push().key;
+        var convoyId = db.ref('convoys').push().key;
         convoyData.id = convoyId;
         convoyData.createdAt = new Date().toISOString();
         db.ref('convoys/' + convoyId).set(convoyData)
-          .then(() => { toast('تم حفظ القافلة بنجاح'); resetConvoyForm(); })
-          .catch((err) => { toast('حدث خطأ! تأكد من صلاحيات الـ Rules', 'err'); console.error(err); });
+          .then(function() { toast('تم حفظ القافلة بنجاح'); resetConvoyForm(); })
+          .catch(function(err) { toast('حدث خطأ! تأكد من صلاحيات الـ Rules', 'err'); console.error(err); });
       }
 
-      convoySubmitBtn.innerText = 'حفظ القافلة وإضافتها للموقع';
+      convoySubmitBtn.innerText = submitBtnText;
       convoySubmitBtn.disabled = false;
     });
 
@@ -1596,11 +1361,16 @@
       document.getElementById('convoy-date-single').value = '';
       document.getElementById('convoy-date-from').value = '';
       document.getElementById('convoy-date-to').value = '';
+      updateCharCount('convoy-desc', 'descCounter', 200);
+      updateCharCount('convoy-article', 'articleCounter', 0);
+      formDirty = false;
+      clearDraft();
+      document.getElementById('draftNotice').style.display = 'none';
     }
 
     function editConvoy(id) {
-      db.ref('convoys/' + id).once('value', (snap) => {
-        const d = snap.val();
+      db.ref('convoys/' + id).once('value', function(snap) {
+        var d = snap.val();
         if (!d) return;
         document.getElementById('editId').value = id;
         document.getElementById('convoy-title').value = d.title || '';
@@ -1610,7 +1380,6 @@
         document.getElementById('convoy-article').value = d.article || '';
         document.getElementById('convoy-featured').checked = d.featured || false;
 
-        // استعادة نوع التاريخ
         if (d.dateType === 'range') {
           setDateType('range');
           document.getElementById('convoy-date-from').value = d.dateFrom || '';
@@ -1625,235 +1394,390 @@
           document.getElementById('previewSrc').src = d.image;
           document.getElementById('imgPreview').classList.add('show');
           document.getElementById('uploadBox').style.display = 'none';
+          if (d.image.startsWith('https://')) {
+            document.getElementById('imgLinkBox').classList.add('show');
+            document.getElementById('imgLinkText').href = d.image;
+            document.getElementById('imgLinkText').innerText = d.image;
+          } else {
+            document.getElementById('imgLinkBox').classList.remove('show');
+          }
+        } else {
+          removeImg();
         }
 
+        updateCharCount('convoy-desc', 'descCounter', 200);
+        updateCharCount('convoy-article', 'articleCounter', 0);
+        document.getElementById('draftNotice').style.display = 'none';
         document.getElementById('formTitle').innerHTML = '<i class="fas fa-edit"></i> تعديل القافلة';
         convoySubmitBtn.innerText = 'تحديث القافلة';
+        formDirty = false;
         goPage('add', document.querySelector('[data-page=add]'));
       });
     }
 
     function deleteConvoy(id) {
-      showConfirm('هل أنت متأكد من حذف هذه القافلة؟', () => {
-        db.ref('convoys/' + id).remove().then(() => toast('تم حذف القافلة')).catch(() => toast('حدث خطأ', 'err'));
+      showConfirm('هل أنت متأكد من حذف هذه القافلة؟', function() {
+        db.ref('convoys/' + id).remove().then(function() { toast('تم حذف القافلة'); }).catch(function() { toast('حدث خطأ', 'err'); });
       });
     }
 
-    // ===== عرض القوافل =====
+    // ===== إضافة: نسخ قافلة =====
+    function duplicateConvoy(id) {
+      db.ref('convoys/' + id).once('value', function(snap) {
+        var d = snap.val();
+        if (!d) return;
+        var newId = db.ref('convoys').push().key;
+        var copy = JSON.parse(JSON.stringify(d));
+        delete copy.id;
+        delete copy.createdAt;
+        copy.title = d.title + ' (نسخة)';
+        copy.featured = false;
+        copy.id = newId;
+        copy.createdAt = new Date().toISOString();
+        copy.updatedAt = new Date().toISOString();
+        db.ref('convoys/' + newId).set(copy).then(function() {
+          toast('تم نسخ القافلة بنجاح');
+        }).catch(function(err) { toast('حدث خطأ أثناء النسخ', 'err'); console.error(err); });
+      });
+    }
+
+    // ===== إضافة: معاينة القافلة =====
+    function previewConvoy(id) {
+      db.ref('convoys/' + id).once('value', function(snap) {
+        var c = snap.val();
+        if (!c) return;
+        var html = '<div class="preview-card">';
+        if (c.image) {
+          html += '<img src="' + esc(c.image) + '" alt="' + esc(c.title) + '" onerror="this.style.display=\'none\'">';
+        }
+        html += '<div class="preview-body">';
+        html += '<div class="preview-badges">';
+        html += '<span class="preview-badge type">' + esc(c.type) + '</span>';
+        if (c.featured) html += '<span class="preview-badge featured">⭐ رئيسية</span>';
+        html += '<span class="preview-badge date">📅 ' + esc(c.date) + '</span>';
+        html += '</div>';
+        html += '<h2>' + esc(c.title) + '</h2>';
+        html += '<div class="preview-meta">📍 ' + esc(c.location) + '</div>';
+        html += '<div class="preview-desc">' + esc(c.desc) + '</div>';
+        if (c.article) {
+          html += '<hr class="preview-divider">';
+          html += '<div class="preview-article">' + esc(c.article) + '</div>';
+        }
+        html += '</div></div>';
+        document.getElementById('previewContent').innerHTML = html;
+        document.getElementById('previewModal').classList.add('show');
+      });
+    }
+    function closePreview() { document.getElementById('previewModal').classList.remove('show'); }
+
+    // ===== إضافة: بحث وفلترة القوافل =====
+    function filterConvoys() {
+      var search = document.getElementById('searchConvoys').value.toLowerCase();
+      var type = document.getElementById('filterType').value;
+      var status = document.getElementById('filterStatus').value;
+      var rows = document.querySelectorAll('#convoyTableBody tr[data-convoy-id]');
+      var visibleCount = 0;
+      var totalCount = rows.length;
+
+      rows.forEach(function(row) {
+        var text = row.textContent.toLowerCase();
+        var rowType = row.getAttribute('data-convoy-type') || '';
+        var rowStatus = row.getAttribute('data-convoy-status') || '';
+        var matchSearch = !search || text.includes(search);
+        var matchType = !type || rowType === type;
+        var matchStatus = !status || rowStatus === status;
+        var show = matchSearch && matchType && matchStatus;
+        row.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      document.getElementById('convoyResultCount').textContent =
+        visibleCount === totalCount ? '' : 'عرض ' + visibleCount + ' من ' + totalCount;
+    }
+
+    // ===== عرض القوافل (مع XSS protection) =====
     function loadConvoys() {
-      db.ref('convoys').on('value', (snap) => {
-        const data = snap.val();
-        const statEl = document.getElementById('statConvoys');
-        const tbody = document.getElementById('convoyTableBody');
-        const homeEl = document.getElementById('homeConvoys');
-        const settCount = document.getElementById('settingsConvoyCount');
-        const settUpdate = document.getElementById('settingsLastUpdate');
+      db.ref('convoys').on('value', function(snap) {
+        var data = snap.val();
+        var statEl = document.getElementById('statConvoys');
+        var tbody = document.getElementById('convoyTableBody');
+        var homeEl = document.getElementById('homeConvoys');
+        var settCount = document.getElementById('settingsConvoyCount');
+        var settUpdate = document.getElementById('settingsLastUpdate');
 
         if (!data) {
           statEl.textContent = '0';
           settCount.textContent = '0';
           settUpdate.textContent = '-';
-          const emptyHtml = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد قوافل بعد</p><button class="btn-primary-sm" onclick="goPage(\'add\',document.querySelector(\'[data-page=add]\'))"><i class="fas fa-plus" style="margin-left:6px;"></i>أضف أول قافلة</button></div>';
+          var emptyHtml = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد قوافل بعد</p><button class="btn-primary-sm" onclick="goPage(\'add\',document.querySelector(\'[data-page=add]\'))"><i class="fas fa-plus" style="margin-left:6px;"></i>أضف أول قافلة</button></div>';
           tbody.innerHTML = '<tr><td colspan="7">' + emptyHtml + '</td></tr>';
           homeEl.innerHTML = emptyHtml;
+          document.getElementById('convoyResultCount').textContent = '';
           return;
         }
 
-        const all = Object.values(data).reverse();
+        var all = Object.values(data).reverse();
         statEl.textContent = all.length;
         settCount.textContent = all.length;
 
-        const latest = all[0];
+        var latest = all[0];
         if (latest.updatedAt || latest.createdAt) {
           settUpdate.textContent = new Date(latest.updatedAt || latest.createdAt).toLocaleDateString('ar-EG', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
         }
 
-        tbody.innerHTML = all.map(c => `
-          <tr>
-            <td><img src="${c.image || 'https://picsum.photos/seed/' + (c.id||'x') + '/50/50.jpg'}" class="tbl-img" onerror="this.src='https://picsum.photos/seed/${c.id||'x'}/50/50.jpg'"></td>
-            <td style="font-weight:700; color:var(--cyan-900);">${c.title}</td>
-            <td>${c.type}</td>
-            <td style="color:#6b7280;">${c.location}</td>
-            <td style="color:#6b7280; font-size:12px; white-space:nowrap;">
-              ${c.dateType === 'range' ? '<i class="fas fa-calendar-week" style="margin-left:4px;color:var(--cyan-500);"></i>' : '<i class="fas fa-calendar-day" style="margin-left:4px;color:var(--cyan-500);"></i>'}
-              ${c.date || '-'}
-            </td>
-            <td><span class="status-pill ${c.featured ? 'main' : 'normal'}"><i class="fas fa-${c.featured ? 'star' : 'minus'}" style="font-size:9px;"></i>${c.featured ? 'رئيسية' : 'عادية'}</span></td>
-            <td>
-              <div style="display:flex;gap:6px;">
-                <button class="act-btn" title="تعديل" onclick="editConvoy('${c.id}')"><i class="fas fa-pen"></i></button>
-                <button class="act-btn del" title="حذف" onclick="deleteConvoy('${c.id}')"><i class="fas fa-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-        `).join('');
+        tbody.innerHTML = all.map(function(c) {
+          var imgSrc = c.image || PLACEHOLDER_IMG;
+          var statusText = c.featured ? 'رئيسية' : 'عادية';
+          return '<tr data-convoy-id="' + esc(c.id || '') + '" data-convoy-type="' + esc(c.type || '') + '" data-convoy-status="' + statusText + '">' +
+            '<td><img src="' + esc(imgSrc) + '" class="tbl-img" alt="' + esc(c.title) + '" onerror="this.src=\'' + PLACEHOLDER_IMG.replace(/'/g, "\\'") + '\'"></td>' +
+            '<td style="font-weight:700; color:var(--cyan-900);">' + esc(c.title) + '</td>' +
+            '<td>' + esc(c.type) + '</td>' +
+            '<td style="color:#6b7280;">' + esc(c.location) + '</td>' +
+            '<td style="color:#6b7280; font-size:12px; white-space:nowrap;">' +
+              (c.dateType === 'range' ? '<i class="fas fa-calendar-week" style="margin-left:4px;color:var(--cyan-500);"></i>' : '<i class="fas fa-calendar-day" style="margin-left:4px;color:var(--cyan-500);"></i>') +
+              esc(c.date || '-') +
+            '</td>' +
+            '<td><span class="status-pill ' + (c.featured ? 'main' : 'normal') + '"><i class="fas fa-' + (c.featured ? 'star' : 'minus') + '" style="font-size:9px;"></i>' + statusText + '</span></td>' +
+            '<td><div style="display:flex;gap:6px;">' +
+              '<button class="act-btn eye" title="معاينة" onclick="previewConvoy(\'' + (c.id||'') + '\')"><i class="fas fa-eye"></i></button>' +
+              '<button class="act-btn copy" title="نسخ" onclick="duplicateConvoy(\'' + (c.id||'') + '\')"><i class="fas fa-copy"></i></button>' +
+              '<button class="act-btn" title="تعديل" onclick="editConvoy(\'' + (c.id||'') + '\')"><i class="fas fa-pen"></i></button>' +
+              '<button class="act-btn del" title="حذف" onclick="deleteConvoy(\'' + (c.id||'') + '\')"><i class="fas fa-trash"></i></button>' +
+            '</div></td>' +
+          '</tr>';
+        }).join('');
 
-        homeEl.innerHTML = all.slice(0,3).map(c => `
-          <div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s;border:1px solid #e5e7eb;margin-bottom:8px;" onmouseover="this.style.borderColor='#a5f3fc'" onmouseout="this.style.borderColor='#e5e7eb'" onclick="editConvoy('${c.id}')">
-            <img src="${c.image || 'https://picsum.photos/seed/' + (c.id||'x') + '/50/50.jpg'}" style="width:48px;height:48px;border-radius:10px;object-fit:cover;border:2px solid #e5e7eb;" onerror="this.src='https://picsum.photos/seed/${c.id||'x'}/48/48.jpg'">
-            <div style="flex:1;min-width:0;">
-              <div style="font-weight:700;color:var(--cyan-900);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.title}</div>
-              <div style="font-size:12px;color:#6b7280;">${c.type} - ${c.location}</div>
-            </div>
-            <span class="status-pill ${c.featured ? 'main' : 'normal'}" style="font-size:10px;">${c.featured ? 'رئيسية' : 'عادية'}</span>
-          </div>
-        `).join('');
+        document.getElementById('convoyResultCount').textContent = '';
+
+        homeEl.innerHTML = all.slice(0,3).map(function(c) {
+          var imgSrc = c.image || PLACEHOLDER_IMG;
+          return '<div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:12px;cursor:pointer;transition:all 0.2s;border:1px solid #e5e7eb;margin-bottom:8px;" onmouseover="this.style.borderColor=\'#a5f3fc\'" onmouseout="this.style.borderColor=\'#e5e7eb\'" onclick="previewConvoy(\'' + (c.id||'') + '\')">' +
+            '<img src="' + esc(imgSrc) + '" style="width:48px;height:48px;border-radius:10px;object-fit:cover;border:2px solid #e5e7eb;" alt="' + esc(c.title) + '" onerror="this.src=\'' + PLACEHOLDER_IMG.replace(/'/g, "\\'") + '\'">' +
+            '<div style="flex:1;min-width:0;"><div style="font-weight:700;color:var(--cyan-900);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + esc(c.title) + '</div><div style="font-size:12px;color:#6b7280;">' + esc(c.type) + ' - ' + esc(c.location) + '</div></div>' +
+            '<span class="status-pill ' + (c.featured ? 'main' : 'normal') + '" style="font-size:10px;">' + (c.featured ? 'رئيسية' : 'عادية') + '</span>' +
+          '</div>';
+        }).join('');
       });
     }
 
-    // ===== الرسائل =====
+    // ===== الرسائل (مع XSS protection + Pagination) =====
+    var allMessagesData = [];
+    var msgCurrentPage = 1;
+    var MSG_PER_PAGE = 8;
+
     function loadMessages() {
-      db.ref('messages').on('value', (snap) => {
-        const data = snap.val();
-        const statEl = document.getElementById('statMsgs');
-        const allMsgsEl = document.getElementById('allMsgs');
-        const homeMsgsEl = document.getElementById('homeMsgs');
-        const badge = document.getElementById('msgBadge');
-        const settCount = document.getElementById('settingsMsgCount');
+      db.ref('messages').on('value', function(snap) {
+        var data = snap.val();
+        var statEl = document.getElementById('statMsgs');
+        var allMsgsEl = document.getElementById('allMsgs');
+        var homeMsgsEl = document.getElementById('homeMsgs');
+        var badge = document.getElementById('msgBadge');
+        var settCount = document.getElementById('settingsMsgCount');
 
         if (!data) {
           statEl.textContent = '0';
           badge.style.display = 'none';
           settCount.textContent = '0';
-          const emptyHtml = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد رسائل جديدة حالياً</p></div>';
+          allMessagesData = [];
+          var emptyHtml = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد رسائل جديدة حالياً</p></div>';
           allMsgsEl.innerHTML = emptyHtml;
           homeMsgsEl.innerHTML = emptyHtml;
           return;
         }
 
-        const msgs = Object.values(data).reverse();
-        statEl.textContent = msgs.length;
+        allMessagesData = Object.values(data).reverse();
+        statEl.textContent = allMessagesData.length;
         badge.style.display = '';
-        badge.textContent = msgs.length;
-        settCount.textContent = msgs.length;
+        badge.textContent = allMessagesData.length;
+        settCount.textContent = allMessagesData.length;
 
-        function renderMsg(m, showDel = true) {
-          return `
-            <div class="msg-card">
-              ${showDel ? `<button class="msg-del" onclick="deleteMsg('${m.id}')">حذف</button>` : ''}
-              <div class="msg-head">
-                <div class="msg-avatar">${m.name.charAt(0)}</div>
-                <div>
-                  <div class="msg-name">${m.name}</div>
-                  <div class="msg-time">${m.time || ''}</div>
-                </div>
-              </div>
-              <div class="msg-info">
-                <div><span>📞 الهاتف:</span> ${m.phone || 'غير متوفر'}</div>
-                <div><span>✉️ الإيميل:</span> ${m.email || '-'}</div>
-              </div>
-              <div class="msg-body">${m.message}</div>
-            </div>
-          `;
-        }
+        // الصفحة الرئيسية: آخر 3 رسائل بدون pagination
+        homeMsgsEl.innerHTML = allMessagesData.slice(0, 3).map(function(m) { return renderMsg(m, false); }).join('');
 
-        allMsgsEl.innerHTML = msgs.map(m => renderMsg(m)).join('');
-        homeMsgsEl.innerHTML = msgs.slice(0,3).map(m => renderMsg(m)).join('');
-      }, (error) => {
+        // صفحة الرسائل: مع pagination
+        renderMessagesPage();
+      }, function(error) {
         console.error('Firebase Error:', error);
-        const errHtml = '<div class="empty"><i class="fas fa-exclamation-circle" style="color:#ef4444;"></i><p style="color:#ef4444;">حدث خطأ في تحميل الرسائل! تأكد إنك ضغطت Publish في صفحة الـ Rules.</p></div>';
+        var errHtml = '<div class="empty"><i class="fas fa-exclamation-circle" style="color:#ef4444;"></i><p style="color:#ef4444;">حدث خطأ في تحميل الرسائل!</p></div>';
         document.getElementById('allMsgs').innerHTML = errHtml;
         document.getElementById('homeMsgs').innerHTML = errHtml;
       });
     }
 
+    function renderMsg(m, showDel) {
+      return '<div class="msg-card">' +
+        (showDel ? '<button class="msg-del" onclick="deleteMsg(\'' + esc(m.id || '') + '\')">حذف</button>' : '') +
+        '<div class="msg-head"><div class="msg-avatar">' + esc((m.name || '?').charAt(0)) + '</div><div><div class="msg-name">' + esc(m.name) + '</div><div class="msg-time">' + esc(m.time || '') + '</div></div></div>' +
+        '<div class="msg-info"><div><span>📞 الهاتف:</span> ' + esc(m.phone || 'غير متوفر') + '</div><div><span>✉️ الإيميل:</span> ' + esc(m.email || '-') + '</div></div>' +
+        '<div class="msg-body">' + esc(m.message) + '</div></div>';
+    }
+
+    function renderMessagesPage() {
+      var allMsgsEl = document.getElementById('allMsgs');
+      if (allMessagesData.length === 0) {
+        allMsgsEl.innerHTML = '<div class="empty"><i class="fas fa-inbox"></i><p>لا توجد رسائل جديدة حالياً</p></div>';
+        return;
+      }
+
+      var totalPages = Math.ceil(allMessagesData.length / MSG_PER_PAGE);
+      msgCurrentPage = Math.min(msgCurrentPage, totalPages);
+      msgCurrentPage = Math.max(msgCurrentPage, 1);
+      var start = (msgCurrentPage - 1) * MSG_PER_PAGE;
+      var paged = allMessagesData.slice(start, start + MSG_PER_PAGE);
+
+      var html = paged.map(function(m) { return renderMsg(m, true); }).join('');
+
+      // أزرار Pagination
+      if (totalPages > 1) {
+        html += '<div class="pagination-bar">';
+        html += '<span class="page-info">صفحة ' + msgCurrentPage + ' من ' + totalPages + ' (' + allMessagesData.length + ' رسالة)</span>';
+        html += '<button class="page-btn" onclick="msgGoPage(' + (msgCurrentPage - 1) + ')" ' + (msgCurrentPage <= 1 ? 'disabled' : '') + '><i class="fas fa-chevron-right"></i></button>';
+
+        var startP = Math.max(1, msgCurrentPage - 2);
+        var endP = Math.min(totalPages, msgCurrentPage + 2);
+        if (startP > 1) {
+          html += '<button class="page-btn" onclick="msgGoPage(1)">1</button>';
+          if (startP > 2) html += '<span style="color:#9ca3af;padding:0 4px;">...</span>';
+        }
+        for (var i = startP; i <= endP; i++) {
+          html += '<button class="page-btn' + (i === msgCurrentPage ? ' active' : '') + '" onclick="msgGoPage(' + i + ')">' + i + '</button>';
+        }
+        if (endP < totalPages) {
+          if (endP < totalPages - 1) html += '<span style="color:#9ca3af;padding:0 4px;">...</span>';
+          html += '<button class="page-btn" onclick="msgGoPage(' + totalPages + ')">' + totalPages + '</button>';
+        }
+
+        html += '<button class="page-btn" onclick="msgGoPage(' + (msgCurrentPage + 1) + ')" ' + (msgCurrentPage >= totalPages ? 'disabled' : '') + '><i class="fas fa-chevron-left"></i></button>';
+        html += '</div>';
+      }
+
+      allMsgsEl.innerHTML = html;
+    }
+
+    function msgGoPage(page) {
+      var totalPages = Math.ceil(allMessagesData.length / MSG_PER_PAGE);
+      if (page < 1 || page > totalPages) return;
+      msgCurrentPage = page;
+      renderMessagesPage();
+      document.getElementById('pg-msgs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     function deleteMsg(id) {
-      showConfirm('هل أنت متأكد من حذف هذه الرسالة؟', () => {
-        db.ref('messages/' + id).remove().then(() => toast('تم حذف الرسالة')).catch(() => toast('حدث خطأ', 'err'));
+      showConfirm('هل أنت متأكد من حذف هذه الرسالة؟', function() {
+        db.ref('messages/' + id).remove().then(function() {
+          toast('تم حذف الرسالة');
+          var totalPages = Math.ceil((allMessagesData.length - 1) / MSG_PER_PAGE);
+          if (msgCurrentPage > totalPages && totalPages > 0) msgCurrentPage = totalPages;
+        }).catch(function() { toast('حدث خطأ', 'err'); });
       });
     }
 
     function deleteAllMsgs() {
-      showConfirm('هل أنت متأكد من حذف جميع الرسائل؟ لا يمكن التراجع.', () => {
-        db.ref('messages').remove().then(() => toast('تم حذف جميع الرسائل')).catch(() => toast('حدث خطأ', 'err'));
+      showConfirm('هل أنت متأكد من حذف جميع الرسائل؟ لا يمكن التراجع.', function() {
+        db.ref('messages').remove().then(function() {
+          toast('تم حذف جميع الرسائل');
+          msgCurrentPage = 1;
+        }).catch(function() { toast('حدث خطأ', 'err'); });
       });
     }
 
     // ===== الإعدادات =====
+    function updateDisplayName() {
+      var user = auth.currentUser;
+      if (!user) { toast('لا يوجد مستخدم مسجل', 'err'); return; }
+      var name = document.getElementById('displayName').value.trim();
+      if (!name) { toast('أدخل اسم العرض', 'err'); return; }
+      user.updateProfile({ displayName: name }).then(function() {
+        toast('تم تحديث الاسم بنجاح');
+      }).catch(function(err) { toast('حدث خطأ: ' + err.message, 'err'); });
+    }
 
     function changePassword() {
-      const user = auth.currentUser;
+      var user = auth.currentUser;
       if (!user) { toast('لا يوجد مستخدم مسجل', 'err'); return; }
-
-      const oldPass = document.getElementById('oldPass').value;
-      const newPass = document.getElementById('newPass').value;
-      const confirmPass = document.getElementById('confirmPass').value;
-
+      var oldPass = document.getElementById('oldPass').value;
+      var newPass = document.getElementById('newPass').value;
+      var confirmPass = document.getElementById('confirmPass').value;
       if (!oldPass) { toast('أدخل كلمة المرور الحالية', 'err'); return; }
       if (!newPass || newPass.length < 6) { toast('كلمة المرور الجديدة لازم تكون 6 أحرف على الأقل', 'err'); return; }
       if (newPass !== confirmPass) { toast('كلمة المرور الجديدة مش متطابقة', 'err'); return; }
-
-      const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPass);
-
-      user.reauthenticateWithCredential(credential)
-        .then(() => {
-          return user.updatePassword(newPass);
-        })
-        .then(() => {
-          toast('تم تغيير كلمة المرور بنجاح');
-          document.getElementById('oldPass').value = '';
-          document.getElementById('newPass').value = '';
-          document.getElementById('confirmPass').value = '';
-        })
-        .catch((err) => {
-          if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-            toast('كلمة المرور الحالية غلط', 'err');
-          } else if (err.code === 'auth/weak-password') {
-            toast('كلمة المرور ضعيفة', 'err');
-          } else {
-            toast('حدث خطأ: ' + err.message, 'err');
-          }
+      var credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPass);
+      user.reauthenticateWithCredential(credential).then(function() { return user.updatePassword(newPass); })
+        .then(function() { toast('تم تغيير كلمة المرور بنجاح'); document.getElementById('oldPass').value = ''; document.getElementById('newPass').value = ''; document.getElementById('confirmPass').value = ''; })
+        .catch(function(err) {
+          if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') { toast('كلمة المرور الحالية غلط', 'err'); }
+          else if (err.code === 'auth/weak-password') { toast('كلمة المرور ضعيفة', 'err'); }
+          else { toast('حدث خطأ: ' + err.message, 'err'); }
         });
     }
 
+    // ===== إصلاح: تصدير البيانات بدون بيانات داخلية لـ Firebase =====
     function exportData() {
-      db.ref().once('value', (snap) => {
-        const data = snap.val();
-        const exportObj = {
-          exportDate: new Date().toISOString(),
-          data: data
-        };
-        const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+      db.ref().once('value', function(snap) {
+        var data = snap.val();
+        var cleanData = {};
+        if (data.convoys) cleanData.convoys = data.convoys;
+        if (data.messages) cleanData.messages = data.messages;
+        var blob = new Blob([JSON.stringify({ exportDate: new Date().toISOString(), version: '2.2.0', data: cleanData }, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
         a.href = url;
         a.download = 'sls-backup-' + new Date().toISOString().split('T')[0] + '.json';
         a.click();
         URL.revokeObjectURL(url);
         toast('تم تصدير النسخة الاحتياطية');
-      }).catch(() => toast('حدث خطأ أثناء التصدير', 'err'));
+      }).catch(function() { toast('حدث خطأ أثناء التصدير', 'err'); });
     }
 
+    // ===== إصلاح: استيراد البيانات بشكل آمن (بدون مسح .info) =====
     function importData(event) {
-      const file = event.target.files[0];
+      var file = event.target.files[0];
       if (!file) return;
-
-      const reader = new FileReader();
+      var reader = new FileReader();
       reader.onload = function(e) {
         try {
-          const imported = JSON.parse(e.target.result);
-          if (!imported.data) { toast('ملف غير صالح', 'err'); return; }
-
-          showConfirm('هيتم استبدال كل البيانات الحالية بالبيانات المستوردة. متأكد؟', () => {
-            db.ref().set(imported.data)
-              .then(() => toast('تم استيراد البيانات بنجاح'))
-              .catch(() => toast('حدث خطأ أثناء الاستيراد', 'err'));
+          var imported = JSON.parse(e.target.result);
+          if (!imported.data) { toast('ملف غير صالح: لا يحتوي على بيانات', 'err'); return; }
+          var hasConvoys = !!imported.data.convoys;
+          var hasMessages = !!imported.data.messages;
+          if (!hasConvoys && !hasMessages) { toast('الملف لا يحتوي على قوافل أو رسائل', 'err'); return; }
+          showConfirm('سيتم استبدال القوافل والرسائل الحالية بالبيانات المستوردة. متأكد؟', function() {
+            var updates = {};
+            if (hasConvoys) updates['convoys'] = imported.data.convoys;
+            if (hasMessages) updates['messages'] = imported.data.messages;
+            db.ref().update(updates).then(function() { toast('تم استيراد البيانات بنجاح'); }).catch(function() { toast('حدث خطأ أثناء الاستيراد', 'err'); });
           });
-        } catch {
-          toast('ملف غير صالح', 'err');
-        }
+        } catch(ex) { toast('ملف غير صالح: صيغة JSON خاطئة', 'err'); }
       };
       reader.readAsText(file);
       event.target.value = '';
     }
 
+    // ===== إصلاح: مسح البيانات بشكل آمن (بدون تدمير .info) =====
     function clearAllFirebase() {
-      showConfirm('تحذير: سيتم مسح كل البيانات من فيرسل نهائياً (القوافل والرسائل). لا يمكن التراجع!', () => {
-        db.ref().remove()
-          .then(() => toast('تم مسح كل البيانات'))
-          .catch(() => toast('حدث خطأ', 'err'));
+      showConfirm('تحذير خطير: سيتم مسح جميع القوافل والرسائل نهائياً. لا يمكن التراجع!', function() {
+        db.ref().update({ convoys: null, messages: null }).then(function() {
+          toast('تم مسح كل البيانات بنجاح');
+          msgCurrentPage = 1;
+        }).catch(function() { toast('حدث خطأ أثناء المسح', 'err'); });
       });
     }
+
+    // ===== إضافة: إغلاق المودالات بالضغط خارجها =====
+    document.getElementById('confirmModal').addEventListener('click', function(e) {
+      if (e.target === this) closeConfirm();
+    });
+    document.getElementById('previewModal').addEventListener('click', function(e) {
+      if (e.target === this) closePreview();
+    });
+
+    // ===== إضافة: إغلاق المودالات بزر Escape =====
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeConfirm();
+        closePreview();
+      }
+    });
   </script>
 </body>
 </html>

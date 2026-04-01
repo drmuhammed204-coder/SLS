@@ -138,6 +138,57 @@
       </div>
     </div>
   </div>
+  
+    <!-- ========================================== -->
+    <!-- أحدث القوافل والأنشطة (ديناميكية) -->
+    <!-- ========================================== -->
+    <div class="mt-16 pt-16 border-t-2 border-sls-cyan-100">
+      <div class="text-center mb-10 page-transition">
+        <span class="inline-block bg-sls-gold-400/20 text-sls-gold-600 font-bold text-sm px-4 py-2 rounded-full mb-4">آخر الأخبار</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-sls-cyan-900 mb-4">أحدث القوافل والأنشطة</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">تابع آخر ما قمنا به من قوافل طبية ومبادرات إنسانية في مختلف محافظات مصر</p>
+        <div class="w-24 h-1 bg-gradient-to-r from-sls-gold-400 to-sls-gold-500 mx-auto rounded-full mt-6"></div>
+      </div>
+
+      <!-- القوافل الرئيسية (كبيرة) -->
+      <div id="featured-convoys" class="mb-10"></div>
+
+      <!-- باقي القوافل (كروت صغيرة) -->
+      <div id="all-convoys" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Skeleton Loading -->
+        <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-sls-cyan-50 border border-sls-cyan-100">
+          <div class="h-48 bg-gray-200 animate-pulse"></div>
+          <div class="p-6">
+            <div class="h-5 bg-gray-200 rounded-lg mb-3 w-3/4 animate-pulse"></div>
+            <div class="h-4 bg-gray-200 rounded-lg mb-2 w-full animate-pulse"></div>
+            <div class="h-4 bg-gray-200 rounded-lg w-2/3 animate-pulse"></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-sls-cyan-50 border border-sls-cyan-100 hidden sm:block">
+          <div class="h-48 bg-gray-200 animate-pulse"></div>
+          <div class="p-6">
+            <div class="h-5 bg-gray-200 rounded-lg mb-3 w-3/4 animate-pulse"></div>
+            <div class="h-4 bg-gray-200 rounded-lg mb-2 w-full animate-pulse"></div>
+            <div class="h-4 bg-gray-200 rounded-lg w-2/3 animate-pulse"></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-sls-cyan-50 border border-sls-cyan-100 hidden lg:block">
+          <div class="h-48 bg-gray-200 animate-pulse"></div>
+          <div class="p-6">
+            <div class="h-5 bg-gray-200 rounded-lg mb-3 w-3/4 animate-pulse"></div>
+            <div class="h-4 bg-gray-200 rounded-lg mb-2 w-full animate-pulse"></div>
+            <div class="h-4 bg-gray-200 rounded-lg w-2/3 animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- رسالة لو مفيش قوافل -->
+      <div id="no-convoys" class="hidden text-center py-16">
+        <span class="text-6xl mb-4 block">🏥</span>
+        <h3 class="text-2xl font-bold text-sls-cyan-900 mb-3">لا توجد قوافل حالياً</h3>
+        <p class="text-gray-500 max-w-md mx-auto">سيتم إضافة قوافل جديدة قريباً. تابعنا على فيسبوك لتعرف آخر الأخبار!</p>
+      </div>
+    </div>
 </div>
 
 <!-- FOOTER PROFESSIONAL -->
@@ -205,7 +256,18 @@
     </div>
   </div>
 </footer>
-
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="script.js"></script>
 </body>
+<!-- مودال تفاصيل القافلة -->
+<div id="convoy-modal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeConvoyModal()"></div>
+  <div class="relative z-10 max-w-3xl mx-4 mt-10 sm:mt-20 mb-10 bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[85vh] overflow-y-auto">
+    <button onclick="closeConvoyModal()" class="absolute top-4 left-4 z-20 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 hover:text-red-500 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div id="convoy-modal-content"></div>
+  </div>
+</div>
 </html>
