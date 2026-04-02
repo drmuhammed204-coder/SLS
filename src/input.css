@@ -222,3 +222,125 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* ==========================================
+   مودال القوافل (فول بيج)
+   ========================================== */
+
+#convoy-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#convoy-modal.modal-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+#convoy-modal .modal-inner-enter {
+  animation: modalSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* بارتفاع الشاشة الصغيرة يكون 100% بدون padding */
+@media (max-height: 700px) {
+  #convoy-modal .relative.z-10 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  #convoy-modal .relative.z-10 > div {
+    border-radius: 0;
+    min-height: 100vh;
+  }
+}
+/* جملة الرعاية / المشاركة المنفصلة */
+.convoy-highlight {
+  background: linear-gradient(135deg, #ecfeff, #f0fdfa);
+  border-right: 4px solid #14b8a6;
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #164e63;
+  margin: 1.5rem 0;
+  line-height: 2;
+}
+/* إصلاح الصورة: منع Tailwind Reset من تحطيم المقاس */
+/* تنسيق النص الاحترافي */
+.convoy-desc {
+  font-size: 1.2rem;
+  line-height: 2;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.convoy-article {
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: #334155;
+}
+
+.convoy-separator {
+  border: none;
+  height: 3px;
+  background: linear-gradient(to left, transparent, #14b8a6, #06b6d4, transparent);
+  margin: 2rem 0;
+  border-radius: 2px;
+}
+
+.convoy-meta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0e7490;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+
+.convoy-article {
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: #334155;
+}
+
+.convoy-article p {
+  margin-bottom: 1.2rem;
+}
+
+.convoy-separator {
+  border: none;
+  height: 3px;
+  background: linear-gradient(to left, transparent, #14b8a6, #06b6d4, transparent);
+  margin: 2rem 0;
+  border-radius: 2px;
+}
+
+.convoy-meta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0e7490;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}

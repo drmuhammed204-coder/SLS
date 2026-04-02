@@ -736,7 +736,7 @@
                 <div class="date-single-row" id="singleDateRow"><label class="dash-label">تاريخ القافلة *</label><input type="date" id="convoy-date-single" class="dash-input"></div>
                 <div class="date-range-row" id="rangeDateRow">
                   <div><label class="dash-label">من تاريخ *</label><input type="date" id="convoy-date-from" class="dash-input"></div>
-                  <div class="range-sep">→</div>
+                  <div class="range-sep">←</div>
                   <div><label class="dash-label">إلى تاريخ *</label><input type="date" id="convoy-date-to" class="dash-input"></div>
                 </div>
               </div>
@@ -1309,7 +1309,7 @@
         var to = document.getElementById('convoy-date-to').value;
         if (!from || !to) { toast('اختر تاريخ البداية والنهاية', 'err'); convoySubmitBtn.innerText = submitBtnText; convoySubmitBtn.disabled = false; return; }
         if (new Date(to) < new Date(from)) { toast('تاريخ النهاية لازم يكون بعد تاريخ البداية', 'err'); convoySubmitBtn.innerText = submitBtnText; convoySubmitBtn.disabled = false; return; }
-        dateValue = from + ' → ' + to;
+        dateValue = from + ' ← ' + to;
       }
 
       var convoyData = {

@@ -81,57 +81,142 @@ function safeText(str) {
 
 var defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%230e4a5c'/%3E%3Ctext x='50%25' y='50%25' fill='%23a5f3fc' font-size='40' text-anchor='middle' dy='.3em'%3E🏥%3C/text%3E%3C/svg%3E";
 
-// المودال (Global عشان الـ onclick في HTML يوصلهم)
+// تنسيق المقال: فصل جمل الرعاية عن باقي النص
+function formatArticle(text) {
+  if (!text) return '';
+  var safe = safeText(text);
+  var lines = safe.split('\n');
+  var html = '';
+
+  // كلمات مفتاحية = جملة رعاية أو مشاركة
+  var keywords = ['محافظ', 'بمشاركة', 'برعاية', 'ب حضور', 'حضور'];
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+
+    // سطر فاضي = مسافة
+    if (line === '') {
+      html += '<div style="height: 8px;"></div>';
+      continue;
+    }
+
+    // فحص هل السطر ده جملة رعاية؟
+    var isSpecial = false;
+    for (var j = 0; j < keywords.length; j++) {
+      if (line.indexOf(keywords[j]) !== -1) {
+        isSpecial = true;
+        break;
+      }
+    }
+
+    if (isSpecial) {
+      // عرض الجملة في البوكس المنفصل
+      html += '<div class="convoy-highlight">' + line + '</div>';
+    } else {
+      // سطر عادي
+      html += '<p style="margin-bottom: 0.8rem;">' + line + '</p>';
+    }
+  }
+
+  return html;
+}
+
 function openConvoyModal(id) {
   if (!id) return;
   var modal = document.getElementById('convoy-modal');
   var content = document.getElementById('convoy-modal-content');
   if (!modal || !content) return;
 
-  content.innerHTML = '<div class="h-64 bg-gray-200 animate-pulse"></div><div class="p-8"><div class="h-8 bg-gray-200 rounded-lg mb-4 w-3/4 animate-pulse"></div><div class="h-4 bg-gray-200 rounded-lg mb-2 w-full animate-pulse"></div><div class="h-4 bg-gray-200 rounded-lg mb-2 w-5/6 animate-pulse"></div><div class="h-4 bg-gray-200 rounded-lg w-2/3 animate-pulse"></div></div>';
+  content.innerHTML =
+    '<div class="modal-inner-enter">' +
+      '<div class="p-6 sm:p-10">' +
+        '<div class="max-w-3xl mx-auto">' +
+          '<div class="flex gap-3 mb-6"><div class="h-8 bg-gray-200 rounded-full w-28 animate-pulse"></div><div class="h-8 bg-gray-200 rounded-full w-24 animate-pulse"></div></div>' +
+          '<div class="h-10 bg-gray-200 rounded-xl mb-4 w-3/4 animate-pulse"></div>' +
+          '<div class="h-64 bg-gray-200 rounded-2xl animate-pulse"></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
 
   modal.classList.remove('hidden');
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      modal.classList.add('modal-open');
+    });
+  });
   document.body.style.overflow = 'hidden';
 
   var convoyDb = firebase.database();
   convoyDb.ref('convoys/' + id).once('value', function(snapshot) {
     var c = snapshot.val();
     if (!c) {
-      content.innerHTML = '<div class="p-12 text-center"><span class="text-5xl block mb-4">😕</span><h3 class="text-xl font-bold text-gray-700">القافلة غير موجودة</h3></div>';
+      content.innerHTML = '<div class="modal-inner-enter p-20 text-center"><span class="text-6xl block mb-6">😕</span><h3 class="text-2xl font-bold text-gray-700 mb-2">القافلة غير موجودة</h3><p class="text-gray-400">ربما تم حذفها من لوحة التحكم</p></div>';
       return;
     }
 
     var icon = typeIcons[c.type] || '🏥';
     var img = c.image || defaultImg;
+    var imgExists = c.image && c.image.length > 0;
 
     content.innerHTML =
-      '<div class="h-64 sm:h-80 bg-sls-cyan-100 overflow-hidden relative">' +
-        '<img src="' + safeText(img) + '" alt="' + safeText(c.title) + '" class="w-full h-full object-cover" onerror="this.src=\'' + defaultImg + '\'">' +
-        '<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-6">' +
-          '<div class="flex flex-wrap items-center gap-2">' +
-            '<span class="bg-white/95 px-3 py-1 rounded-full text-sm font-bold text-sls-cyan-900">' + icon + ' ' + safeText(c.type) + '</span>' +
-            (c.featured ? '<span class="bg-sls-gold-400 px-3 py-1 rounded-full text-sm font-bold text-sls-cyan-900">⭐ رئيسية</span>' : '') +
+      '<div class="modal-inner-enter">' +
+
+        // العنوان والبادجات في الأعلى
+        '<div class="bg-gradient-to-br from-sls-cyan-50 to-white border-b border-sls-cyan-100">' +
+          '<div class="max-w-3xl mx-auto px-6 sm:px-10 pt-8 sm:pt-10 pb-6">' +
+            '<div class="flex flex-wrap items-center gap-2 mb-5">' +
+              '<span class="bg-sls-cyan-100 text-sls-cyan-800 px-4 py-1.5 rounded-full text-sm font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
+              (c.featured ? '<span class="bg-sls-gold-400 text-sls-cyan-900 px-4 py-1.5 rounded-full text-sm font-bold">⭐ قافلة رئيسية</span>' : '') +
+            '</div>' +
+            '<h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-sls-cyan-900 leading-snug">' + safeText(c.title) + '</h2>' +
           '</div>' +
         '</div>' +
-      '</div>' +
-      '<div class="p-6 sm:p-8">' +
-        '<h2 class="text-2xl sm:text-3xl font-black text-sls-cyan-900 mb-4">' + safeText(c.title) + '</h2>' +
-        '<div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6 pb-6 border-b border-gray-100">' +
-          '<span>📍 ' + safeText(c.location) + '</span>' +
-          '<span>📅 ' + safeText(c.date) + '</span>' +
+
+        // الصورة متوسطة
+        (imgExists ?
+          '<div class="max-w-3xl mx-auto px-6 sm:px-10 py-6">' +
+            '<div class="rounded-2xl overflow-hidden shadow-lg border border-sls-cyan-100">' +
+              '<img src="' + safeText(img) + '" alt="' + safeText(c.title) + '" class="w-full h-auto max-h-80 object-contain bg-sls-cyan-50 rounded-2xl">' +
+            '</div>' +
+          '</div>'
+        : '') +
+
+        // الموقع والتاريخ
+        '<div class="max-w-3xl mx-auto px-6 sm:px-10">' +
+          '<div class="flex flex-wrap items-center gap-3">' +
+            '<span class="convoy-meta-label"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' + safeText(c.location) + '</span>' +
+            '<span class="convoy-meta-label"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' + safeText(c.date) + '</span>' +
+          '</div>' +
         '</div>' +
-        '<p class="text-gray-600 leading-relaxed text-lg mb-6 font-medium">' + safeText(c.desc) + '</p>' +
-        (c.article ? '<div class="border-t-2 border-sls-cyan-100 pt-6"><p class="text-gray-700 leading-loose whitespace-pre-wrap">' + safeText(c.article) + '</p></div>' : '') +
+
+        // النص مع مسافة سفلية
+        '<div class="max-w-3xl mx-auto px-6 sm:px-10 pt-6 pb-24 sm:pb-28">' +
+          '<p class="convoy-desc">' + safeText(c.desc) + '</p>' +
+          (c.article ?
+            '<hr class="convoy-separator">' +
+            '<div class="mt-8">' +
+              '<h4 class="text-lg font-bold text-sls-cyan-900 mb-6 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> تفاصيل القافلة</h4>' +
+              '<div class="convoy-article">' + formatArticle(c.article) + '</div>' +
+            '</div>'
+          : '') +
+        '</div>' +
+
       '</div>';
   });
 }
-
 function closeConvoyModal() {
   var modal = document.getElementById('convoy-modal');
-  if (modal) {
+  if (!modal) return;
+
+  // بانيميشن إغلاق
+  modal.classList.remove('modal-open');
+  
+  // استنى الانيميشن يخلص ثم اخفي
+  setTimeout(function() {
     modal.classList.add('hidden');
+    document.getElementById('convoy-modal-content').innerHTML = '';
     document.body.style.overflow = '';
-  }
+  }, 400);
 }
 
 // إغلاق المودال بـ Escape

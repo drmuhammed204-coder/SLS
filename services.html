@@ -260,14 +260,25 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="script.js"></script>
 </body>
-<!-- مودال تفاصيل القافلة -->
+<!-- مودال تفاصيل القافلة (فول بيج) -->
 <div id="convoy-modal" class="fixed inset-0 z-[100] hidden">
-  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeConvoyModal()"></div>
-  <div class="relative z-10 max-w-3xl mx-4 mt-10 sm:mt-20 mb-10 bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[85vh] overflow-y-auto">
-    <button onclick="closeConvoyModal()" class="absolute top-4 left-4 z-20 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 hover:text-red-500 transition-colors">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
-    <div id="convoy-modal-content"></div>
+  <!-- خلفية معتمة -->
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-md" onclick="closeConvoyModal()"></div>
+  
+  <!-- المحتوى -->
+  <div class="relative z-10 h-full overflow-y-auto">
+    <div class="min-h-full flex items-start justify-center py-6 px-4 sm:px-6">
+      <div class="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden">
+        
+        <!-- زر الإغلاق -->
+        <button onclick="closeConvoyModal()" class="fixed top-4 left-4 z-50 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 hover:text-red-500 transition-all group">
+          <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <!-- المحتوى الديناميكي -->
+        <div id="convoy-modal-content"></div>
+      </div>
+    </div>
   </div>
 </div>
 </html>
