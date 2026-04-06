@@ -1354,6 +1354,7 @@ function formatDateAr(dateStr) {
         location: document.getElementById('convoy-location').value,
         date: dateValue,
         dateType: dateType,
+        dateSingle: dateType === 'single' ? document.getElementById('convoy-date-single').value : '',
         dateFrom: dateType === 'range' ? document.getElementById('convoy-date-from').value : '',
         dateTo: dateType === 'range' ? document.getElementById('convoy-date-to').value : '',
         desc: document.getElementById('convoy-desc').value,
@@ -1418,13 +1419,11 @@ function formatDateAr(dateStr) {
 
         if (d.dateType === 'range') {
           setDateType('range');
-          // ✅ التواريخ الأصلية من قاعدة البيانات (صيغة date input)
           document.getElementById('convoy-date-from').value = d.dateFrom || '';
           document.getElementById('convoy-date-to').value = d.dateTo || '';
         } else {
           setDateType('single');
-          // ✅ التاريخ الأصلي من قاعدة البيانات (صيغة date input)
-          document.getElementById('convoy-date-single').value = d.dateType === 'single' ? (d.dateFrom || '') : '';
+          document.getElementById('convoy-date-single').value = d.dateSingle || '';
         }
 
         if (d.image) {

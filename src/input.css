@@ -399,6 +399,77 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
   -webkit-box-orient: vertical; overflow: hidden;
 }
 .news-carousel-card .nc-meta { font-size: 0.78rem; color: #6b7280; display: flex; align-items: center; gap: 0.5rem; }
+/* أنماط العناصر الداخلية لكرت كاروسيل الأخبار */
+.news-carousel-card .nc-img {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+}
+.news-carousel-card .nc-type-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(4px);
+  color: #1d4ed8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+.news-carousel-card .nc-featured-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fbbf24;
+  color: #1e3a8a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+.news-carousel-card .nc-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+.news-carousel-card .nc-date svg { flex-shrink: 0; }
+.news-carousel-card .nc-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+.news-carousel-card .nc-location svg { flex-shrink: 0; }
+.news-carousel-card .nc-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2563eb;
+  transition: gap 0.3s ease;
+}
+.news-carousel-card:hover .nc-read-more {
+  gap: 10px;
+  color: #1d4ed8;
+}
+.news-carousel-card .nc-read-more svg { flex-shrink: 0; }
 .news-carousel-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 40px; height: 40px; background: white; border: 1px solid #e2e8f0;
@@ -465,7 +536,7 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
 }
 #mobile-menu-overlay.show { display: block; }
 #mobile-menu {
-  transform: translateX(-100%);
+  transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 #mobile-menu.menu-open { transform: translateX(0); }

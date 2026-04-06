@@ -73,6 +73,79 @@
 .hero-slide-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-slide-content { width: 55%; padding: 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
 @media (max-width: 768px) { .hero-slide-content { width: 100%; padding: 1.5rem; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== أنماط كاروسيل الأخبار (مضمونة هنا) ===== */
+.news-carousel-card .nc-img {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+}
+.news-carousel-card .nc-type-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(4px);
+  color: #1d4ed8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+.news-carousel-card .nc-featured-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fbbf24;
+  color: #1e3a8a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+.news-carousel-card .nc-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+.news-carousel-card .nc-date svg { flex-shrink: 0; }
+.news-carousel-card .nc-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+.news-carousel-card .nc-location svg { flex-shrink: 0; }
+.news-carousel-card .nc-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2563eb;
+  transition: gap 0.3s ease;
+}
+.news-carousel-card:hover .nc-read-more {
+  gap: 10px;
+  color: #1d4ed8;
+}
+.news-carousel-card .nc-read-more svg { flex-shrink: 0; }
 </style>
 </head>
 <body class="bg-white">
@@ -114,72 +187,48 @@
   </div>
 </nav>
 
-<!-- ===================== -->
-<!-- HOME PAGE CONTENT    -->
-<!-- ===================== -->
 <main class="pt-16">
 
-  <!-- ========================================== -->
-  <!-- المرحلة 1: تعريف اللوجو              -->
-  <!-- ========================================== -->
+  <!-- تعريف اللوجو -->
   <section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-sls-blue-900 via-sls-blue-800 to-sls-blue-900">
-
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute w-44 h-44 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 8%; left: 5%;"></div>
       <div class="absolute w-24 h-24 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
       <div class="absolute w-56 h-56 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 15%; right: 4%; animation-delay: 3s;"></div>
     </div>
-
     <div class="relative z-10 text-center px-4 py-16">
       <div class="mb-8 animate-scale-in">
         <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl animate-pulse-glow overflow-hidden bg-white flex items-center justify-center mx-auto">
           <img src="images/logo.webp" alt="SLS Logo" class="w-full h-full object-contain">
         </div>
       </div>
-
-      <p class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 text-sls-blue-100 text-sm mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
-        مشهرة برقم ٣٣٧٧ لسنة ٢٠١٣ • وزارة التضامن الاجتماعي
-      </p>
-
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 animate-fade-in-up" style="animation-delay: 0.3s;">
-        جمعية الليدرز الاجتماعية
-      </h1>
+      <p class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 text-sls-blue-100 text-sm mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">مشهرة برقم ٣٣٧٧ لسنة ٢٠١٣ • وزارة التضامن الاجتماعي</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 animate-fade-in-up" style="animation-delay: 0.3s;">جمعية الليدرز الاجتماعية</h1>
       <p class="text-xl sm:text-2xl text-sls-blue-200 font-light mb-3 animate-fade-in-up" style="animation-delay: 0.4s;">Social Leaders Society</p>
       <p class="text-lg sm:text-xl text-sls-gold-400 font-bold mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">ما كان لله دام و اتّصل</p>
-
       <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.7s;">
         <a href="services.html" class="btn-primary px-8 py-4 text-sls-blue-900 font-bold rounded-full shadow-lg">اكتشف خدماتنا</a>
         <a href="contact.html" class="btn-secondary px-8 py-4 text-white font-semibold rounded-full">تواصل معنا</a>
       </div>
     </div>
-
-    <!-- سهم للأسفل يشير للسلايدر -->
     <div id="hero-arrow" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce opacity-0" style="animation-delay: 2.5s; transition: opacity 0.5s;">
       <svg class="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7H5"/></svg>
     </div>
   </section>
 
-  <!-- ========================================== -->
-  <!-- المرحلة 2: سلايدر القوافل الكبير        -->
-  <!-- ========================================== -->
+  <!-- سلايدر القوافل الكبير -->
   <section class="relative bg-gradient-to-b from-sls-blue-900 to-sls-blue-950 py-10 sm:py-14 overflow-hidden">
     <div class="max-w-6xl mx-auto px-4">
-      <!-- عنوان صغير -->
       <div class="text-center mb-8">
         <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 text-sls-blue-100 text-sm font-bold">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7H5"/></svg>
           أحدث القوافل
         </span>
       </div>
-
-      <!-- حاوية السلايدر -->
       <div id="hero-slider" class="relative mx-auto">
-        <!-- Skeleton لحد ما البيانات تتحمل -->
-        <div class="hero-slide active">
+        <div class="hero-slide">
           <div class="hero-slide-card">
-            <div class="hero-slide-img bg-sls-blue-50">
-              <div class="w-full h-full bg-sls-blue-100 animate-pulse"></div>
-            </div>
+            <div class="hero-slide-img bg-sls-blue-50"><div class="w-full h-full bg-sls-blue-100 animate-pulse"></div></div>
             <div class="hero-slide-content">
               <div class="space-y-3 mb-6">
                 <div class="h-5 bg-gray-200 rounded-lg w-28 animate-pulse"></div>
@@ -191,22 +240,17 @@
           </div>
         </div>
       </div>
-
-      <!-- النقاط -->
       <div id="hero-dots" class="flex justify-center gap-2 mt-8"></div>
     </div>
   </section>
 
-  <!-- ========================================== -->
-  <!-- المرحلة 3: الأرقام والإنجازات          -->
-  <!-- ========================================== -->
+  <!-- الأرقام والإنجازات -->
   <section class="relative py-20 overflow-hidden" style="background: linear-gradient(135deg, #1e3a8a 0%, #4a7dba 50%, #1e40af 100%);">
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
       <div class="absolute w-[500px] h-[500px] rounded-full border border-white/10 -top-48 -right-48 opacity-50"></div>
       <div class="absolute w-[300px] h-[300px] rounded-full border border-white/10 -bottom-32 -left-32 opacity-40"></div>
       <div class="absolute w-[200px] h-[200px] rounded-full bg-white/5 -top-20 left-1/4"></div>
     </div>
-
     <div class="relative z-10 max-w-6xl mx-auto px-4">
       <div class="text-center mb-14">
         <span class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 font-bold text-sm px-5 py-2 rounded-full mb-4">📊 أرقام حقيقية</span>
@@ -214,102 +258,78 @@
         <p class="text-sls-blue-200/80 text-sm sm:text-base max-w-lg mx-auto">منذ 2013 ونوصل لكل محتاج في كل محافظات مصر</p>
         <div class="w-16 h-1 bg-gradient-to-r from-sls-gold-400 to-sls-gold-500 mx-auto rounded-full mt-5"></div>
       </div>
-
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" id="stats-container">
-
-        <!-- 1. عمليات جراحية -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🔬</div>
           <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="2107">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">عملية جراحية</span>
         </div>
-
-        <!-- 2. قافلة طبية -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🏥</div>
           <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="270">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">قافلة طبية</span>
         </div>
-
-        <!-- 3. كشف طبي -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🩺</div>
           <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="110357">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">كشف طبي</span>
         </div>
-
-        <!-- 4. روشتة طبية -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">📋</div>
           <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="62751">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">روشتة طبية</span>
         </div>
-
-        <!-- 5. تحليل طبي -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🧪</div>
           <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="8945">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">تحليل طبي</span>
         </div>
-
-        <!-- 6. نظارة طبية -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">👓</div>
           <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="4464">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">نظارة طبية</span>
         </div>
-
-        <!-- ===== السطر التاني ===== -->
-
-        <!-- 7. حالة طبية -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🩺</div>
           <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="6900">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">حالة طبية</span>
         </div>
-
-        <!-- 8. مصاريف مدرسية -->
         <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] col-span-2 sm:col-span-1">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🎒</div>
           <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="1800">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">مصاريف مدرسية</span>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- آخر الأخبار (كاروسيل صغير) -->
-<section class="py-16 bg-gradient-to-b from-sls-blue-50 to-white px-4">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-10 page-transition">
-      <span class="inline-block bg-sls-gold-400/20 text-sls-gold-600 font-bold text-sm px-4 py-2 rounded-full mb-4">📰 المزيد من الأخبار</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-sls-blue-900 mb-4">كل القوافل والأنشطة</h2>
-      <p class="text-gray-500 max-w-xl mx-auto">تابع آخر ما قمنا به من قوافل طبية ومبادرات إنسانية</p>
-      <div class="w-24 h-1 bg-gradient-to-r from-sls-gold-400 to-sls-gold-500 mx-auto rounded-full mt-6"></div>
-    </div>
-
-    <div class="news-carousel-wrapper">
-      <button class="news-carousel-nav prev" id="carouselPrev" aria-label="السابق">→</button>
-      <button class="news-carousel-nav next" id="carouselNext" aria-label="التالي">←</button>
-      <div class="news-carousel-track" id="news-carousel-track">
-        <!-- Skeleton - هيتبدل بالبيانات الحقيقية -->
-        <div class="news-carousel-card"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
-        <div class="news-carousel-card"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
-        <div class="news-carousel-card hidden sm:block"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+  <!-- آخر الأخبار (كاروسيل) -->
+  <section class="py-16 bg-gradient-to-b from-sls-blue-50 to-white px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-10 page-transition">
+        <span class="inline-block bg-sls-gold-400/20 text-sls-gold-600 font-bold text-sm px-4 py-2 rounded-full mb-4">📰 المزيد من الأخبار</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-sls-blue-900 mb-4">كل القوافل والأنشطة</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">تابع آخر ما قمنا به من قوافل طبية ومبادرات إنسانية</p>
+        <div class="w-24 h-1 bg-gradient-to-r from-sls-gold-400 to-sls-gold-500 mx-auto rounded-full mt-6"></div>
+      </div>
+      <div class="news-carousel-wrapper">
+        <button class="news-carousel-nav prev" id="carouselPrev" aria-label="السابق">→</button>
+        <button class="news-carousel-nav next" id="carouselNext" aria-label="التالي">←</button>
+        <div class="news-carousel-track" id="news-carousel-track">
+          <div class="news-carousel-card"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+          <div class="news-carousel-card"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+          <div class="news-carousel-card hidden sm:block"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+        </div>
+      </div>
+      <div class="news-carousel-dots" id="news-carousel-dots"></div>
+      <div class="text-center mt-8">
+        <a href="services.html" class="inline-flex items-center gap-2 text-sls-blue-700 font-bold hover:gap-3 transition-all">
+          عرض جميع القوافل
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
-
-    <div class="news-carousel-dots" id="news-carousel-dots"></div>
-
-    <div class="text-center mt-8">
-      <a href="services.html" class="inline-flex items-center gap-2 text-sls-blue-700 font-bold hover:gap-3 transition-all">
-        عرض جميع القوافل
-        <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 </main>
 
 <!-- مودال تفاصيل القافلة -->
@@ -327,7 +347,7 @@
   </div>
 </div>
 
-<!-- FOOTER PROFESSIONAL -->
+<!-- FOOTER -->
 <footer class="bg-sls-blue-950 text-white pt-12 pb-6" dir="rtl">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
@@ -351,7 +371,7 @@
         <h4 class="font-bold text-lg mb-4 text-white">تواصل معنا</h4>
         <ul class="space-y-2 text-sls-blue-100/70 text-sm">
           <li class="flex items-center gap-2"><span>📞</span> <a href="tel:+201117629537" class="hover:text-sls-gold-400 transition-colors">01117629537</a></li>
-          <li class="flex items-center gap-2"><span>✉️</span> <a href="mailto:Socialleaders8@gmail.com" class="hover:text-sls-gold-400 transition-colors">Socialleaders8@gmail.com</a></li>
+          <li class="flex items-center gap-2"><span>✉️</span> <a href="/cdn-cgi/l/email-protection#a0f3cfc3c9c1ccccc5c1c4c5d2d398e0c7cdc1c9cc8ec3cfcd" class="hover:text-sls-gold-400 transition-colors"><span class="__cf_email__" data-cfemail="d083bfb3b9b1bcbcb5b1b4b5a2a3e890b7bdb1b9bcfeb3bfbd">[email&#160;protected]</span></a></li>
           <li class="flex items-center gap-2"><span>📍</span> <span>باب شرق - الإسكندرية</span></li>
         </ul>
       </div>
@@ -369,28 +389,20 @@
   </div>
 </footer>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="script.js"></script>
 
-<!-- كود السلايدر الكبير + كاروسيل الأخبار -->
 <script>
 (function() {
-  console.log('🔥 السلايدر + الأخبار بدأو يشتغلوا');
+  console.log('🔥 السلايدر + الأخبار بدأو');
 
-  // التأكد إن الدوال موجودة
   if (typeof safeText === 'undefined' || typeof defaultImg === 'undefined') {
     console.error('❌ script.js ماتحملش بعد!');
-    var slider = document.getElementById('hero-slider');
-    if (slider) {
-      slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-5xl block mb-4">⚠️</span><p class="text-white/80 text-lg font-bold">جاري تحميل البيانات...</p></div></div></div>';
-    }
     return;
   }
 
-  // ==========================================
-  // متغيرات السلايدر الكبير
-  // ==========================================
+  // ===== متغيرات السلايدر الكبير =====
   var slider = document.getElementById('hero-slider');
   var dotsContainer = document.getElementById('hero-dots');
   var heroArrow = document.getElementById('hero-arrow');
@@ -398,22 +410,16 @@
   var currentIndex = -1;
   var autoTimer = null;
   var isTransitioning = false;
-  var INIT_CALLED = false;
 
-  // ==========================================
-  // متغيرات كاروسيل الأخبار
-  // ==========================================
+  // ===== متغيرات كاروسيل الأخبار =====
   var newsTrack = document.getElementById('news-carousel-track');
   var newsDotsContainer = document.getElementById('news-carousel-dots');
   var newsData = [];
   var newsCurrentSlide = 0;
   var newsAutoTimer = null;
   var newsIsAnimating = false;
-  var NEWS_READY = false;
 
-  // ==========================================
-  // دوال السلايدر الكبير
-  // ==========================================
+  // ===== دوال السلايدر الكبير =====
   function buildSlideCard(c) {
     var icon = (typeof typeIcons !== 'undefined' && typeIcons[c.type]) ? typeIcons[c.type] : '🏥';
     var imgSrc = c.image || defaultImg;
@@ -442,10 +448,14 @@
     '</div>';
   }
 
+  function getSlideEl(index) {
+    return slider.querySelectorAll('.hero-slide')[index] || null;
+  }
+
   function slideIn(index) {
     if (isTransitioning || !allConvoys.length) return;
     isTransitioning = true;
-    var slide = allConvoys[index];
+    var slide = getSlideEl(index);
     if (!slide) { isTransitioning = false; return; }
     slide.style.transition = 'none';
     slide.style.transform = 'translateX(-105%)';
@@ -461,7 +471,7 @@
   }
 
   function slideOut(index) {
-    var slide = allConvoys[index];
+    var slide = getSlideEl(index);
     if (!slide) return;
     slide.style.transition = 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease';
     slide.style.transform = 'translateX(105%)';
@@ -471,16 +481,19 @@
 
   function goToNext() {
     if (!allConvoys.length || isTransitioning) return;
+    var totalSlides = slider.querySelectorAll('.hero-slide').length;
+    if (!totalSlides) return;
     var oldIndex = currentIndex;
-    currentIndex = (currentIndex + 1) % allConvoys.length;
+    currentIndex = (currentIndex + 1) % totalSlides;
     slideOut(oldIndex);
     setTimeout(function() { slideIn(currentIndex); updateHeroDots(); }, 250);
   }
 
   function updateHeroDots() {
     if (!dotsContainer) return;
+    var totalSlides = slider.querySelectorAll('.hero-slide').length;
     var html = '';
-    for (var i = 0; i < allConvoys.length; i++) {
+    for (var i = 0; i < totalSlides; i++) {
       html += '<button class="hero-dot' + (i === currentIndex ? ' active' : '') + '" onclick="window._heroGoTo(' + i + ')"></button>';
     }
     dotsContainer.innerHTML = html;
@@ -488,6 +501,8 @@
 
   window._heroGoTo = function(idx) {
     if (isTransitioning || idx === currentIndex) return;
+    var totalSlides = slider.querySelectorAll('.hero-slide').length;
+    if (idx < 0 || idx >= totalSlides) return;
     clearInterval(autoTimer);
     var oldIndex = currentIndex;
     currentIndex = idx;
@@ -505,19 +520,18 @@
   }
 
   function showEmpty() {
-    slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-6xl block mb-4">🏥</span><p class="text-white/70 text-xl font-bold mb-3">لا توجد قوافل حالياً</p><p class="text-white/40 text-sm">سيتم إضافتها من لوحة التحكم قريباً</p><a href="services.html" class="inline-block mt-6 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold px-6 py-2.5 rounded-full text-sm hover:bg-white/20 transition-all">تصفح الخدمات</a></div></div></div>';
+    slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-6xl block mb-4">🏥</span><p class="text-white/70 text-xl font-bold mb-3">لا توجد قوافل حالياً</p><p class="text-white/40 text-sm">سيتم إضافتها من لوحة التحكم قريباً</p></div></div></div>';
     if (dotsContainer) dotsContainer.innerHTML = '';
   }
 
   function showError(msg) {
-    console.error('❌ خطأ:', msg);
     slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-6xl block mb-4">⚠️</span><p class="text-white/80 text-lg font-bold mb-2">حدث خطأ</p><p class="text-white/50 text-sm">' + safeText(msg) + '</p></div></div></div>';
     if (dotsContainer) dotsContainer.innerHTML = '';
   }
 
-  // ==========================================
-  // دوال كاروسيل الأخبار
-  // ==========================================
+  // =============================================
+  // كاروسيل الأخبار
+  // =============================================
   function getVisibleCount() {
     var w = window.innerWidth;
     if (w <= 640) return 1;
@@ -526,9 +540,7 @@
   }
 
   function getNewsMaxSlide() {
-    var visible = getVisibleCount();
-    var max = newsData.length - visible;
-    return Math.max(0, max);
+    return Math.max(0, newsData.length - getVisibleCount());
   }
 
   function buildNewsCard(c) {
@@ -550,18 +562,24 @@
           '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' +
           safeText(c.location) +
         '</div>' +
-        '<span class="nc-read-more">اقرأ التفاصيل <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="rotate-180"/></svg></span>' +
+        '<span class="nc-read-more">اقرأ التفاصيل <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" style="transform:scaleX(-1)"/></svg></span>' +
       '</div>' +
     '</div>';
   }
 
   function moveNewsTrack(animated) {
-    if (!newsData.length || !newsTrack.children.length) return;
-    var cardWidth = newsTrack.children[0].offsetWidth;
-    var gap = 20;
+    if (!newsData.length) return;
+    var cards = newsTrack.querySelectorAll('.news-carousel-card');
+    if (!cards.length) return;
+
+    var cardWidth = cards[0].offsetWidth;
+    if (!cardWidth || cardWidth <= 0) return;
+
+    var computedStyle = window.getComputedStyle(newsTrack);
+    var gap = parseInt(computedStyle.gap) || 24;
     var offset = newsCurrentSlide * (cardWidth + gap);
 
-    if (animated !== false) {
+    if (animated) {
       newsIsAnimating = true;
       newsTrack.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
     } else {
@@ -570,7 +588,7 @@
 
     newsTrack.style.transform = 'translateX(' + offset + 'px)';
 
-    if (animated !== false) {
+    if (animated) {
       setTimeout(function() { newsIsAnimating = false; }, 650);
     }
     updateNewsDots();
@@ -579,10 +597,9 @@
   function updateNewsDots() {
     if (!newsDotsContainer || !newsData.length) return;
     var max = getNewsMaxSlide();
-    var totalDots = max + 1;
     var html = '';
-    for (var i = 0; i < totalDots; i++) {
-      html += '<button class="news-dot' + (i === newsCurrentSlide ? ' active' : '') + '" onclick="window._newsGoTo(' + i + ')"></button>';
+    for (var i = 0; i <= max; i++) {
+      html += '<button class="news-carousel-dot' + (i === newsCurrentSlide ? ' active' : '') + '" onclick="window._newsGoTo(' + i + ')"></button>';
     }
     newsDotsContainer.innerHTML = html;
   }
@@ -595,7 +612,6 @@
     startNewsAuto();
   };
 
-  // دي الدالة اللي الأزرار بيدعوها
   window.slideNewsCarousel = function(dir) {
     if (newsIsAnimating || !newsData.length) return;
     clearInterval(newsAutoTimer);
@@ -618,9 +634,17 @@
 
   function renderNewsCarousel(data) {
     if (!newsTrack) return;
+
+    clearInterval(newsAutoTimer);
+    newsIsAnimating = false;
+
+    newsTrack.style.transition = 'none';
+    newsTrack.style.transform = 'translateX(0px)';
+
     if (!data || Object.keys(data).length === 0) {
       newsTrack.innerHTML = '<div style="width:100%;text-align:center;padding:40px;color:#9ca3af;"><span style="font-size:48px;display:block;margin-bottom:12px;">📭</span><p style="font-size:16px;font-weight:700;">لا توجد قوافل إضافية حالياً</p></div>';
       if (newsDotsContainer) newsDotsContainer.innerHTML = '';
+      newsData = [];
       return;
     }
 
@@ -634,35 +658,36 @@
     newsTrack.innerHTML = html;
 
     newsCurrentSlide = 0;
-    moveNewsTrack(false);
-    setTimeout(function() { startNewsAuto(); }, 1000);
+
+    void newsTrack.offsetHeight;
+
+    updateNewsDots();
+
+    setTimeout(function() {
+      startNewsAuto();
+    }, 300);
   }
 
-  // ==========================================
-  // تهيئة السلايدر + الأخبار مع بعض
-  // ==========================================
+  // ===== الدالة الرئيسية =====
   function init(data) {
-    if (INIT_CALLED) {
-      // حتى لو init اتناديتت، الأخبار ممكن تحتاج تحديث
-      if (!NEWS_READY && newsTrack) {
-        NEWS_READY = true;
-        renderNewsCarousel(data);
-      }
-      return;
-    }
-    INIT_CALLED = true;
-    NEWS_READY = true;
-    console.log('📦 init شتغلت! البيانات:', data ? (Object.keys(data).length + ' قافلة') : 'مفيش');
+    console.log('📦 init:', data ? (Object.keys(data).length + ' قافلة') : 'فاضية');
 
-    // ===== السلايدر الكبير (الرئيسية فقط) =====
+    // كاروسيل الأخبار: كل القوافل
+    renderNewsCarousel(data);
+
+    // السلايدر الكبير: كل القوافل (مش بس الـ featured)
+    clearInterval(autoTimer);
+    isTransitioning = false;
+    currentIndex = -1;
+
     if (!data || Object.keys(data).length === 0) {
       showEmpty();
-      renderNewsCarousel(data);
       return;
     }
 
-    allConvoys = Object.values(data).reverse().filter(function(c) { return c.featured; });
-    console.log('✅ السلايدر: ' + allConvoys.length + ' قافلة رئيسية');
+    // ★ التعديل الأساسي: عرض كل القوافل مش بس featured
+    allConvoys = Object.values(data).reverse();
+    console.log('✅ السلايدر: ' + allConvoys.length + ' قافلة');
 
     if (allConvoys.length > 0) {
       var html = '';
@@ -670,6 +695,7 @@
         html += '<div class="hero-slide">' + buildSlideCard(allConvoys[i]) + '</div>';
       }
       slider.innerHTML = html;
+      currentIndex = 0;
       updateHeroDots();
 
       if (heroArrow) {
@@ -679,22 +705,20 @@
         }, 3000);
       }
 
-      setTimeout(function() {
-        currentIndex = 0;
-        slideIn(0);
-        startAuto();
-      }, 300);
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          slideIn(0);
+          startAuto();
+        });
+      });
     } else {
       showEmpty();
     }
-
-    // ===== كاروسيل الأخبار (كل القوافل) =====
-    renderNewsCarousel(data);
   }
 
-  // ==========================================
-  // تحميل البيانات من Firebase (مرة واحدة)
-  // ==========================================
+  // ===== تحميل البيانات من Firebase =====
+  // إظهار loading فوراً
+  showLoading();
   try {
     var fbConfig = {
       apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
@@ -707,27 +731,23 @@
     };
 
     if (!firebase.apps.length) {
-      console.log('🔄 بعمل initialize لـ Firebase...');
       firebase.initializeApp(fbConfig);
     }
 
-    console.log('📡 بستمع للقوافل من Firebase...');
+    console.log('📡 بستمع للقوافل...');
     firebase.database().ref('convoys').on('value', function(snap) {
-      console.log('🔥 Firebase رجع ببيانات:', snap.val() ? 'موجودة' : 'فاضية');
+      console.log('🔥 Firebase:', snap.val() ? 'موجودة' : 'فاضية');
       init(snap.val());
     }, function(error) {
-      console.error('❌ خطأ في Firebase:', error);
+      console.error('❌ Firebase خطأ:', error);
       showError(error.message || 'خطأ في الاتصال');
     });
-
   } catch(e) {
     console.error('❌ خطأ عام:', e);
     showError(e.message || 'خطأ غير معروف');
   }
 
-  // ==========================================
-  // أحداث مشتركة
-  // ==========================================
+  // ===== أحداث =====
   function updateSliderHeight() {
     if (window.innerWidth <= 768) {
       slider.style.height = 'auto';
@@ -737,10 +757,11 @@
       slider.style.minHeight = '';
     }
   }
+
   window.addEventListener('resize', function() {
     updateSliderHeight();
-    // إصلاح كاروسيل الأخبار عند الريسايز
     if (newsData.length) {
+      newsTrack.style.transition = 'none';
       if (newsCurrentSlide > getNewsMaxSlide()) newsCurrentSlide = getNewsMaxSlide();
       moveNewsTrack(false);
       clearInterval(newsAutoTimer);
@@ -749,21 +770,21 @@
   });
   updateSliderHeight();
 
-  // السلايدر الكبير - وقف عند الماوس
   slider.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
   slider.addEventListener('mouseleave', function() { if (allConvoys.length) startAuto(); });
 
-  // السلايدر الكبير - سحب باللمس
   var touchStartX = 0;
   slider.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
   slider.addEventListener('touchend', function(e) {
     if (!allConvoys.length) return;
+    var totalSlides = slider.querySelectorAll('.hero-slide').length;
+    if (!totalSlides) return;
     var diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
       clearInterval(autoTimer);
       if (diff > 0) {
         var oldIndex = currentIndex;
-        currentIndex = (currentIndex - 1 + allConvoys.length) % allConvoys.length;
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         slideOut(oldIndex);
         setTimeout(function() { slideIn(currentIndex); updateHeroDots(); startAuto(); }, 250);
       } else {
@@ -772,14 +793,12 @@
     }
   }, { passive: true });
 
-  // كاروسيل الأخبار - وقف عند الماوس
   var newsWrapper = newsTrack ? newsTrack.closest('.news-carousel-wrapper') : null;
   if (newsWrapper) {
     newsWrapper.addEventListener('mouseenter', function() { clearInterval(newsAutoTimer); });
     newsWrapper.addEventListener('mouseleave', function() { startNewsAuto(); });
   }
 
-  // كاروسيل الأخبار - سحب باللمس
   var newsTouchX = 0;
   if (newsTrack) {
     newsTrack.addEventListener('touchstart', function(e) { newsTouchX = e.touches[0].clientX; }, { passive: true });
@@ -793,9 +812,11 @@
     }, { passive: true });
   }
 
-  showLoading();
+  // ★ إصلاح: ربط أزرار الكاروسيل (كانت مقطوعة!)
+  var prevBtn = document.getElementById('carouselPrev');
+  var nextBtn = document.getElementById('carouselNext');
+  if (prevBtn) prevBtn.addEventListener('click', function() { slideNewsCarousel(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { slideNewsCarousel(1); });
+
 })();
 </script>
-
-</body>
-</html>
