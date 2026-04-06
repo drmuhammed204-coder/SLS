@@ -173,7 +173,7 @@
     </div>
   </div>
   <div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
-  <div id="mobile-menu" class="mobile-menu lg:hidden bg-sls-blue-900/98 backdrop-blur-xl border-t border-sls-blue-700/50">
+  <div id="mobile-menu" class="bg-sls-blue-900/98 backdrop-blur-xl border-t border-sls-blue-700/50" style="display:none;">
     <div class="px-4 py-4 space-y-2">
       <a href="index.html" class="block px-4 py-3 text-white font-medium">الرئيسية</a>
       <a href="about.html" class="block px-4 py-3 text-white/80 hover:text-white">من نحن</a>
@@ -819,4 +819,30 @@
   if (nextBtn) nextBtn.addEventListener('click', function() { slideNewsCarousel(1); });
 
 })();
+</script>
+<script>
+// دوال المنيو الموبايل (fallback)
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (!menu) return;
+  var isOpen = menu.classList.contains('menu-open');
+  if (isOpen) {
+    menu.classList.remove('menu-open');
+    if (overlay) overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('menu-open');
+    if (overlay) overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var overlay = document.getElementById('mobile-menu-overlay');
+  if (menu) menu.classList.remove('menu-open');
+  if (overlay) overlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
 </script>

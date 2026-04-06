@@ -2926,6 +2926,10 @@ body {
    تحسينات المنيو الموبايل (زي الـ Admin)
    ========================================== */
 
+/* ==========================================
+   تحسينات المنيو الموبايل
+   ========================================== */
+
 #mobile-menu-overlay {
   display: none;
   position: fixed;
@@ -2941,7 +2945,14 @@ body {
 }
 
 #mobile-menu {
-  transform: translateX(-100%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  z-index: 50;
+  overflow-y: auto;
+  transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -2950,14 +2961,9 @@ body {
 }
 
 @media (min-width: 1024px) {
+  #mobile-menu-overlay,
   #mobile-menu {
-    transform: none !important;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+    display: none !important;
   }
 }
 
