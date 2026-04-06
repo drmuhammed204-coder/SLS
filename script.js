@@ -52,16 +52,23 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Mobile Menu Toggle
+// Mobile Menu Toggle (محسّن — زي الـ Admin)
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
-  if (menu) {
-    menu.classList.toggle('hidden');
-  }
+  const overlay = document.getElementById('mobile-menu-overlay');
+  if (menu) menu.classList.toggle('menu-open');
+  if (overlay) overlay.classList.toggle('show');
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  if (menu) menu.classList.remove('menu-open');
+  if (overlay) overlay.classList.remove('show');
 }
 
 // ==========================================
-// أدوات مشتركة (Global — عشان المودال يوصلها)
+// أدوات مشتركة (Global)
 // ==========================================
 var typeIcons = {
   'قافلة طبية': '🏥',
@@ -79,42 +86,46 @@ function safeText(str) {
   return div.innerHTML;
 }
 
-var defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%230e4a5c'/%3E%3Ctext x='50%25' y='50%25' fill='%23a5f3fc' font-size='40' text-anchor='middle' dy='.3em'%3E🏥%3C/text%3E%3C/svg%3E";
+var defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%231e3a8a'/%3E%3Ctext x='50%25' y='50%25' fill='%2393c5fd' font-size='40' text-anchor='middle' dy='.3em'%3E🏥%3C/text%3E%3C/svg%3E";
 
-// تنسيق المقال: فصل جمل الرعاية عن باقي النص
-function formatArticle(text) {
+// تنسيق المقال: فصل جمل الرعاية + إدراج صورة وسط المقال
+function formatArticle(text, imageUrl, imageTitle) {
   if (!text) return '';
   var safe = safeText(text);
   var lines = safe.split('\n');
   var html = '';
-
-  // كلمات مفتاحية = جملة رعاية أو مشاركة
   var keywords = ['محافظ', 'بمشاركة', 'برعاية', 'ب حضور', 'حضور'];
+  var paragraphCount = 0;
+  var imageInserted = false;
 
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim();
 
-    // سطر فاضي = مسافة
     if (line === '') {
       html += '<div style="height: 8px;"></div>';
       continue;
     }
 
-    // فحص هل السطر ده جملة رعاية؟
     var isSpecial = false;
     for (var j = 0; j < keywords.length; j++) {
-      if (line.indexOf(keywords[j]) !== -1) {
-        isSpecial = true;
-        break;
-      }
+      if (line.indexOf(keywords[j]) !== -1) { isSpecial = true; break; }
     }
 
     if (isSpecial) {
-      // عرض الجملة في البوكس المنفصل
       html += '<div class="convoy-highlight">' + line + '</div>';
     } else {
-      // سطر عادي
-      html += '<p style="margin-bottom: 0.8rem;">' + line + '</p>';
+      paragraphCount++;
+      // إدراج الصورة بعد الفقرة التانية
+      if (!imageInserted && paragraphCount === 2 && imageUrl) {
+        html += '<p style="margin-bottom: 1.2rem;">' + line + '</p>';
+        html += '<figure class="article-inline-image">';
+        html += '<img src="' + safeText(imageUrl) + '" alt="' + safeText(imageTitle || 'صورة من القافلة') + '" onerror="this.parentElement.style.display=\'none\'">';
+        html += '<figcaption>📷 ' + safeText(imageTitle || 'صورة من القافلة') + '</figcaption>';
+        html += '</figure>';
+        imageInserted = true;
+        continue;
+      }
+      html += '<p style="margin-bottom: 1.2rem;">' + line + '</p>';
     }
   }
 
@@ -157,61 +168,50 @@ function openConvoyModal(id) {
     var icon = typeIcons[c.type] || '🏥';
     var img = c.image || defaultImg;
     var imgExists = c.image && c.image.length > 0;
+    var imgCaption = 'صورة من ' + safeText(c.type) + ' — ' + safeText(c.location);
 
     content.innerHTML =
       '<div class="modal-inner-enter">' +
-
-        // العنوان والبادجات في الأعلى
-        '<div class="bg-gradient-to-br from-sls-cyan-50 to-white border-b border-sls-cyan-100">' +
+        '<div class="bg-gradient-to-br from-sls-blue-50 to-white border-b border-sls-blue-100">' +
           '<div class="max-w-3xl mx-auto px-6 sm:px-10 pt-8 sm:pt-10 pb-6">' +
             '<div class="flex flex-wrap items-center gap-2 mb-5">' +
-              '<span class="bg-sls-cyan-100 text-sls-cyan-800 px-4 py-1.5 rounded-full text-sm font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
-              (c.featured ? '<span class="bg-sls-gold-400 text-sls-cyan-900 px-4 py-1.5 rounded-full text-sm font-bold">⭐ قافلة رئيسية</span>' : '') +
+              '<span class="bg-sls-blue-100 text-sls-blue-800 px-4 py-1.5 rounded-full text-sm font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
+              (c.featured ? '<span class="bg-sls-gold-400 text-sls-blue-900 px-4 py-1.5 rounded-full text-sm font-bold">⭐ قافلة رئيسية</span>' : '') +
             '</div>' +
-            '<h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-sls-cyan-900 leading-snug">' + safeText(c.title) + '</h2>' +
+            '<h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-sls-blue-900 leading-snug">' + safeText(c.title) + '</h2>' +
           '</div>' +
         '</div>' +
-
-        // الصورة متوسطة
         (imgExists ?
           '<div class="max-w-3xl mx-auto px-6 sm:px-10 py-6">' +
-            '<div class="rounded-2xl overflow-hidden shadow-lg border border-sls-cyan-100">' +
-              '<img src="' + safeText(img) + '" alt="' + safeText(c.title) + '" class="w-full h-auto max-h-80 object-contain bg-sls-cyan-50 rounded-2xl">' +
+            '<div class="rounded-2xl overflow-hidden shadow-lg border border-sls-blue-100">' +
+              '<img src="' + safeText(img) + '" alt="' + safeText(c.title) + '" class="w-full h-auto max-h-80 object-contain bg-sls-blue-50 rounded-2xl">' +
             '</div>' +
           '</div>'
         : '') +
-
-        // الموقع والتاريخ
         '<div class="max-w-3xl mx-auto px-6 sm:px-10">' +
           '<div class="flex flex-wrap items-center gap-3">' +
             '<span class="convoy-meta-label"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' + safeText(c.location) + '</span>' +
             '<span class="convoy-meta-label"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' + safeText(c.date) + '</span>' +
           '</div>' +
         '</div>' +
-
-        // النص مع مسافة سفلية
         '<div class="max-w-3xl mx-auto px-6 sm:px-10 pt-6 pb-24 sm:pb-28">' +
           '<p class="convoy-desc">' + safeText(c.desc) + '</p>' +
           (c.article ?
             '<hr class="convoy-separator">' +
             '<div class="mt-8">' +
-              '<h4 class="text-lg font-bold text-sls-cyan-900 mb-6 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> تفاصيل القافلة</h4>' +
-              '<div class="convoy-article">' + formatArticle(c.article) + '</div>' +
+              '<h4 class="text-lg font-bold text-sls-blue-900 mb-6 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> تفاصيل القافلة</h4>' +
+              '<div class="convoy-article">' + formatArticle(c.article, imgExists ? img : null, imgCaption) + '</div>' +
             '</div>'
           : '') +
         '</div>' +
-
       '</div>';
   });
 }
+
 function closeConvoyModal() {
   var modal = document.getElementById('convoy-modal');
   if (!modal) return;
-
-  // بانيميشن إغلاق
   modal.classList.remove('modal-open');
-  
-  // استنى الانيميشن يخلص ثم اخفي
   setTimeout(function() {
     modal.classList.add('hidden');
     document.getElementById('convoy-modal-content').innerHTML = '';
@@ -232,12 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. تحريك الأرقام
   animateStats();
 
-  // 2. إغلاق المنيو عند الضغط على رابط (موبايل)
+  // 2. إغلاق المنيو عند الضغط على رابط (موبايل) — محسّن
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenu) {
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
+        closeMobileMenu();
       });
     });
   }
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = false;
       });
     });
-  } // ← قفل if (form) هنا
+  }
 
   // ==========================================
   // 4. عرض القوافل ديناميكياً (صفحة الخدمات فقط)
@@ -329,17 +329,17 @@ document.addEventListener('DOMContentLoaded', () => {
       var icon = typeIcons[c.type] || '🏥';
       var dIcon = dateIcons[c.dateType] || '📅';
 
-      return '<div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-sls-cyan-50 border-2 border-transparent hover:border-sls-cyan-200 transition-all group cursor-pointer gradient-border card-hover" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
-        '<div class="h-48 bg-sls-cyan-100 overflow-hidden relative">' +
+      return '<div class="bg-white rounded-3xl overflow-hidden shadow-xl shadow-sls-blue-50 border-2 border-transparent hover:border-sls-blue-200 transition-all group cursor-pointer gradient-border card-hover" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
+        '<div class="h-48 bg-sls-blue-100 overflow-hidden relative">' +
           '<img src="' + safeText(c.image) + '" alt="' + safeText(c.title) + '" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src=\'' + defaultImg + '\'">' +
-          '<div class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-sls-cyan-900 shadow-sm">' + icon + ' ' + safeText(c.type) + '</div>' +
-          (c.featured ? '<div class="absolute top-3 left-3 bg-sls-gold-400 px-3 py-1 rounded-full text-sm font-bold text-sls-cyan-900 shadow-sm">⭐ رئيسية</div>' : '') +
+          '<div class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">' + icon + ' ' + safeText(c.type) + '</div>' +
+          (c.featured ? '<div class="absolute top-3 left-3 bg-sls-gold-400 px-3 py-1 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">⭐ رئيسية</div>' : '') +
         '</div>' +
         '<div class="p-6">' +
-          '<h3 class="text-lg font-bold text-sls-cyan-900 mb-2 group-hover:text-sls-cyan-700 transition-colors line-clamp-2">' + safeText(c.title) + '</h3>' +
+          '<h3 class="text-lg font-bold text-sls-blue-900 mb-2 group-hover:text-sls-blue-700 transition-colors line-clamp-2">' + safeText(c.title) + '</h3>' +
           '<p class="text-gray-500 text-sm mb-4 line-clamp-2">' + safeText(c.desc) + '</p>' +
           '<div class="flex items-center justify-between text-sm">' +
-            '<span class="text-sls-cyan-700 font-medium">' + dIcon + ' ' + safeText(c.date) + '</span>' +
+            '<span class="text-sls-blue-700 font-medium">' + dIcon + ' ' + safeText(c.date) + '</span>' +
             '<span class="text-gray-400">📍 ' + safeText(c.location) + '</span>' +
           '</div>' +
         '</div>' +
@@ -349,24 +349,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function buildFeaturedConvoyCard(c) {
       var icon = typeIcons[c.type] || '🏥';
 
-      return '<div class="bg-white rounded-3xl overflow-hidden shadow-2xl shadow-sls-cyan-100 border-2 border-sls-gold-400 cursor-pointer group" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
+      return '<div class="bg-white rounded-3xl overflow-hidden shadow-2xl shadow-sls-blue-100 border-2 border-sls-gold-400 cursor-pointer group" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
         '<div class="grid md:grid-cols-2">' +
-          '<div class="h-64 md:h-full bg-sls-cyan-100 overflow-hidden">' +
+          '<div class="h-64 md:h-full bg-sls-blue-100 overflow-hidden">' +
             '<img src="' + safeText(c.image) + '" alt="' + safeText(c.title) + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src=\'' + defaultImg + '\'">' +
           '</div>' +
           '<div class="p-6 sm:p-8 flex flex-col justify-center">' +
             '<div class="flex flex-wrap items-center gap-2 mb-4">' +
-              '<span class="bg-sls-gold-400 text-sls-cyan-900 text-xs px-3 py-1 rounded-full font-bold">⭐ قافلة رئيسية</span>' +
-              '<span class="bg-sls-cyan-100 text-sls-cyan-700 text-xs px-3 py-1 rounded-full font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
+              '<span class="bg-sls-gold-400 text-sls-blue-900 text-xs px-3 py-1 rounded-full font-bold">⭐ قافلة رئيسية</span>' +
+              '<span class="bg-sls-blue-100 text-sls-blue-700 text-xs px-3 py-1 rounded-full font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
             '</div>' +
-            '<h3 class="text-xl sm:text-2xl font-black text-sls-cyan-900 mb-3">' + safeText(c.title) + '</h3>' +
+            '<h3 class="text-xl sm:text-2xl font-black text-sls-blue-900 mb-3">' + safeText(c.title) + '</h3>' +
             '<p class="text-gray-600 mb-4 leading-relaxed line-clamp-3">' + safeText(c.desc) + '</p>' +
             '<div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">' +
               '<span>📍 ' + safeText(c.location) + '</span>' +
               '<span>📅 ' + safeText(c.date) + '</span>' +
             '</div>' +
             '<div class="mt-5">' +
-              '<span class="inline-flex items-center gap-2 text-sls-cyan-700 font-bold group-hover:gap-3 transition-all">اقرأ التفاصيل <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>' +
+              '<span class="inline-flex items-center gap-2 text-sls-blue-700 font-bold group-hover:gap-3 transition-all">اقرأ التفاصيل <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var normal = allConvoys.filter(function(c) { return c.featured !== true; });
 
       if (featured.length > 0) {
-        featuredSection.innerHTML = '<h3 class="text-xl font-bold text-sls-cyan-900 mb-5 flex items-center gap-2"><span class="text-sls-gold-400">⭐</span> قافلة مميزة</h3>' +
+        featuredSection.innerHTML = '<h3 class="text-xl font-bold text-sls-blue-900 mb-5 flex items-center gap-2"><span class="text-sls-gold-400">⭐</span> قافلة مميزة</h3>' +
           featured.slice(0, 1).map(buildFeaturedConvoyCard).join('');
       } else {
         featuredSection.innerHTML = '';
@@ -403,9 +403,163 @@ document.addEventListener('DOMContentLoaded', () => {
         convoysSection.classList.add('hidden');
       }
     });
-  } // ← قفل if (convoysSection) هنا
+  }
 
-  // 5. Back to Top click handler
+  // ==========================================
+  // 5. كاروسيل آخر الأخبار (الصفحة الرئيسية فقط)
+  // ==========================================
+  var newsTrack = document.getElementById('news-carousel-track');
+  var newsDots = document.getElementById('news-carousel-dots');
+
+  if (newsTrack) {
+    var homeFbConfig = {
+      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
+      authDomain: "sls-admin-panel.firebaseapp.com",
+      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "sls-admin-panel",
+      storageBucket: "sls-admin-panel.firebasestorage.app",
+      messagingSenderId: "545641823357",
+      appId: "1:545641823357:web:e0a0ee7f62205156850514"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(homeFbConfig);
+    }
+
+    var homeDb = firebase.database();
+    var carouselIndex = 0;
+    var carouselTimer = null;
+    var carouselData = [];
+
+    function buildNewsCard(c) {
+      var icon = typeIcons[c.type] || '🏥';
+      var imgSrc = c.image || defaultImg;
+      return '<div class="news-carousel-card" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
+        '<img src="' + safeText(imgSrc) + '" alt="' + safeText(c.title) + '" onerror="this.src=\'' + defaultImg + '\'">' +
+        '<div class="nc-body">' +
+          '<span class="nc-badge">' + icon + ' ' + safeText(c.type) + '</span>' +
+          (c.featured ? '<span class="nc-badge" style="background:#fef3c7;color:#d97706;margin-right:4px;">⭐ رئيسية</span>' : '') +
+          '<div class="nc-title">' + safeText(c.title) + '</div>' +
+          '<div class="nc-meta"><span>📍 ' + safeText(c.location) + '</span><span>📅 ' + safeText(c.date) + '</span></div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function getVisibleCards() {
+      var w = window.innerWidth;
+      if (w >= 768) return 3;
+      if (w >= 640) return 2;
+      return 1;
+    }
+
+    function updateCarousel() {
+      if (carouselData.length === 0) return;
+      var visible = getVisibleCards();
+      var maxIndex = Math.max(0, carouselData.length - visible);
+      if (carouselIndex > maxIndex) carouselIndex = maxIndex;
+      if (carouselIndex < 0) carouselIndex = 0;
+
+      var cardWidth = 300 + 24; // min-width + gap
+      var offset = carouselIndex * cardWidth;
+      newsTrack.style.transform = 'translateX(' + offset + 'px)';
+
+      // تحديث النقاط
+      if (newsDots) {
+        var totalDots = maxIndex + 1;
+        var dotsHtml = '';
+        for (var i = 0; i < totalDots; i++) {
+          dotsHtml += '<button class="news-carousel-dot' + (i === carouselIndex ? ' active' : '') + '" onclick="goToSlide(' + i + ')"></button>';
+        }
+        newsDots.innerHTML = dotsHtml;
+      }
+    }
+
+    window.slideNewsCarousel = function(dir) {
+      var visible = getVisibleCards();
+      var maxIndex = Math.max(0, carouselData.length - visible);
+      carouselIndex += dir;
+      if (carouselIndex > maxIndex) carouselIndex = 0;
+      if (carouselIndex < 0) carouselIndex = maxIndex;
+      updateCarousel();
+      resetAutoSlide();
+    };
+
+    window.goToSlide = function(idx) {
+      carouselIndex = idx;
+      updateCarousel();
+      resetAutoSlide();
+    };
+
+    function startAutoSlide() {
+      carouselTimer = setInterval(function() {
+        slideNewsCarousel(1);
+      }, 4000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(carouselTimer);
+      startAutoSlide();
+    }
+
+    // وقف عند التمرير بالماوس
+    newsTrack.addEventListener('mouseenter', function() { clearInterval(carouselTimer); });
+    newsTrack.addEventListener('mouseleave', function() { startAutoSlide(); });
+
+    // تحديث عند تغيير حجم الشاشة
+    window.addEventListener('resize', function() { updateCarousel(); });
+
+    homeDb.ref('convoys').on('value', function(snapshot) {
+      var data = snapshot.val();
+
+      if (!data) {
+        newsTrack.innerHTML = '<div class="text-center w-full py-12"><span class="text-4xl block mb-3">🏥</span><p class="text-gray-400 text-sm">لا توجد قوافل حالياً</p></div>';
+        if (newsDots) newsDots.innerHTML = '';
+        return;
+      }
+
+      carouselData = Object.values(data).reverse();
+      newsTrack.innerHTML = carouselData.map(buildNewsCard).join('');
+      carouselIndex = 0;
+      updateCarousel();
+      startAutoSlide();
+    });
+  }
+
+  // ==========================================
+  // 6. صفحة التبرع (نسخ + FAQ)
+  // ==========================================
+
+  // نسخ النص
+  function copyText(btn, text) {
+    navigator.clipboard.writeText(text).then(function() {
+      btn.classList.add('copied');
+      var originalHtml = btn.innerHTML;
+      btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> تم النسخ';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.innerHTML = originalHtml;
+      }, 2000);
+    });
+  }
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var body = item.querySelector('.faq-body');
+    var isActive = item.classList.contains('active');
+
+    document.querySelectorAll('.faq-item').forEach(function(el) {
+      el.classList.remove('active');
+      el.querySelector('.faq-body').classList.add('hidden');
+    });
+
+    if (!isActive) {
+      item.classList.add('active');
+      body.classList.remove('hidden');
+    }
+  }
+
+  // 7. Back to Top click handler
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
@@ -413,4 +567,308 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-}); // ← قفل DOMContentLoaded هنا
+  // ==========================================
+  // 8. زرار "ساهم معنا" العائم
+  // ==========================================
+  (function() {
+    if (window.location.pathname.indexOf('donate') !== -1) return;
+
+    var btn = document.createElement('a');
+    btn.href = 'donate.html';
+    btn.className = 'fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-sls-gold-400 text-sls-blue-900 font-bold px-5 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-sm';
+    btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> ساهم معنا';
+    btn.setAttribute('aria-label', 'ساهم معنا');
+    document.body.appendChild(btn);
+  })();
+});
+/* ==========================================
+   كاروسيل آخر الأخبار
+   ========================================== */
+(function() {
+  console.log('📰 كاروسيل الأخبار بدأ');
+
+  var track = document.getElementById('news-carousel-track');
+  var dotsContainer = document.getElementById('news-carousel-dots');
+  var prevBtn = document.getElementById('carouselPrev');
+  var nextBtn = document.getElementById('carouselNext');
+
+  if (!track) {
+    console.log('⏭️ مفيش كاروسيل أخبار في الصفحة دي');
+    return;
+  }
+
+  var newsData = [];
+  var currentSlide = 0;
+  var autoPlayTimer = null;
+  var isAnimating = false;
+  var READY = false;
+
+  // تحسب عدد الكروت الظاهرة حسب الشاشة
+  function getVisibleCount() {
+    var w = window.innerWidth;
+    if (w <= 640) return 1;
+    if (w <= 1024) return 2;
+    return 3;
+  }
+
+  // تحسب أقصى سلايد ممكن نوصل له
+  function getMaxSlide() {
+    var visible = getVisibleCount();
+    var max = newsData.length - visible;
+    return Math.max(0, max);
+  }
+
+  // بناء كارت واحد
+  function buildNewsCard(c) {
+    var icon = (typeof typeIcons !== 'undefined' && typeIcons[c.type]) ? typeIcons[c.type] : '🏥';
+    var imgSrc = c.image || (typeof defaultImg !== 'undefined' ? defaultImg : 'https://placehold.co/600x400/e8f0fe/1e3a8a?text=SLS');
+    var title = (typeof safeText !== 'undefined' ? safeText(c.title) : (c.title || ''));
+    var desc = (typeof safeText !== 'undefined' ? safeText(c.desc) : (c.desc || ''));
+    var location = (typeof safeText !== 'undefined' ? safeText(c.location) : (c.location || ''));
+    var date = (typeof safeText !== 'undefined' ? safeText(c.date) : (c.date || ''));
+
+    return '<div class="news-carousel-card" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
+      '<div class="nc-img">' +
+        '<img src="' + imgSrc + '" alt="' + title + '" onerror="this.src=\'' + (typeof defaultImg !== 'undefined' ? defaultImg : '') + '\'">' +
+        '<span class="nc-type-badge">' + icon + ' ' + (typeof safeText !== 'undefined' ? safeText(c.type) : (c.type || '')) + '</span>' +
+        (c.featured ? '<span class="nc-featured-badge">⭐ رئيسية</span>' : '') +
+      '</div>' +
+      '<div class="nc-body">' +
+        '<div class="nc-date">' +
+          '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' +
+          date +
+        '</div>' +
+        '<h3 class="nc-title">' + title + '</h3>' +
+        '<div class="nc-location">' +
+          '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' +
+          location +
+        '</div>' +
+        '<span class="nc-read-more">اقرأ التفاصيل <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="rotate-180"/></svg></span>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // تحريك التراك
+  function moveTrack(animated) {
+    if (!newsData.length) return;
+    var visible = getVisibleCount();
+    var cardWidth = track.children[0] ? track.children[0].offsetWidth : 0;
+    var gap = 20;
+    var offset = currentSlide * (cardWidth + gap);
+
+    if (animated !== false) {
+      isAnimating = true;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+    } else {
+      track.style.transition = 'none';
+    }
+
+    // RTL = الاتجاه معكوس، فالسلايد للأمام = translateX موجب
+    track.style.transform = 'translateX(' + offset + 'px)';
+
+    if (animated !== false) {
+      setTimeout(function() { isAnimating = false; }, 650);
+    }
+
+    updateDots();
+  }
+
+  // النقاط
+  function updateDots() {
+    if (!dotsContainer || !newsData.length) return;
+    var max = getMaxSlide();
+    var totalDots = max + 1;
+    var html = '';
+    for (var i = 0; i < totalDots; i++) {
+      html += '<button class="news-dot' + (i === currentSlide ? ' active' : '') + '" onclick="window._newsGoTo(' + i + ')"></button>';
+    }
+    dotsContainer.innerHTML = html;
+  }
+
+  // الذهاب لنقطة معينة
+  window._newsGoTo = function(idx) {
+    if (isAnimating) return;
+    clearInterval(autoPlayTimer);
+    currentSlide = idx;
+    moveTrack(true);
+    startAutoPlay();
+  };
+
+  // التالي / السابق (اللي الأزرار بتدعوها)
+  window.slideNewsCarousel = function(dir) {
+    if (isAnimating || !newsData.length) return;
+    clearInterval(autoPlayTimer);
+
+    // dir = 1 يعني "التالي" (في RTL = يمين = ←)
+    // dir = -1 يعني "السابق" (في RTL = يسار = →)
+    if (dir === 1) {
+      currentSlide++;
+      if (currentSlide > getMaxSlide()) currentSlide = 0;
+    } else {
+      currentSlide--;
+      if (currentSlide < 0) currentSlide = getMaxSlide();
+    }
+
+    moveTrack(true);
+    startAutoPlay();
+  };
+
+  // أوتوبلاي
+  function startAutoPlay() {
+    clearInterval(autoPlayTimer);
+    if (newsData.length <= getVisibleCount()) return; // لو الكروت قليلة، مفيش حاجة للتحريك
+    autoPlayTimer = setInterval(function() {
+      slideNewsCarousel(1);
+    }, 5000);
+  }
+
+  // عرض حالة فاضية
+  function showEmptyNews() {
+    track.innerHTML = '<div style="width:100%;text-align:center;padding:40px;color:#9ca3af;">' +
+      '<span style="font-size:48px;display:block;margin-bottom:12px;">📭</span>' +
+      '<p style="font-size:16px;font-weight:700;">لا توجد قوافل إضافية حالياً</p>' +
+      '<p style="font-size:13px;margin-top:4px;">سيتم إضافتها من لوحة التحكم قريباً</p></div>';
+    if (dotsContainer) dotsContainer.innerHTML = '';
+  }
+
+  // التهيئة بالبيانات
+  function renderNews(data) {
+    if (READY) {
+      console.log('⏭️ الأخبار اتناديتت قبل كده');
+      return;
+    }
+    READY = true;
+
+    if (!data || Object.keys(data).length === 0) {
+      showEmptyNews();
+      return;
+    }
+
+    // نفس بيانات القوافل - عكس الترتيب (الأحدث أول)
+    newsData = Object.values(data).reverse();
+    console.log('📰 عدد كروت الأخبار:', newsData.length);
+
+    if (!newsData.length) {
+      showEmptyNews();
+      return;
+    }
+
+    // بناء الكروت
+    var html = '';
+    for (var i = 0; i < newsData.length; i++) {
+      html += buildNewsCard(newsData[i]);
+    }
+    track.innerHTML = html;
+
+    // إخفاء الكروت الزيادة على الشاشة الصغيرة مؤقتاً
+    applyResponsiveVisibility();
+
+    // نبدأ من الأول
+    currentSlide = 0;
+    moveTrack(false);
+
+    // شغّل الأوتوبلاي
+    setTimeout(function() {
+      startAutoPlay();
+    }, 1000);
+  }
+
+  // إخفاء/إظهار الكروت حسب حجم الشاشة
+  function applyResponsiveVisibility() {
+    var visible = getVisibleCount();
+    for (var i = 0; i < track.children.length; i++) {
+      track.children[i].style.display = (i < newsData.length) ? '' : 'none';
+    }
+  }
+
+  // استماع لتغيير حجم الشاشة
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (!newsData.length) return;
+      // تصحيح السلايد الحالي لو خرج عن الحد
+      if (currentSlide > getMaxSlide()) {
+        currentSlide = getMaxSlide();
+      }
+      applyResponsiveVisibility();
+      moveTrack(false);
+      // إعادة تشغيل الأوتوبلاي
+      clearInterval(autoPlayTimer);
+      startAutoPlay();
+    }, 200);
+  });
+
+  // وقف الأوتوبلاي لما الماوس فوق الكاروسيل
+  var wrapper = track.closest('.news-carousel-wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('mouseenter', function() { clearInterval(autoPlayTimer); });
+    wrapper.addEventListener('mouseleave', function() { startAutoPlay(); });
+  }
+
+  // سحب باللمس
+  var touchStartX = 0;
+  var touchStartY = 0;
+  track.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  track.addEventListener('touchend', function(e) {
+    if (!newsData.length) return;
+    var diffX = touchStartX - e.changedTouches[0].clientX;
+    var diffY = touchStartY - e.changedTouches[0].clientY;
+
+    // لو السحب أفقي أكبر من الرأسي
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      clearInterval(autoPlayTimer);
+      // في RTL: السحب لليمين = next، السحب لليسار = prev
+      if (diffX > 0) {
+        slideNewsCarousel(1);
+      } else {
+        slideNewsCarousel(-1);
+      }
+    }
+  }, { passive: true });
+
+  // ==========================================
+  // تحميل البيانات من Firebase
+  // ==========================================
+  try {
+    // لو Firebase اتعمل initialize قبل كده (في السلايدر الكبير)
+    if (firebase && firebase.apps && firebase.apps.length) {
+      console.log('📰 Firebase موجود، بجيب بيانات الأخبار...');
+      firebase.database().ref('convoys').on('value', function(snap) {
+        renderNews(snap.val());
+      }, function(err) {
+        console.error('❌ خطأ في أخبار Firebase:', err);
+        showEmptyNews();
+      });
+    } else {
+      console.log('⏳ منتظر Firebase يتحمل...');
+      // انتظر Firebase يتحمل (السلايدر الكبير بيعمله)
+      var waitCount = 0;
+      var waitForFirebase = setInterval(function() {
+        waitCount++;
+        if (firebase && firebase.apps && firebase.apps.length) {
+          clearInterval(waitForFirebase);
+          console.log('📰 Firebase اتحمل، بجيب بيانات الأخبار...');
+          firebase.database().ref('convoys').on('value', function(snap) {
+            renderNews(snap.val());
+          }, function(err) {
+            console.error('❌ خطأ في أخبار Firebase:', err);
+            showEmptyNews();
+          });
+        }
+        if (waitCount > 50) { // 5 ثواني ولم يتحمل
+          clearInterval(waitForFirebase);
+          console.error('❌ Firebase ماتحملش');
+          showEmptyNews();
+        }
+      }, 100);
+    }
+  } catch(e) {
+    console.error('❌ خطأ في كاروسيل الأخبار:', e);
+    showEmptyNews();
+  }
+})();

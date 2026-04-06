@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>من نحن | رؤية ورسالة جمعية الليدرز الاجتماعية</title>
 <link rel="canonical" href="https://sls-rho.vercel.app/about.html">
-<!-- Same Head Content as index.html -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-<!-- Open Graph Tags -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="من نحن | رؤية ورسالة جمعية الليدرز الاجتماعية">
 <meta property="og:description" content="تعرف على رؤية ورسالة جمعية الليدرز الاجتماعية والتزامنا بتقديم خدمات صحية مجانية للمجتمع المصري منذ عام 2013.">
@@ -21,7 +19,6 @@
 <meta property="og:locale" content="ar_EG">
 <meta property="og:site_name" content="جمعية الليدرز الاجتماعية">
 
-<!--- structured data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,8 +53,8 @@
 </head>
 <body class="bg-white">
 
-<!-- NAVIGATION (Note the active class on 'about') -->
-<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-blue-900 via-sls-blue-800 to-sls-blue-900 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
       <a href="index.html" class="flex items-center gap-3">
@@ -76,113 +73,85 @@
       <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </div>
   </div>
-    <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+    <div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden bg-sls-blue-900/98 backdrop-blur-xl border-t border-sls-blue-700/50">
     <div class="px-4 py-4 space-y-2">
       <a href="index.html" class="block px-4 py-3 text-white/80 hover:text-white">الرئيسية</a>
       <a href="about.html" class="block px-4 py-3 text-white/80 hover:text-white">من نحن</a>
       <a href="services.html" class="block px-4 py-3 text-white/80 hover:text-white">خدماتنا</a>
       <a href="regions.html" class="block px-4 py-3 text-white/80 hover:text-white">مناطق الخدمة</a>
-      <a href="board.html" class="block px-4 py-3 text-white/80 hover:text-white">مجلس الإدارة</a>
+      <a href="board.html" class="block px-4 py-3 text-white font-medium">مجلس الإدارة</a>
       <a href="partners.html" class="block px-4 py-3 text-white/80 hover:text-white">شركاؤنا</a>
       <a href="contact.html" class="block px-4 py-3 text-white/80 hover:text-white">تواصل معنا</a>
+      <a href="donate.html" class="block px-4 py-3 text-sls-gold-400 font-bold">❤️ ساهم معنا</a>
     </div>
   </div>
 </nav>
 
 <!-- ABOUT CONTENT -->
-<div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24">
+<div class="min-h-screen bg-gradient-to-b from-sls-blue-50 to-white pt-24">
   <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="text-center mb-12 page-transition">
-      <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">من نحن</span>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">رؤية تُحرّك المجتمع</h1>
-      <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full"></div>
+      <span class="inline-block bg-sls-blue-100 text-sls-blue-700 font-bold text-sm px-4 py-2 rounded-full mb-4">من نحن</span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-blue-900 mb-4">رؤية تُحرّك المجتمع</h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-sls-blue-500 to-sls-blue-500 mx-auto rounded-full"></div>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-8">
       <div class="space-y-6">
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-cyan-100 border-t-4 border-sls-cyan-500 card-hover page-transition">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-cyan-400 to-sls-teal-500 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl">🎯</div>
-          <h3 class="text-2xl font-bold text-sls-cyan-900 mb-4">الرؤية</h3>
+        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-blue-100 border-t-4 border-sls-blue-500 card-hover page-transition">
+          <div class="w-16 h-16 bg-gradient-to-br from-sls-blue-400 to-sls-blue-500 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl">🎯</div>
+          <h3 class="text-2xl font-bold text-sls-blue-900 mb-4">الرؤية</h3>
           <p class="text-gray-600 leading-relaxed"> منذ إنشائها عام 2013 التزمت جمعية الليدرز الاجتماعية بتوفير خدمات صحية على أعلى مستوى وبالمجان... </p>
         </div>
-        <!-- Other cards from original code -->
       </div>
-      <!-- Info cards side -->
       <div class="space-y-4">
-        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-cyan-50 flex items-center gap-4 border-r-4 border-sls-cyan-500 page-transition">
-          <div class="w-12 h-12 bg-sls-cyan-100 rounded-xl flex items-center justify-center text-2xl">📅</div>
-          <div><h4 class="font-bold text-sls-cyan-900">تأسست عام 2013</h4><p class="text-sm text-gray-500">مشهرة برقم ٣٣٧٧</p></div>
+        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-blue-50 flex items-center gap-4 border-r-4 border-sls-blue-500 page-transition">
+          <div class="w-12 h-12 bg-sls-blue-100 rounded-xl flex items-center justify-center text-2xl">📅</div>
+          <div><h4 class="font-bold text-sls-blue-900">تأسست عام 2013</h4><p class="text-sm text-gray-500">مشهرة برقم ٣٣٧٧</p></div>
         </div>
-        <!-- Rest of info pills -->
       </div>
     </div>
   </div>
 </div>
 
-
 <!-- FOOTER PROFESSIONAL -->
-<footer class="bg-sls-cyan-950 text-white pt-12 pb-6" dir="rtl">
+<footer class="bg-sls-blue-950 text-white pt-12 pb-6" dir="rtl">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
-      <!-- Logo & About -->
       <div class="md:col-span-1">
         <div class="flex items-center gap-3 mb-4">
           <img src="images/logo.webp" alt="SLS Logo" class="w-12 h-12 rounded-full object-contain">
-          <div>
-            <h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4>
-            <span class="text-sls-gold-400 text-xs font-bold">SLS</span>
-          </div>
+          <div><h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4><span class="text-sls-gold-400 text-xs font-bold">SLS</span></div>
         </div>
-        <p class="text-sls-cyan-100/70 text-sm leading-relaxed">
-          جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.
-        </p>
+        <p class="text-sls-blue-100/70 text-sm leading-relaxed">جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.</p>
       </div>
-
-      <!-- Quick Links -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">روابط سريعة</h4>
-        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+        <ul class="space-y-2 text-sls-blue-100/70 text-sm">
           <li><a href="about.html" class="hover:text-sls-gold-400 transition-colors">من نحن</a></li>
           <li><a href="services.html" class="hover:text-sls-gold-400 transition-colors">خدماتنا</a></li>
           <li><a href="regions.html" class="hover:text-sls-gold-400 transition-colors">مناطق الخدمة</a></li>
           <li><a href="partners.html" class="hover:text-sls-gold-400 transition-colors">شركاؤنا</a></li>
         </ul>
       </div>
-
-      <!-- Contact Info -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تواصل معنا</h4>
-        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
-          <li class="flex items-center gap-2">
-            <span>📞</span> <span>01117629537</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span>✉️</span> <span>Socialleaders8@gmail.com</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span>📍</span> <span>باب شرق - الإسكندرية</span>
-          </li>
+        <ul class="space-y-2 text-sls-blue-100/70 text-sm">
+          <li class="flex items-center gap-2"><span>📞</span> <a href="tel:+201117629537" class="hover:text-sls-gold-400 transition-colors">01117629537</a></li>
+          <li class="flex items-center gap-2"><span>✉️</span> <a href="mailto:Socialleaders8@gmail.com" class="hover:text-sls-gold-400 transition-colors">Socialleaders8@gmail.com</a></li>
+          <li class="flex items-center gap-2"><span>📍</span> <span>باب شرق - الإسكندرية</span></li>
         </ul>
       </div>
-
-      <!-- Social & Donate -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تابعنا</h4>
         <div class="flex gap-3 mb-4">
-          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-          </a>
+          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-blue-900 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
         </div>
-        <a href="contact.html" class="inline-block bg-sls-gold-500 text-sls-cyan-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">
-          ساهم معنا
-        </a>
+        <a href="donate.html" class="inline-block bg-sls-gold-500 text-sls-blue-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">ساهم معنا</a>
       </div>
     </div>
-
-    <!-- Copyright -->
-    <div class="text-center text-sls-cyan-100/50 text-xs">
-      <p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p>
-    </div>
+    <div class="text-center text-sls-blue-100/50 text-xs"><p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p></div>
   </div>
 </footer>
 

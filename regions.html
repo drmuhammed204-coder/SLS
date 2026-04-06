@@ -58,7 +58,7 @@
 <body class="bg-white">
 
 <!-- NAVIGATION -->
-<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-blue-900 via-sls-blue-800 to-sls-blue-900 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
       <a href="index.html" class="flex items-center gap-3">
@@ -81,112 +81,114 @@
   </div>
   
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+    <div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden bg-sls-blue-900/98 backdrop-blur-xl border-t border-sls-blue-700/50">
     <div class="px-4 py-4 space-y-2">
       <a href="index.html" class="block px-4 py-3 text-white/80 hover:text-white">الرئيسية</a>
       <a href="about.html" class="block px-4 py-3 text-white/80 hover:text-white">من نحن</a>
       <a href="services.html" class="block px-4 py-3 text-white/80 hover:text-white">خدماتنا</a>
-      <a href="regions.html" class="block px-4 py-3 text-white font-medium">مناطق الخدمة</a>
-      <a href="board.html" class="block px-4 py-3 text-white/80 hover:text-white">مجلس الإدارة</a>
+      <a href="regions.html" class="block px-4 py-3 text-white/80 hover:text-white">مناطق الخدمة</a>
+      <a href="board.html" class="block px-4 py-3 text-white font-medium">مجلس الإدارة</a>
       <a href="partners.html" class="block px-4 py-3 text-white/80 hover:text-white">شركاؤنا</a>
       <a href="contact.html" class="block px-4 py-3 text-white/80 hover:text-white">تواصل معنا</a>
+      <a href="donate.html" class="block px-4 py-3 text-sls-gold-400 font-bold">❤️ ساهم معنا</a>
     </div>
   </div>
 </nav>
 
 <!-- REGIONS CONTENT -->
-<div class="min-h-screen bg-gradient-to-b from-sls-cyan-50 to-white pt-24">
+<div class="min-h-screen bg-gradient-to-b from-sls-blue-50 to-white pt-24">
   <div class="max-w-6xl mx-auto px-4 py-12">
     
     <!-- Header -->
     <div class="text-center mb-12 page-transition">
-      <span class="inline-block bg-sls-cyan-100 text-sls-cyan-700 font-bold text-sm px-4 py-2 rounded-full mb-4">نطاق الخدمة</span>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-cyan-900 mb-4">أماكن خدمات الليدرز</h1>
+      <span class="inline-block bg-sls-blue-100 text-sls-blue-700 font-bold text-sm px-4 py-2 rounded-full mb-4">نطاق الخدمة</span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-blue-900 mb-4">أماكن خدمات الليدرز</h1>
       <p class="text-gray-600 max-w-2xl mx-auto">نصل إلى المناطق النائية في جميع محافظات مصر من شمالها لجنوبها ومن شرقها لغربها</p>
-      <div class="w-24 h-1 bg-gradient-to-r from-sls-cyan-500 to-sls-teal-500 mx-auto rounded-full mt-6"></div>
+      <div class="w-24 h-1 bg-gradient-to-r from-sls-blue-500 to-sls-blue-500 mx-auto rounded-full mt-6"></div>
     </div>
 
     <!-- Regions Grid -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏜️</span>
-        <h3 class="font-bold text-sls-cyan-900">واحة سيوة</h3>
+        <h3 class="font-bold text-sls-blue-900">واحة سيوة</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌊</span>
-        <h3 class="font-bold text-sls-cyan-900">مدينة السلوم</h3>
+        <h3 class="font-bold text-sls-blue-900">مدينة السلوم</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏛️</span>
-        <h3 class="font-bold text-sls-cyan-900">محافظة سوهاج</h3>
+        <h3 class="font-bold text-sls-blue-900">محافظة سوهاج</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌴</span>
-        <h3 class="font-bold text-sls-cyan-900">الفرافرة</h3>
+        <h3 class="font-bold text-sls-blue-900">الفرافرة</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏔️</span>
-        <h3 class="font-bold text-sls-cyan-900">سيدي براني</h3>
+        <h3 class="font-bold text-sls-blue-900">سيدي براني</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">📍</span>
-        <h3 class="font-bold text-sls-cyan-900">حلايب وشلاتين</h3>
+        <h3 class="font-bold text-sls-blue-900">حلايب وشلاتين</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌅</span>
-        <h3 class="font-bold text-sls-cyan-900">الأقصر</h3>
+        <h3 class="font-bold text-sls-blue-900">الأقصر</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏙️</span>
-        <h3 class="font-bold text-sls-cyan-900">القاهرة</h3>
+        <h3 class="font-bold text-sls-blue-900">القاهرة</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌾</span>
-        <h3 class="font-bold text-sls-cyan-900">كفر الشيخ</h3>
+        <h3 class="font-bold text-sls-blue-900">كفر الشيخ</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌊</span>
-        <h3 class="font-bold text-sls-cyan-900">البحيرة</h3>
+        <h3 class="font-bold text-sls-blue-900">البحيرة</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏜️</span>
-        <h3 class="font-bold text-sls-cyan-900">مطروح</h3>
+        <h3 class="font-bold text-sls-blue-900">مطروح</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌿</span>
-        <h3 class="font-bold text-sls-cyan-900">الفيوم</h3>
+        <h3 class="font-bold text-sls-blue-900">الفيوم</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏗️</span>
-        <h3 class="font-bold text-sls-cyan-900">الوادي الجديد</h3>
+        <h3 class="font-bold text-sls-blue-900">الوادي الجديد</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🔴</span>
-        <h3 class="font-bold text-sls-cyan-900">البحر الأحمر</h3>
+        <h3 class="font-bold text-sls-blue-900">البحر الأحمر</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🏖️</span>
-        <h3 class="font-bold text-sls-cyan-900">جنوب سيناء</h3>
+        <h3 class="font-bold text-sls-blue-900">جنوب سيناء</h3>
       </div>
 
-      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-cyan-50 border border-sls-cyan-100 cursor-pointer page-transition">
+      <div class="region-badge bg-white rounded-2xl p-5 text-center shadow-lg shadow-sls-blue-50 border border-sls-blue-100 cursor-pointer page-transition">
         <span class="text-3xl mb-2 block">🌆</span>
-        <h3 class="font-bold text-sls-cyan-900">الجيزة</h3>
+        <h3 class="font-bold text-sls-blue-900">الجيزة</h3>
       </div>
 
     </div>
@@ -194,7 +196,7 @@
 </div>
 
 <!-- FOOTER PROFESSIONAL -->
-<footer class="bg-sls-cyan-950 text-white pt-12 pb-6" dir="rtl">
+<footer class="bg-sls-blue-950 text-white pt-12 pb-6" dir="rtl">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
       <!-- Logo & About -->
@@ -206,7 +208,7 @@
             <span class="text-sls-gold-400 text-xs font-bold">SLS</span>
           </div>
         </div>
-        <p class="text-sls-cyan-100/70 text-sm leading-relaxed">
+        <p class="text-sls-blue-100/70 text-sm leading-relaxed">
           جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.
         </p>
       </div>
@@ -214,7 +216,7 @@
       <!-- Quick Links -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">روابط سريعة</h4>
-        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+        <ul class="space-y-2 text-sls-blue-100/70 text-sm">
           <li><a href="about.html" class="hover:text-sls-gold-400 transition-colors">من نحن</a></li>
           <li><a href="services.html" class="hover:text-sls-gold-400 transition-colors">خدماتنا</a></li>
           <li><a href="regions.html" class="hover:text-sls-gold-400 transition-colors">مناطق الخدمة</a></li>
@@ -225,12 +227,12 @@
       <!-- Contact Info -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تواصل معنا</h4>
-        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+        <ul class="space-y-2 text-sls-blue-100/70 text-sm">
           <li class="flex items-center gap-2">
-            <span>📞</span> <span>01117629537</span>
+            <span>📞</span> <a href="tel:+201117629537" class="hover:text-sls-gold-400 transition-colors">01117629537</a>
           </li>
           <li class="flex items-center gap-2">
-            <span>✉️</span> <span>Socialleaders8@gmail.com</span>
+            <span>✉️</span> <a href="mailto:Socialleaders8@gmail.com" class="hover:text-sls-gold-400 transition-colors">Socialleaders8@gmail.com</a>
           </li>
           <li class="flex items-center gap-2">
             <span>📍</span> <span>باب شرق - الإسكندرية</span>
@@ -242,18 +244,18 @@
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تابعنا</h4>
         <div class="flex gap-3 mb-4">
-          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك"  target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
+          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك"  target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-blue-900 transition-all">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
           </a>
         </div>
-        <a href="contact.html" class="inline-block bg-sls-gold-500 text-sls-cyan-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">
-          ساهم معنا
+        <a href="donate.html" class="inline-block bg-sls-gold-500 text-sls-blue-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">
+         ساهم معنا
         </a>
       </div>
     </div>
 
     <!-- Copyright -->
-    <div class="text-center text-sls-cyan-100/50 text-xs">
+    <div class="text-center text-sls-blue-100/50 text-xs">
       <p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p>
     </div>
   </div>

@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>جمعية الليدرز الاجتماعية - SLS | الرئيسية</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<!-- SEO & Meta Tags (Keep them as they are) -->
 <meta name="description" content="جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية وتنموية في جميع محافظات مصر بقيادة فريق طبي متخصص.">
-<!-- Open Graph Tags -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="جمعية الليدرز الاجتماعية - SLS | الرئيسية">
 <meta property="og:description" content="جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية وتنموية في جميع محافظات مصر بقيادة فريق طبي متخصص.">
@@ -16,15 +14,11 @@
 <meta property="og:locale" content="ar_EG">
 <meta property="og:site_name" content="جمعية الليدرز الاجتماعية">
 <link rel="canonical" href="https://sls-rho.vercel.app/">
-<meta name="theme-color" content="#0f766e">
-
-<!-- Fonts & Tailwind -->
+<meta name="theme-color" content="#4a7dba">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
-<!--- structured data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,40 +29,62 @@
   "logo": "https://sls-rho.vercel.app/images/logo.webp",
   "description": "جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية في جميع محافظات مصر",
   "foundingDate": "2013",
-  "foundingLocation": {
-    "@type": "Place",
-    "name": "الإسكندرية، مصر"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق",
-    "addressLocality": "الإسكندرية",
-    "addressCountry": "EG"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+201117629537",
-    "contactType": "customer service",
-    "availableLanguage": ["ar"]
-  },
-  "sameAs": [
-    "https://www.facebook.com/share/1C1RqpGpdJ/"
-  ]
+  "foundingLocation": { "@type": "Place", "name": "الإسكندرية، مصر" },
+  "address": { "@type": "PostalAddress", "streetAddress": "برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق", "addressLocality": "الإسكندرية", "addressCountry": "EG" },
+  "contactPoint": { "@type": "ContactPoint", "telephone": "+201117629537", "contactType": "customer service", "availableLanguage": ["ar"] },
+  "sameAs": ["https://www.facebook.com/share/1C1RqpGpdJ/"]
 }
 </script>
+<style>
+/* ===== Hero Slider ===== */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.hero-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+#hero-slider { max-width: 80%; height: 420px; }
+@media (max-width: 768px) {
+  #hero-slider { max-width: 95%; height: auto; min-height: 380px; }
+}
+.hero-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.3); border: none;
+  cursor: pointer; transition: all 0.3s;
+}
+.hero-dot.active {
+  background: #fbbf24; width: 28px; border-radius: 5px;
+}
+.hero-slide-card {
+  background: white; border-radius: 1.5rem; overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  display: flex; height: 100%;
+}
+@media (max-width: 768px) {
+  .hero-slide-card { flex-direction: column; }
+}
+.hero-slide-img { width: 45%; position: relative; overflow: hidden; background: #eff6ff; }
+@media (max-width: 768px) { .hero-slide-img { width: 100%; height: 200px; } }
+.hero-slide-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-slide-content { width: 55%; padding: 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 768px) { .hero-slide-content { width: 100%; padding: 1.5rem; } }
+</style>
 </head>
 <body class="bg-white">
+
 <!-- NAVIGATION -->
-<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 backdrop-blur-md">
+<nav id="navbar" class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 bg-gradient-to-r from-sls-blue-900 via-sls-blue-800 to-sls-blue-900 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
-      <!-- Logo -->
       <a href="index.html" class="flex items-center gap-3">
         <img src="images/logo.webp" alt="SLS Logo" class="w-10 h-10 rounded-full object-contain">
         <span class="hidden sm:block text-white font-bold text-lg">جمعية الليدرز الاجتماعية</span>
       </a>
-
-      <!-- Desktop Nav Links -->
       <ul class="nav-links hidden lg:flex items-center gap-1">
         <li><a href="index.html" class="nav-link active px-4 py-2 text-white font-medium text-sm">الرئيسية</a></li>
         <li><a href="about.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">من نحن</a></li>
@@ -78,16 +94,13 @@
         <li><a href="partners.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">شركاؤنا</a></li>
         <li><a href="contact.html" class="nav-link px-4 py-2 text-white/80 hover:text-white font-medium text-sm">تواصل معنا</a></li>
       </ul>
-
-      <!-- Mobile Menu Button -->
       <button class="lg:hidden p-2 text-white" onclick="toggleMobileMenu()">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </div>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu lg:hidden hidden bg-sls-cyan-900/98 backdrop-blur-xl border-t border-sls-cyan-700/50">
+  <div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+  <div id="mobile-menu" class="mobile-menu lg:hidden bg-sls-blue-900/98 backdrop-blur-xl border-t border-sls-blue-700/50">
     <div class="px-4 py-4 space-y-2">
       <a href="index.html" class="block px-4 py-3 text-white font-medium">الرئيسية</a>
       <a href="about.html" class="block px-4 py-3 text-white/80 hover:text-white">من نحن</a>
@@ -96,158 +109,512 @@
       <a href="board.html" class="block px-4 py-3 text-white/80 hover:text-white">مجلس الإدارة</a>
       <a href="partners.html" class="block px-4 py-3 text-white/80 hover:text-white">شركاؤنا</a>
       <a href="contact.html" class="block px-4 py-3 text-white/80 hover:text-white">تواصل معنا</a>
+      <a href="donate.html" class="block px-4 py-3 text-sls-gold-400 font-bold">❤️ ساهم معنا</a>
     </div>
   </div>
 </nav>
 
-<!-- HOME PAGE CONTENT -->
+<!-- ===================== -->
+<!-- HOME PAGE CONTENT    -->
+<!-- ===================== -->
 <main class="pt-16">
- <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900">
 
-  <!-- Shapes & Content -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute w-44 h-44 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 8%; left: 5%;"></div>
-    <div class="absolute w-24 h-24 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
-    <div class="absolute w-56 h-56 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 15%; right: 4%; animation-delay: 3s;"></div>
-  </div> <!-- تم إغلاق div الأشكال بشكل صحيح هنا -->
+  <!-- ========================================== -->
+  <!-- المرحلة 1: تعريف اللوجو              -->
+  <!-- ========================================== -->
+  <section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-sls-blue-900 via-sls-blue-800 to-sls-blue-900">
 
-  <div class="relative z-10 text-center px-4 py-20">
-    <div class="mb-8 animate-scale-in">
-      <div class="relative inline-block">
-        <!-- التعديل هنا: إضافة flex items-center justify-center -->
-        <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl animate-pulse-glow overflow-hidden bg-white flex items-center justify-center">
-          <!-- التعديل هنا: استخدام object-contain وظبط المقاس -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute w-44 h-44 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 8%; left: 5%;"></div>
+      <div class="absolute w-24 h-24 border border-white/10 rounded-3xl bg-white/5 animate-float" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
+      <div class="absolute w-56 h-56 border border-white/10 rounded-3xl bg-white/5 animate-float" style="bottom: 15%; right: 4%; animation-delay: 3s;"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-4 py-16">
+      <div class="mb-8 animate-scale-in">
+        <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl animate-pulse-glow overflow-hidden bg-white flex items-center justify-center mx-auto">
           <img src="images/logo.webp" alt="SLS Logo" class="w-full h-full object-contain">
         </div>
       </div>
-    </div>
 
-      <p class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 text-sls-cyan-100 text-sm mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+      <p class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 text-sls-blue-100 text-sm mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
         مشهرة برقم ٣٣٧٧ لسنة ٢٠١٣ • وزارة التضامن الاجتماعي
       </p>
 
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 animate-fade-in-up" style="animation-delay: 0.3s;">
         جمعية الليدرز الاجتماعية
       </h1>
-      <p class="text-xl sm:text-2xl text-sls-cyan-200 font-light mb-3 animate-fade-in-up" style="animation-delay: 0.4s;">Social Leaders Society</p>
+      <p class="text-xl sm:text-2xl text-sls-blue-200 font-light mb-3 animate-fade-in-up" style="animation-delay: 0.4s;">Social Leaders Society</p>
       <p class="text-lg sm:text-xl text-sls-gold-400 font-bold mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">ما كان لله دام و اتّصل</p>
 
-      <p class="text-sls-cyan-100 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style="animation-delay: 0.6s;">
-        منذ تأسيسنا عام 2013، نلتزم بتقديم خدمات صحية وإنسانية مجانية على أعلى مستوى.
-      </p>
-
       <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.7s;">
-        <a href="services.html" class="btn-primary px-8 py-4 text-sls-cyan-900 font-bold rounded-full shadow-lg">اكتشف خدماتنا</a>
+        <a href="services.html" class="btn-primary px-8 py-4 text-sls-blue-900 font-bold rounded-full shadow-lg">اكتشف خدماتنا</a>
         <a href="contact.html" class="btn-secondary px-8 py-4 text-white font-semibold rounded-full">تواصل معنا</a>
       </div>
     </div>
+
+    <!-- سهم للأسفل يشير للسلايدر -->
+    <div id="hero-arrow" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce opacity-0" style="animation-delay: 2.5s; transition: opacity 0.5s;">
+      <svg class="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7H5"/></svg>
+    </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="bg-gradient-to-r from-sls-cyan-900 via-sls-teal-800 to-sls-cyan-900 py-16">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4" id="stats-container">
-        <!-- Stats Items -->
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="2107">+0</span>
-          <span class="text-sls-cyan-100 text-sm">عملية جراحية</span>
+  <!-- ========================================== -->
+  <!-- المرحلة 2: سلايدر القوافل الكبير        -->
+  <!-- ========================================== -->
+  <section class="relative bg-gradient-to-b from-sls-blue-900 to-sls-blue-950 py-10 sm:py-14 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4">
+      <!-- عنوان صغير -->
+      <div class="text-center mb-8">
+        <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 text-sls-blue-100 text-sm font-bold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7H5"/></svg>
+          أحدث القوافل
+        </span>
+      </div>
+
+      <!-- حاوية السلايدر -->
+      <div id="hero-slider" class="relative mx-auto">
+        <!-- Skeleton لحد ما البيانات تتحمل -->
+        <div class="hero-slide active">
+          <div class="hero-slide-card">
+            <div class="hero-slide-img bg-sls-blue-50">
+              <div class="w-full h-full bg-sls-blue-100 animate-pulse"></div>
+            </div>
+            <div class="hero-slide-content">
+              <div class="space-y-3 mb-6">
+                <div class="h-5 bg-gray-200 rounded-lg w-28 animate-pulse"></div>
+                <div class="h-8 bg-gray-200 rounded-xl w-full animate-pulse"></div>
+                <div class="h-8 bg-gray-200 rounded-xl w-3/4 animate-pulse"></div>
+                <div class="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="270">+0</span>
-          <span class="text-sls-cyan-100 text-sm">قافلة طبية</span>
+      </div>
+
+      <!-- النقاط -->
+      <div id="hero-dots" class="flex justify-center gap-2 mt-8"></div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- المرحلة 3: الأرقام والإنجازات          -->
+  <!-- ========================================== -->
+  <section class="relative py-20 overflow-hidden" style="background: linear-gradient(135deg, #1e3a8a 0%, #4a7dba 50%, #1e40af 100%);">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute w-[500px] h-[500px] rounded-full border border-white/10 -top-48 -right-48 opacity-50"></div>
+      <div class="absolute w-[300px] h-[300px] rounded-full border border-white/10 -bottom-32 -left-32 opacity-40"></div>
+      <div class="absolute w-[200px] h-[200px] rounded-full bg-white/5 -top-20 left-1/4"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4">
+      <div class="text-center mb-14">
+        <span class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 font-bold text-sm px-5 py-2 rounded-full mb-4">📊 أرقام حقيقية</span>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-3">إنجازاتنا على أرض الواقع</h2>
+        <p class="text-sls-blue-200/80 text-sm sm:text-base max-w-lg mx-auto">منذ 2013 ونوصل لكل محتاج في كل محافظات مصر</p>
+        <div class="w-16 h-1 bg-gradient-to-r from-sls-gold-400 to-sls-gold-500 mx-auto rounded-full mt-5"></div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" id="stats-container">
+
+        <!-- 1. عمليات جراحية -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🔬</div>
+          <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="2107">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">عملية جراحية</span>
         </div>
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="110357">+0</span>
-          <span class="text-sls-cyan-100 text-sm">كشف طبي</span>
+
+        <!-- 2. قافلة طبية -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🏥</div>
+          <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="270">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">قافلة طبية</span>
         </div>
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="62751">+0</span>
-          <span class="text-sls-cyan-100 text-sm">روشتة طبية</span>
+
+        <!-- 3. كشف طبي -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🩺</div>
+          <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="110357">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">كشف طبي</span>
         </div>
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="8945">+0</span>
-          <span class="text-sls-cyan-100 text-sm">تحليل طبي</span>
+
+        <!-- 4. روشتة طبية -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">📋</div>
+          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="62751">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">روشتة طبية</span>
         </div>
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="4464">+0</span>
-          <span class="text-sls-cyan-100 text-sm">نظارة طبية</span>
+
+        <!-- 5. تحليل طبي -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🧪</div>
+          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="8945">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">تحليل طبي</span>
         </div>
-        <div class="stat-card bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-gold-400 mb-2" data-target="1800">+0</span>
-          <span class="text-sls-cyan-100 text-sm">مصاريف مدرسية</span>
+
+        <!-- 6. نظارة طبية -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">👓</div>
+          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="4464">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">نظارة طبية</span>
         </div>
+
+        <!-- ===== السطر التاني ===== -->
+
+        <!-- 7. حالة طبية -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🩺</div>
+          <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="6900">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">حالة طبية</span>
+        </div>
+
+        <!-- 8. مصاريف مدرسية -->
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] col-span-2 sm:col-span-1">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🎒</div>
+          <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="1800">+0</span>
+          <span class="text-gray-500 text-xs sm:text-sm font-bold">مصاريف مدرسية</span>
+        </div>
+
       </div>
     </div>
   </section>
+
+  <!-- آخر الأخبار (كاروسيل صغير) -->
+<section class="py-16 bg-gradient-to-b from-sls-blue-50 to-white px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10 page-transition">
+      <span class="inline-block bg-sls-gold-400/20 text-sls-gold-600 font-bold text-sm px-4 py-2 rounded-full mb-4">📰 المزيد من الأخبار</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-sls-blue-900 mb-4">كل القوافل والأنشطة</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">تابع آخر ما قمنا به من قوافل طبية ومبادرات إنسانية</p>
+      <div class="w-24 h-1 bg-gradient-to-r from-sls-gold-400 to-sls-gold-500 mx-auto rounded-full mt-6"></div>
+    </div>
+
+    <div class="news-carousel-wrapper">
+      <button class="news-carousel-nav prev" id="carouselPrev" aria-label="السابق">→</button>
+      <button class="news-carousel-nav next" id="carouselNext" aria-label="التالي">←</button>
+      <div class="news-carousel-track" id="news-carousel-track">
+        <!-- Skeleton - هيتبدل بالبيانات الحقيقية -->
+        <div class="news-carousel-card"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+        <div class="news-carousel-card"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+        <div class="news-carousel-card hidden sm:block"><div class="nc-img"><div class="w-full h-full bg-gray-200 animate-pulse"></div></div><div class="nc-body"><div class="h-4 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-full mb-2 animate-pulse"></div><div class="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div></div></div>
+      </div>
+    </div>
+
+    <div class="news-carousel-dots" id="news-carousel-dots"></div>
+
+    <div class="text-center mt-8">
+      <a href="services.html" class="inline-flex items-center gap-2 text-sls-blue-700 font-bold hover:gap-3 transition-all">
+        عرض جميع القوافل
+        <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 </main>
 
+<!-- مودال تفاصيل القافلة -->
+<div id="convoy-modal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-md" onclick="closeConvoyModal()"></div>
+  <div class="relative z-10 h-full overflow-y-auto">
+    <div class="min-h-full flex items-start justify-center py-6 px-4 sm:px-6">
+      <div class="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden">
+        <button onclick="closeConvoyModal()" class="fixed top-4 left-4 z-50 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 hover:text-red-500 transition-all group">
+          <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div id="convoy-modal-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER PROFESSIONAL -->
-<footer class="bg-sls-cyan-950 text-white pt-12 pb-6" dir="rtl">
+<footer class="bg-sls-blue-950 text-white pt-12 pb-6" dir="rtl">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
-      <!-- Logo & About -->
       <div class="md:col-span-1">
         <div class="flex items-center gap-3 mb-4">
           <img src="images/logo.webp" alt="SLS Logo" class="w-12 h-12 rounded-full object-contain">
-          <div>
-            <h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4>
-            <span class="text-sls-gold-400 text-xs font-bold">SLS</span>
-          </div>
+          <div><h4 class="font-bold text-lg">جمعية الليدرز الاجتماعية</h4><span class="text-sls-gold-400 text-xs font-bold">SLS</span></div>
         </div>
-        <p class="text-sls-cyan-100/70 text-sm leading-relaxed">
-          جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.
-        </p>
+        <p class="text-sls-blue-100/70 text-sm leading-relaxed">جمعية خيرية مصرية مشهرة رقم ٣٣٧٧ لسنة ٢٠١٣. نخدم المجتمع المصري منذ أكثر من 10 سنوات.</p>
       </div>
-
-      <!-- Quick Links -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">روابط سريعة</h4>
-        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
+        <ul class="space-y-2 text-sls-blue-100/70 text-sm">
           <li><a href="about.html" class="hover:text-sls-gold-400 transition-colors">من نحن</a></li>
           <li><a href="services.html" class="hover:text-sls-gold-400 transition-colors">خدماتنا</a></li>
           <li><a href="regions.html" class="hover:text-sls-gold-400 transition-colors">مناطق الخدمة</a></li>
           <li><a href="partners.html" class="hover:text-sls-gold-400 transition-colors">شركاؤنا</a></li>
         </ul>
       </div>
-
-      <!-- Contact Info -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تواصل معنا</h4>
-        <ul class="space-y-2 text-sls-cyan-100/70 text-sm">
-          <li class="flex items-center gap-2">
-            <span>📞</span> <span>01117629537</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span>✉️</span> <span>Socialleaders8@gmail.com</span>
-          </li>
-          <li class="flex items-center gap-2">
-            <span>📍</span> <span>باب شرق - الإسكندرية</span>
-          </li>
+        <ul class="space-y-2 text-sls-blue-100/70 text-sm">
+          <li class="flex items-center gap-2"><span>📞</span> <a href="tel:+201117629537" class="hover:text-sls-gold-400 transition-colors">01117629537</a></li>
+          <li class="flex items-center gap-2"><span>✉️</span> <a href="mailto:Socialleaders8@gmail.com" class="hover:text-sls-gold-400 transition-colors">Socialleaders8@gmail.com</a></li>
+          <li class="flex items-center gap-2"><span>📍</span> <span>باب شرق - الإسكندرية</span></li>
         </ul>
       </div>
-
-      <!-- Social & Donate -->
       <div>
         <h4 class="font-bold text-lg mb-4 text-white">تابعنا</h4>
         <div class="flex gap-3 mb-4">
-          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك"  target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-cyan-900 transition-all">
+          <a href="https://www.facebook.com/share/1C1RqpGpdJ/" aria-label="تابعنا على فيسبوك" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-sls-gold-400 hover:text-sls-blue-900 transition-all">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
           </a>
         </div>
-        <a href="contact.html" class="inline-block bg-sls-gold-500 text-sls-cyan-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">
-          ساهم معنا
-        </a>
+        <a href="donate.html" class="inline-block bg-sls-gold-500 text-sls-blue-900 font-bold px-4 py-2 rounded-full text-sm hover:bg-white transition-colors">ساهم معنا</a>
       </div>
     </div>
-
-    <!-- Copyright -->
-    <div class="text-center text-sls-cyan-100/50 text-xs">
-      <p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p>
-    </div>
+    <div class="text-center text-sls-blue-100/50 text-xs"><p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p></div>
   </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="script.js"></script>
+
+<!-- كود السلايدر الكبير -->
+<script>
+(function() {
+  // ==========================================
+  // Debug: طباعة في الكونسول عشان تشوف المشكلة
+  // ==========================================
+  console.log('🔥 السلايدر بدأ يشتغل');
+
+  // التأكد إن الدوال موجودة
+  if (typeof safeText === 'undefined' || typeof defaultImg === 'undefined') {
+    console.error('❌ مشكلة: script.js ماتحملش بعد! المتغيرات safeText و defaultImg مش موجودة');
+    var slider = document.getElementById('hero-slider');
+    if (slider) {
+      slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-5xl block mb-4">⚠️</span><p class="text-white/80 text-lg font-bold">جاري تحميل البيانات...</p></div></div></div>';
+    }
+    return;
+  }
+
+  var slider = document.getElementById('hero-slider');
+  var dotsContainer = document.getElementById('hero-dots');
+  var heroArrow = document.getElementById('hero-arrow');
+  var allConvoys = [];
+  var currentIndex = -1;
+  var autoTimer = null;
+  var isTransitioning = false;
+  var INIT_CALLED = false; // يمنع تكرار التهيئة
+
+  function buildSlideCard(c) {
+    var icon = (typeof typeIcons !== 'undefined' && typeIcons[c.type]) ? typeIcons[c.type] : '🏥';
+    var imgSrc = c.image || defaultImg;
+    return '<div class="hero-slide-card" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
+      '<div class="hero-slide-img">' +
+        '<img src="' + safeText(imgSrc) + '" alt="' + safeText(c.title) + '" onerror="this.src=\'' + defaultImg + '\'">' +
+        '<div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">' + icon + ' ' + safeText(c.type) + '</div>' +
+        (c.featured ? '<div class="absolute bottom-4 right-4 bg-sls-gold-400 px-3 py-1.5 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">⭐ رئيسية</div>' : '') +
+      '</div>' +
+      '<div class="hero-slide-content">' +
+        '<div class="flex flex-wrap gap-2 mb-4">' +
+          '<span class="bg-sls-blue-100 text-sls-blue-700 text-xs px-3 py-1.5 rounded-full font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
+          (c.featured ? '<span class="bg-sls-gold-400/20 text-sls-gold-600 text-xs px-3 py-1.5 rounded-full font-bold">⭐ قافلة رئيسية</span>' : '') +
+        '</div>' +
+        '<h2 class="text-xl sm:text-2xl md:text-3xl font-black text-sls-blue-900 mb-3 leading-snug">' + safeText(c.title) + '</h2>' +
+        '<p class="text-gray-500 text-sm sm:text-base mb-5 leading-relaxed line-clamp-3">' + safeText(c.desc) + '</p>' +
+        '<div class="flex flex-wrap gap-4 text-sm text-gray-500 mb-6">' +
+          '<span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' + safeText(c.location) + '</span>' +
+          '<span class="flex items-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' + safeText(c.date) + '</span>' +
+        '</div>' +
+        '<div class="inline-flex items-center gap-2 bg-sls-blue-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-sls-blue-700 transition-all w-fit text-sm cursor-pointer">' +
+          'اقرأ التفاصيل' +
+          '<svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function slideIn(index) {
+    if (isTransitioning || !allConvoys.length) return;
+    isTransitioning = true;
+    var slide = allConvoys[index];
+    if (!slide) { isTransitioning = false; return; }
+
+    slide.style.transition = 'none';
+    slide.style.transform = 'translateX(-105%)';
+    slide.style.opacity = '0';
+    slide.classList.add('active');
+    slide.offsetHeight;
+    requestAnimationFrame(function() {
+      slide.style.transition = 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease';
+      slide.style.transform = 'translateX(0)';
+      slide.style.opacity = '1';
+    });
+    setTimeout(function() { isTransitioning = false; }, 950);
+  }
+
+  function slideOut(index) {
+    var slide = allConvoys[index];
+    if (!slide) return;
+    slide.style.transition = 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease';
+    slide.style.transform = 'translateX(105%)';
+    slide.style.opacity = '0';
+    setTimeout(function() { slide.classList.remove('active'); }, 950);
+  }
+
+  function goToNext() {
+    if (!allConvoys.length || isTransitioning) return;
+    var oldIndex = currentIndex;
+    currentIndex = (currentIndex + 1) % allConvoys.length;
+    slideOut(oldIndex);
+    setTimeout(function() { slideIn(currentIndex); updateDots(); }, 250);
+  }
+
+  function updateDots() {
+    if (!dotsContainer) return;
+    var html = '';
+    for (var i = 0; i < allConvoys.length; i++) {
+      html += '<button class="hero-dot' + (i === currentIndex ? ' active' : '') + '" onclick="window._heroGoTo(' + i + ')"></button>';
+    }
+    dotsContainer.innerHTML = html;
+  }
+
+  // عرّف globally عشان الـ onclick في الـ dots يقدر يوصلها
+  window._heroGoTo = function(idx) {
+    if (isTransitioning || idx === currentIndex) return;
+    clearInterval(autoTimer);
+    var oldIndex = currentIndex;
+    currentIndex = idx;
+    slideOut(oldIndex);
+    setTimeout(function() { slideIn(currentIndex); updateDots(); startAuto(); }, 250);
+  };
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(goToNext, 4500);
+  }
+
+  function showLoading() {
+    slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><div style="width:40px;height:40px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fbbf24;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px;"></div><p class="text-white/80 text-lg font-bold mt-4">جاري تحميل القوافل...</p></div></div></div>';
+  }
+
+  function showEmpty() {
+    slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-6xl block mb-4">🏥</span><p class="text-white/70 text-xl font-bold mb-3">لا توجد قوافل حالياً</p><p class="text-white/40 text-sm">سيتم إضافتها من لوحة التحكم قريباً</p><a href="services.html" class="inline-block mt-6 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold px-6 py-2.5 rounded-full text-sm hover:bg-white/20 transition-all">تصفح الخدمات</a></div></div></div>';
+    if (dotsContainer) dotsContainer.innerHTML = '';
+  }
+
+  function showError(msg) {
+    console.error('❌ خطأ في السلايدر:', msg);
+    slider.innerHTML = '<div class="hero-slide active" style="opacity:1;transform:none;pointer-events:auto;"><div class="hero-slide-card flex items-center justify-center"><div class="text-center p-10"><span class="text-6xl block mb-4">⚠️</span><p class="text-white/80 text-lg font-bold mb-2">حدث خطأ في التحميل</p><p class="text-white/50 text-sm">' + safeText(msg) + '</p></div></div></div>';
+    if (dotsContainer) dotsContainer.innerHTML = '';
+  }
+
+  function init(data) {
+    if (INIT_CALLED) {
+      console.log('⏭️ init اتناديتت قبل كده، مابنفعشش تاني');
+      return;
+    }
+    INIT_CALLED = true;
+    console.log('📦 init شتغلت! البيانات:', data ? (Object.keys(data).length + ' قافلة') : 'مفيش بيانات');
+
+    if (!data || Object.keys(data).length === 0) {
+      console.log('📭 مفيش قوافل في الـ database');
+      showEmpty();
+      return;
+    }
+
+    allConvoys = Object.values(data).reverse().filter(function(c) { return c.featured; });
+    console.log('✅ هعمل ' + allConvoys.length + ' شريحة سلايدر');
+
+    var html = '';
+    for (var i = 0; i < allConvoys.length; i++) {
+      html += '<div class="hero-slide">' + buildSlideCard(allConvoys[i]) + '</div>';
+    }
+    slider.innerHTML = html;
+    updateDots();
+
+    if (heroArrow) {
+      setTimeout(function() {
+        heroArrow.style.opacity = '0';
+        heroArrow.style.pointerEvents = 'none';
+      }, 3000);
+    }
+
+    setTimeout(function() {
+      currentIndex = 0;
+      slideIn(0);
+      startAuto();
+    }, 3000);
+  }
+
+  // تحميل البيانات من Firebase
+  try {
+    var fbConfig = {
+      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
+      authDomain: "sls-admin-panel.firebaseapp.com",
+      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "sls-admin-panel",
+      storageBucket: "sls-admin-panel.firebasestorage.app",
+      messagingSenderId: "545641823357",
+      appId: "1:545641823357:web:e0a0ee7f62205156850514"
+    };
+
+    // منع تكرار init (script.js ممكن يكون عاملها فعلاً)
+    if (!firebase.apps.length) {
+      console.log('🔄 بعمل initialize لـ Firebase...');
+      firebase.initializeApp(fbConfig);
+    } else {
+      console.log('✅ Firebase معمول فعلاً (' + firebase.apps.length + ' app)');
+    }
+
+    console.log('📡 بستمع للقوافل من Firebase...');
+    firebase.database().ref('convoys').on('value', function(snap) {
+      console.log('🔥 Firebase رجع ببيانات:', snap.val() ? 'موجودة' : 'فاضية');
+      init(snap.val());
+    }, function(error) {
+      console.error('❌ خطأ في Firebase:', error);
+      showError(error.message || 'خطأ في الاتصال بقاعدة البيانات');
+    });
+
+  } catch(e) {
+    console.error('❌ خطأ عام:', e);
+    showError(e.message || 'خطأ غير معروف');
+  }
+
+  // تحديث الـ height عند تغيير حجم الشاشة
+  function updateSliderHeight() {
+    if (window.innerWidth <= 768) {
+      slider.style.height = 'auto';
+      slider.style.minHeight = '380px';
+    } else {
+      slider.style.height = '420px';
+      slider.style.minHeight = '';
+    }
+  }
+  window.addEventListener('resize', updateSliderHeight);
+  updateSliderHeight();
+
+  // أظهر loading لحد ما البيانات تتحمل
+  showLoading();
+
+  // وقف الـ auto-slide لما الماوس فوق السلايدر
+  slider.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+  slider.addEventListener('mouseleave', function() { if (allConvoys.length) startAuto(); });
+
+  // دعم السحب باللمس على الموبايل
+  var touchStartX = 0;
+  slider.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener('touchend', function(e) {
+    if (!allConvoys.length) return;
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      clearInterval(autoTimer);
+      if (diff > 0) {
+        var oldIndex = currentIndex;
+        currentIndex = (currentIndex - 1 + allConvoys.length) % allConvoys.length;
+        slideOut(oldIndex);
+        setTimeout(function() { slideIn(currentIndex); updateDots(); startAuto(); }, 250);
+      } else {
+        goToNext();
+      }
+    }
+  }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
