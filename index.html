@@ -377,6 +377,34 @@
 <script src="script.js"></script>
 
 <script>
+    // ===== ترتيب القوافل بالتاريخ (الأحدث أولاً) =====
+  function parseArabicDate(dateStr) {
+    if (!dateStr) return 0;
+    var months = {
+      'يناير':1,'فبراير':2,'مارس':3,'أبريل':4,'مايو':5,'يونيو':6,
+      'يوليو':7,'أغسطس':8,'سبتمبر':9,'أكتوبر':10,'نوفمبر':11,'ديسمبر':12,
+      'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,
+      'july':7,'august':8,'september':9,'october':10,'november':11,'december':12
+    };
+    var parts = dateStr.trim().split(/[\s\/\-]+/);
+    if (parts.length >= 3) {
+      var day = parseInt(parts[0]) || 1;
+      var monthVal = months[parts[1].toLowerCase()] || parseInt(parts[1]) || 1;
+      var year = parseInt(parts[2]) || 2025;
+      return new Date(year, monthVal - 1, day).getTime();
+    }
+    var num = parseInt(dateStr);
+    if (!isNaN(num) && num > 1000000000) return num;
+    return 0;
+  }
+
+  function sortByDate(arr) {
+    return arr.sort(function(a, b) {
+      var dA = (a.timestamp && typeof a.timestamp === 'number') ? a.timestamp : parseArabicDate(a.date);
+      var dB = (b.timestamp && typeof b.timestamp === 'number') ? b.timestamp : parseArabicDate(b.date);
+      return dB - dA;
+    });
+  }
 (function() {
   console.log('🔥 السلايدر + الأخبار بدأو');
 
@@ -631,7 +659,7 @@
       return;
     }
 
-    newsData = Object.values(data).reverse();
+    newsData = sortByDate(Object.values(data));
     console.log('📰 كاروسيل الأخبار: ' + newsData.length + ' قافلة');
 
     var html = '';
@@ -669,7 +697,7 @@
     }
 
     // ★ التعديل الأساسي: عرض كل القوافل مش بس featured
-    allConvoys = Object.values(data).reverse();
+    allConvoys = sortByDate(Object.values(data));
     console.log('✅ السلايدر: ' + allConvoys.length + ' قافلة');
 
     if (allConvoys.length > 0) {
