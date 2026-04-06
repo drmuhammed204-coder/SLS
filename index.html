@@ -74,78 +74,6 @@
 .hero-slide-content { width: 55%; padding: 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
 @media (max-width: 768px) { .hero-slide-content { width: 100%; padding: 1.5rem; } }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* ===== أنماط كاروسيل الأخبار (مضمونة هنا) ===== */
-.news-carousel-card .nc-img {
-  position: relative;
-  overflow: hidden;
-  height: 180px;
-}
-.news-carousel-card .nc-type-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(4px);
-  color: #1d4ed8;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  z-index: 2;
-}
-.news-carousel-card .nc-featured-badge {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: #fbbf24;
-  color: #1e3a8a;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  z-index: 2;
-}
-.news-carousel-card .nc-date {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: #6b7280;
-  margin-bottom: 8px;
-}
-.news-carousel-card .nc-date svg { flex-shrink: 0; }
-.news-carousel-card .nc-location {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: #9ca3af;
-  margin-bottom: 12px;
-}
-.news-carousel-card .nc-location svg { flex-shrink: 0; }
-.news-carousel-card .nc-read-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #2563eb;
-  transition: gap 0.3s ease;
-}
-.news-carousel-card:hover .nc-read-more {
-  gap: 10px;
-  color: #1d4ed8;
-}
-.news-carousel-card .nc-read-more svg { flex-shrink: 0; }
 </style>
 </head>
 <body class="bg-white">
@@ -349,7 +277,7 @@
           <span class="stat-number block text-3xl sm:text-4xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="6900">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">حالة طبية</span>
         </div>
-        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] col-span-2 sm:col-span-1">
+        <div class="bg-white rounded-2xl p-5 text-center cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)]">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl flex items-center justify-center text-2xl">🎒</div>
           <span class="stat-number block text-2xl sm:text-3xl font-black text-sls-blue-900 mb-0.5 tracking-tight" data-target="1800">+0</span>
           <span class="text-gray-500 text-xs sm:text-sm font-bold">مصاريف مدرسية</span>
