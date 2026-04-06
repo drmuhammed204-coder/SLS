@@ -370,16 +370,28 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
 /* ==========================================
    قسم آخر الأخبار (كاروسيل)
    ========================================== */
-.news-carousel-wrapper { position: relative; direction: rtl; }
+.news-carousel-wrapper {
+  position: relative;
+  direction: rtl;
+  overflow: hidden;
+}
 .news-carousel-track {
-  display: flex; gap: 1.25rem; overflow: hidden;
+  display: flex;
+  gap: 1.25rem;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
 }
 .news-carousel-card {
-  min-width: 280px; max-width: 280px; flex-shrink: 0;
-  background: white; border-radius: 1.25rem; overflow: hidden;
+  min-width: 280px;
+  max-width: 280px;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 1.25rem;
+  overflow: hidden;
   box-shadow: 0 8px 24px rgba(74, 125, 186, 0.08);
-  border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.3s;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 .news-carousel-card:hover {
   transform: translateY(-6px);
@@ -479,19 +491,36 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
 }
 .news-carousel-card .nc-read-more svg { flex-shrink: 0; }
 .news-carousel-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 36px; height: 36px; background: white; border: 1px solid #e2e8f0;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 10; transition: all 0.3s;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08); font-size: 1rem; color: #1e3a8a;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 1rem;
+  color: #1e3a8a;
 }
 .news-carousel-nav:hover { background: #3b82f6; border-color: #3b82f6; color: white; }
 .news-carousel-nav.prev { right: -10px; }
 .news-carousel-nav.next { left: -10px; }
 .news-carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 1.25rem; }
 .news-carousel-dot {
-  width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1;
-  cursor: pointer; transition: all 0.3s; border: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
 }
 .news-carousel-dot.active { background: #3b82f6; width: 24px; border-radius: 4px; }
 @media (max-width: 640px) {

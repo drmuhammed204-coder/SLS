@@ -780,17 +780,33 @@
   if (newsWrapper) {
     newsWrapper.addEventListener('mouseenter', function() { clearInterval(newsAutoTimer); });
     newsWrapper.addEventListener('mouseleave', function() { startNewsAuto(); });
-  }
 
-  var newsTouchX = 0;
-  if (newsTrack) {
-    newsTrack.addEventListener('touchstart', function(e) { newsTouchX = e.touches[0].clientX; }, { passive: true });
-    newsTrack.addEventListener('touchend', function(e) {
-      if (!newsData.length) return;
-      var diff = newsTouchX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
+    var _newsTouchX = 0;
+    var _newsTouchY = 0;
+    var _newsIsSwiping = false;
+
+    newsWrapper.addEventListener('touchstart', function(e) {
+      _newsTouchX = e.touches[0].clientX;
+      _newsTouchY = e.touches[0].clientY;
+      _newsIsSwiping = false;
+    }, { passive: true });
+
+    newsWrapper.addEventListener('touchmove', function(e) {
+      var dx = Math.abs(e.touches[0].clientX - _newsTouchX);
+      var dy = Math.abs(e.touches[0].clientY - _newsTouchY);
+      if (dx > dy && dx > 10) {
+        _newsIsSwiping = true;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    newsWrapper.addEventListener('touchend', function(e) {
+      if (!_newsIsSwiping || !newsData.length) return;
+      var diff = _newsTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
         clearInterval(newsAutoTimer);
         if (diff > 0) { slideNewsCarousel(1); } else { slideNewsCarousel(-1); }
+        startNewsAuto();
       }
     }, { passive: true });
   }
