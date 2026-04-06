@@ -528,21 +528,21 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
 .donate-method-option.selected { border-color: #3b82f6 !important; background: #eff6ff !important; }
 
 /* ==========================================
-   تحسينات المنيو الموبايل (زي الـ Admin)
-   ========================================== */
-/* ==========================================
-   تحسينات المنيو الموبايل
+   المنيو الموبايل (Full Screen)
    ========================================== */
 #mobile-menu-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   z-index: 49;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 #mobile-menu-overlay.show {
   display: block;
+  opacity: 1;
 }
 
 #mobile-menu {
@@ -550,14 +550,81 @@ body { font-family: 'Tajawal', 'Cairo', sans-serif; }
   top: 0;
   right: 0;
   bottom: 0;
-  width: 280px;
+  width: 100%;
+  max-width: 320px;
   z-index: 50;
-  overflow-y: auto;
+  background: linear-gradient(180deg, #0c1e4a 0%, #1e3a8a 40%, #1e40af 100%);
   transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 #mobile-menu.menu-open {
   transform: translateX(0);
+}
+
+/* هيدر المنيو */
+.mobile-menu-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+/* لينكات المنيو */
+.mobile-menu-links {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.mobile-menu-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+.mobile-menu-links a:hover,
+.mobile-menu-links a.active {
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+.mobile-menu-links a.active {
+  background: rgba(251,191,36,0.12);
+  color: #fbbf24;
+}
+.mobile-menu-links a svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+.mobile-menu-links a:hover svg,
+.mobile-menu-links a.active svg {
+  opacity: 1;
+}
+
+/* فاصل بين الأقسام */
+.mobile-menu-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 0.75rem 1rem;
+}
+
+/* فوتر المنيو */
+.mobile-menu-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
 }
 
 @media (min-width: 1024px) {
