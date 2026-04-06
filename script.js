@@ -52,7 +52,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Mobile Menu Toggle (محسّن — زي الـ Admin)
+// Mobile Menu Toggle
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
   const overlay = document.getElementById('mobile-menu-overlay');
@@ -88,7 +88,7 @@ function safeText(str) {
 
 var defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%231e3a8a'/%3E%3Ctext x='50%25' y='50%25' fill='%2393c5fd' font-size='40' text-anchor='middle' dy='.3em'%3E🏥%3C/text%3E%3C/svg%3E";
 
-// تنسيق المقال: فصل جمل الرعاية + إدراج صورة وسط المقال
+// تنسيق المقال
 function formatArticle(text, imageUrl, imageTitle) {
   if (!text) return '';
   var safe = safeText(text);
@@ -115,7 +115,6 @@ function formatArticle(text, imageUrl, imageTitle) {
       html += '<div class="convoy-highlight">' + line + '</div>';
     } else {
       paragraphCount++;
-      // إدراج الصورة بعد الفقرة التانية
       if (!imageInserted && paragraphCount === 2 && imageUrl) {
         html += '<p style="margin-bottom: 1.2rem;">' + line + '</p>';
         html += '<figure class="article-inline-image">';
@@ -132,6 +131,7 @@ function formatArticle(text, imageUrl, imageTitle) {
   return html;
 }
 
+// مودال القافلة
 function openConvoyModal(id) {
   if (!id) return;
   var modal = document.getElementById('convoy-modal');
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. تحريك الأرقام
   animateStats();
 
-  // 2. إغلاق المنيو عند الضغط على رابط (موبايل) — محسّن
+  // 2. إغلاق المنيو عند الضغط على رابط (موبايل)
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenu) {
     mobileMenu.querySelectorAll('a').forEach(link => {
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 3. كود فيرسل والفورم (صفحة التواصل فقط)
+  // 3. فورم التواصل (صفحة التواصل فقط)
   // ==========================================
   const form = document.getElementById('contact-form');
 
@@ -255,8 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
       projectId: "sls-admin-panel",
       storageBucket: "sls-admin-panel.firebasestorage.app",
       messagingSenderId: "545641823357",
-      appId: "1:545641823357:web:e0a0ee7f62205156850514",
-      measurementId: "G-9YX9L874BR"
+      appId: "1:545641823357:web:e0a0ee7f62205156850514"
     };
 
     if (!firebase.apps.length) {
@@ -301,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 4. عرض القوافل ديناميكياً (صفحة الخدمات فقط)
+  // 4. عرض القوافل (صفحة الخدمات فقط)
   // ==========================================
   var convoysSection = document.getElementById('all-convoys');
   var featuredSection = document.getElementById('featured-convoys');
@@ -406,130 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 5. كاروسيل آخر الأخبار (الصفحة الرئيسية فقط)
-  // ==========================================
-  var newsTrack = document.getElementById('news-carousel-track');
-  var newsDots = document.getElementById('news-carousel-dots');
-
-  if (newsTrack) {
-    var homeFbConfig = {
-      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
-      authDomain: "sls-admin-panel.firebaseapp.com",
-      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "sls-admin-panel",
-      storageBucket: "sls-admin-panel.firebasestorage.app",
-      messagingSenderId: "545641823357",
-      appId: "1:545641823357:web:e0a0ee7f62205156850514"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(homeFbConfig);
-    }
-
-    var homeDb = firebase.database();
-    var carouselIndex = 0;
-    var carouselTimer = null;
-    var carouselData = [];
-
-    function buildNewsCard(c) {
-      var icon = typeIcons[c.type] || '🏥';
-      var imgSrc = c.image || defaultImg;
-      return '<div class="news-carousel-card" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
-        '<img src="' + safeText(imgSrc) + '" alt="' + safeText(c.title) + '" onerror="this.src=\'' + defaultImg + '\'">' +
-        '<div class="nc-body">' +
-          '<span class="nc-badge">' + icon + ' ' + safeText(c.type) + '</span>' +
-          (c.featured ? '<span class="nc-badge" style="background:#fef3c7;color:#d97706;margin-right:4px;">⭐ رئيسية</span>' : '') +
-          '<div class="nc-title">' + safeText(c.title) + '</div>' +
-          '<div class="nc-meta"><span>📍 ' + safeText(c.location) + '</span><span>📅 ' + safeText(c.date) + '</span></div>' +
-        '</div>' +
-      '</div>';
-    }
-
-    function getVisibleCards() {
-      var w = window.innerWidth;
-      if (w >= 768) return 3;
-      if (w >= 640) return 2;
-      return 1;
-    }
-
-    function updateCarousel() {
-      if (carouselData.length === 0) return;
-      var visible = getVisibleCards();
-      var maxIndex = Math.max(0, carouselData.length - visible);
-      if (carouselIndex > maxIndex) carouselIndex = maxIndex;
-      if (carouselIndex < 0) carouselIndex = 0;
-
-      var cardWidth = 300 + 24; // min-width + gap
-      var offset = carouselIndex * cardWidth;
-      newsTrack.style.transform = 'translateX(' + offset + 'px)';
-
-      // تحديث النقاط
-      if (newsDots) {
-        var totalDots = maxIndex + 1;
-        var dotsHtml = '';
-        for (var i = 0; i < totalDots; i++) {
-          dotsHtml += '<button class="news-carousel-dot' + (i === carouselIndex ? ' active' : '') + '" onclick="goToSlide(' + i + ')"></button>';
-        }
-        newsDots.innerHTML = dotsHtml;
-      }
-    }
-
-    window.slideNewsCarousel = function(dir) {
-      var visible = getVisibleCards();
-      var maxIndex = Math.max(0, carouselData.length - visible);
-      carouselIndex += dir;
-      if (carouselIndex > maxIndex) carouselIndex = 0;
-      if (carouselIndex < 0) carouselIndex = maxIndex;
-      updateCarousel();
-      resetAutoSlide();
-    };
-
-    window.goToSlide = function(idx) {
-      carouselIndex = idx;
-      updateCarousel();
-      resetAutoSlide();
-    };
-
-    function startAutoSlide() {
-      carouselTimer = setInterval(function() {
-        slideNewsCarousel(1);
-      }, 4000);
-    }
-
-    function resetAutoSlide() {
-      clearInterval(carouselTimer);
-      startAutoSlide();
-    }
-
-    // وقف عند التمرير بالماوس
-    newsTrack.addEventListener('mouseenter', function() { clearInterval(carouselTimer); });
-    newsTrack.addEventListener('mouseleave', function() { startAutoSlide(); });
-
-    // تحديث عند تغيير حجم الشاشة
-    window.addEventListener('resize', function() { updateCarousel(); });
-
-    homeDb.ref('convoys').on('value', function(snapshot) {
-      var data = snapshot.val();
-
-      if (!data) {
-        newsTrack.innerHTML = '<div class="text-center w-full py-12"><span class="text-4xl block mb-3">🏥</span><p class="text-gray-400 text-sm">لا توجد قوافل حالياً</p></div>';
-        if (newsDots) newsDots.innerHTML = '';
-        return;
-      }
-
-      carouselData = Object.values(data).reverse();
-      newsTrack.innerHTML = carouselData.map(buildNewsCard).join('');
-      carouselIndex = 0;
-      updateCarousel();
-      startAutoSlide();
-    });
-  }
-
-  // ==========================================
-  // 6. صفحة التبرع (نسخ + FAQ)
+  // 5. صفحة التبرع (نسخ + FAQ)
   // ==========================================
 
-  // نسخ النص
   function copyText(btn, text) {
     navigator.clipboard.writeText(text).then(function() {
       btn.classList.add('copied');
@@ -542,7 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // FAQ toggle
   function toggleFaq(btn) {
     var item = btn.parentElement;
     var body = item.querySelector('.faq-body');
@@ -559,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 7. Back to Top click handler
+  // Back to Top
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
@@ -568,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 8. زرار "ساهم معنا" العائم
+  // 6. زرار "ساهم معنا" العائم
   // ==========================================
   (function() {
     if (window.location.pathname.indexOf('donate') !== -1) return;
@@ -581,294 +458,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(btn);
   })();
 });
-/* ==========================================
-   كاروسيل آخر الأخبار
-   ========================================== */
-(function() {
-  console.log('📰 كاروسيل الأخبار بدأ');
-
-  var track = document.getElementById('news-carousel-track');
-  var dotsContainer = document.getElementById('news-carousel-dots');
-  var prevBtn = document.getElementById('carouselPrev');
-  var nextBtn = document.getElementById('carouselNext');
-
-  if (!track) {
-    console.log('⏭️ مفيش كاروسيل أخبار في الصفحة دي');
-    return;
-  }
-
-  var newsData = [];
-  var currentSlide = 0;
-  var autoPlayTimer = null;
-  var isAnimating = false;
-  var READY = false;
-
-  // تحسب عدد الكروت الظاهرة حسب الشاشة
-  function getVisibleCount() {
-    var w = window.innerWidth;
-    if (w <= 640) return 1;
-    if (w <= 1024) return 2;
-    return 3;
-  }
-
-  // تحسب أقصى سلايد ممكن نوصل له
-  function getMaxSlide() {
-    var visible = getVisibleCount();
-    var max = newsData.length - visible;
-    return Math.max(0, max);
-  }
-
-  // بناء كارت واحد
-  function buildNewsCard(c) {
-    var icon = (typeof typeIcons !== 'undefined' && typeIcons[c.type]) ? typeIcons[c.type] : '🏥';
-    var imgSrc = c.image || (typeof defaultImg !== 'undefined' ? defaultImg : 'https://placehold.co/600x400/e8f0fe/1e3a8a?text=SLS');
-    var title = (typeof safeText !== 'undefined' ? safeText(c.title) : (c.title || ''));
-    var desc = (typeof safeText !== 'undefined' ? safeText(c.desc) : (c.desc || ''));
-    var location = (typeof safeText !== 'undefined' ? safeText(c.location) : (c.location || ''));
-    var date = (typeof safeText !== 'undefined' ? safeText(c.date) : (c.date || ''));
-
-    return '<div class="news-carousel-card" onclick="openConvoyModal(\'' + (c.id || '') + '\')">' +
-      '<div class="nc-img">' +
-        '<img src="' + imgSrc + '" alt="' + title + '" onerror="this.src=\'' + (typeof defaultImg !== 'undefined' ? defaultImg : '') + '\'">' +
-        '<span class="nc-type-badge">' + icon + ' ' + (typeof safeText !== 'undefined' ? safeText(c.type) : (c.type || '')) + '</span>' +
-        (c.featured ? '<span class="nc-featured-badge">⭐ رئيسية</span>' : '') +
-      '</div>' +
-      '<div class="nc-body">' +
-        '<div class="nc-date">' +
-          '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' +
-          date +
-        '</div>' +
-        '<h3 class="nc-title">' + title + '</h3>' +
-        '<div class="nc-location">' +
-          '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' +
-          location +
-        '</div>' +
-        '<span class="nc-read-more">اقرأ التفاصيل <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="rotate-180"/></svg></span>' +
-      '</div>' +
-    '</div>';
-  }
-
-  // تحريك التراك
-  function moveTrack(animated) {
-    if (!newsData.length) return;
-    var visible = getVisibleCount();
-    var cardWidth = track.children[0] ? track.children[0].offsetWidth : 0;
-    var gap = 20;
-    var offset = currentSlide * (cardWidth + gap);
-
-    if (animated !== false) {
-      isAnimating = true;
-      track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
-    } else {
-      track.style.transition = 'none';
-    }
-
-    // RTL = الاتجاه معكوس، فالسلايد للأمام = translateX موجب
-    track.style.transform = 'translateX(' + offset + 'px)';
-
-    if (animated !== false) {
-      setTimeout(function() { isAnimating = false; }, 650);
-    }
-
-    updateDots();
-  }
-
-  // النقاط
-  function updateDots() {
-    if (!dotsContainer || !newsData.length) return;
-    var max = getMaxSlide();
-    var totalDots = max + 1;
-    var html = '';
-    for (var i = 0; i < totalDots; i++) {
-      html += '<button class="news-dot' + (i === currentSlide ? ' active' : '') + '" onclick="window._newsGoTo(' + i + ')"></button>';
-    }
-    dotsContainer.innerHTML = html;
-  }
-
-  // الذهاب لنقطة معينة
-  window._newsGoTo = function(idx) {
-    if (isAnimating) return;
-    clearInterval(autoPlayTimer);
-    currentSlide = idx;
-    moveTrack(true);
-    startAutoPlay();
-  };
-
-  // التالي / السابق (اللي الأزرار بتدعوها)
-  window.slideNewsCarousel = function(dir) {
-    if (isAnimating || !newsData.length) return;
-    clearInterval(autoPlayTimer);
-
-    // dir = 1 يعني "التالي" (في RTL = يمين = ←)
-    // dir = -1 يعني "السابق" (في RTL = يسار = →)
-    if (dir === 1) {
-      currentSlide++;
-      if (currentSlide > getMaxSlide()) currentSlide = 0;
-    } else {
-      currentSlide--;
-      if (currentSlide < 0) currentSlide = getMaxSlide();
-    }
-
-    moveTrack(true);
-    startAutoPlay();
-  };
-
-  // أوتوبلاي
-  function startAutoPlay() {
-    clearInterval(autoPlayTimer);
-    if (newsData.length <= getVisibleCount()) return; // لو الكروت قليلة، مفيش حاجة للتحريك
-    autoPlayTimer = setInterval(function() {
-      slideNewsCarousel(1);
-    }, 5000);
-  }
-
-  // عرض حالة فاضية
-  function showEmptyNews() {
-    track.innerHTML = '<div style="width:100%;text-align:center;padding:40px;color:#9ca3af;">' +
-      '<span style="font-size:48px;display:block;margin-bottom:12px;">📭</span>' +
-      '<p style="font-size:16px;font-weight:700;">لا توجد قوافل إضافية حالياً</p>' +
-      '<p style="font-size:13px;margin-top:4px;">سيتم إضافتها من لوحة التحكم قريباً</p></div>';
-    if (dotsContainer) dotsContainer.innerHTML = '';
-  }
-
-  // التهيئة بالبيانات
-  function renderNews(data) {
-    if (READY) {
-      console.log('⏭️ الأخبار اتناديتت قبل كده');
-      return;
-    }
-    READY = true;
-
-    if (!data || Object.keys(data).length === 0) {
-      showEmptyNews();
-      return;
-    }
-
-    // نفس بيانات القوافل - عكس الترتيب (الأحدث أول)
-    newsData = Object.values(data).reverse();
-    console.log('📰 عدد كروت الأخبار:', newsData.length);
-
-    if (!newsData.length) {
-      showEmptyNews();
-      return;
-    }
-
-    // بناء الكروت
-    var html = '';
-    for (var i = 0; i < newsData.length; i++) {
-      html += buildNewsCard(newsData[i]);
-    }
-    track.innerHTML = html;
-
-    // إخفاء الكروت الزيادة على الشاشة الصغيرة مؤقتاً
-    applyResponsiveVisibility();
-
-    // نبدأ من الأول
-    currentSlide = 0;
-    moveTrack(false);
-
-    // شغّل الأوتوبلاي
-    setTimeout(function() {
-      startAutoPlay();
-    }, 1000);
-  }
-
-  // إخفاء/إظهار الكروت حسب حجم الشاشة
-  function applyResponsiveVisibility() {
-    var visible = getVisibleCount();
-    for (var i = 0; i < track.children.length; i++) {
-      track.children[i].style.display = (i < newsData.length) ? '' : 'none';
-    }
-  }
-
-  // استماع لتغيير حجم الشاشة
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-      if (!newsData.length) return;
-      // تصحيح السلايد الحالي لو خرج عن الحد
-      if (currentSlide > getMaxSlide()) {
-        currentSlide = getMaxSlide();
-      }
-      applyResponsiveVisibility();
-      moveTrack(false);
-      // إعادة تشغيل الأوتوبلاي
-      clearInterval(autoPlayTimer);
-      startAutoPlay();
-    }, 200);
-  });
-
-  // وقف الأوتوبلاي لما الماوس فوق الكاروسيل
-  var wrapper = track.closest('.news-carousel-wrapper');
-  if (wrapper) {
-    wrapper.addEventListener('mouseenter', function() { clearInterval(autoPlayTimer); });
-    wrapper.addEventListener('mouseleave', function() { startAutoPlay(); });
-  }
-
-  // سحب باللمس
-  var touchStartX = 0;
-  var touchStartY = 0;
-  track.addEventListener('touchstart', function(e) {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  track.addEventListener('touchend', function(e) {
-    if (!newsData.length) return;
-    var diffX = touchStartX - e.changedTouches[0].clientX;
-    var diffY = touchStartY - e.changedTouches[0].clientY;
-
-    // لو السحب أفقي أكبر من الرأسي
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-      clearInterval(autoPlayTimer);
-      // في RTL: السحب لليمين = next، السحب لليسار = prev
-      if (diffX > 0) {
-        slideNewsCarousel(1);
-      } else {
-        slideNewsCarousel(-1);
-      }
-    }
-  }, { passive: true });
-
-  // ==========================================
-  // تحميل البيانات من Firebase
-  // ==========================================
-  try {
-    // لو Firebase اتعمل initialize قبل كده (في السلايدر الكبير)
-    if (firebase && firebase.apps && firebase.apps.length) {
-      console.log('📰 Firebase موجود، بجيب بيانات الأخبار...');
-      firebase.database().ref('convoys').on('value', function(snap) {
-        renderNews(snap.val());
-      }, function(err) {
-        console.error('❌ خطأ في أخبار Firebase:', err);
-        showEmptyNews();
-      });
-    } else {
-      console.log('⏳ منتظر Firebase يتحمل...');
-      // انتظر Firebase يتحمل (السلايدر الكبير بيعمله)
-      var waitCount = 0;
-      var waitForFirebase = setInterval(function() {
-        waitCount++;
-        if (firebase && firebase.apps && firebase.apps.length) {
-          clearInterval(waitForFirebase);
-          console.log('📰 Firebase اتحمل، بجيب بيانات الأخبار...');
-          firebase.database().ref('convoys').on('value', function(snap) {
-            renderNews(snap.val());
-          }, function(err) {
-            console.error('❌ خطأ في أخبار Firebase:', err);
-            showEmptyNews();
-          });
-        }
-        if (waitCount > 50) { // 5 ثواني ولم يتحمل
-          clearInterval(waitForFirebase);
-          console.error('❌ Firebase ماتحملش');
-          showEmptyNews();
-        }
-      }, 100);
-    }
-  } catch(e) {
-    console.error('❌ خطأ في كاروسيل الأخبار:', e);
-    showEmptyNews();
-  }
-})();
