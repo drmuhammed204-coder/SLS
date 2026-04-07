@@ -2,3 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "."
 }
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "gitignore": ["imgbb-key.js", "firebase-config.js"]
+}

@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
+  <script src="firebase-config.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -872,19 +872,16 @@
   </div>
 
   <script>
+    // بدل ما تكتب المفتاح مباشرة، هنجيبه من ملف منفصل
+var IMGBB_KEY = '';
+(function() {
+  var s = document.createElement('script');
+  s.src = 'imgbb-key.js';
+  s.onload = function() { IMGBB_KEY = window.__IMGBB_KEY || ''; };
+  document.head.appendChild(s);
+})();
     // ===== Firebase Config =====
-    const firebaseConfig = {
-      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
-      authDomain: "sls-admin-panel.firebaseapp.com",
-      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "sls-admin-panel",
-      storageBucket: "sls-admin-panel.firebasestorage.app",
-      messagingSenderId: "545641823357",
-      appId: "1:545641823357:web:e0a0ee7f62205156850514",
-      measurementId: "G-9YX9L874BR"
-    };
-
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(SLS_FIREBASE_CONFIG);
     const auth = firebase.auth();
     const db = firebase.database();
 
@@ -906,9 +903,6 @@
 
     // ===== إضافة: سنة الـ Footer =====
     document.getElementById('footerYear').textContent = new Date().getFullYear();
-
-    // ===== ImgBB =====
-    const IMGBB_KEY = '4d7b9457bcea3a7dc6dae1a8843dbb3a';
 
     function readFileAsBase64(file) {
       return new Promise(function(resolve, reject) {

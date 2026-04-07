@@ -101,7 +101,7 @@
     </div>
   </div>
 </nav>
-
+<div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
 <div id="mobile-menu">
   <!-- هيدر المنيو -->
   <div class="mobile-menu-header">
@@ -371,7 +371,7 @@
     <div class="text-center text-sls-blue-100/50 text-xs"><p>© 2025 جميع الحقوق محفوظة لجمعية الليدرز الاجتماعية SLS</p></div>
   </div>
 </footer>
-
+<script src="firebase-config.js"></script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="script.js"></script>
@@ -731,20 +731,9 @@
   // إظهار loading فوراً
   showLoading();
   try {
-    var fbConfig = {
-      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
-      authDomain: "sls-admin-panel.firebaseapp.com",
-      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "sls-admin-panel",
-      storageBucket: "sls-admin-panel.firebasestorage.app",
-      messagingSenderId: "545641823357",
-      appId: "1:545641823357:web:e0a0ee7f62205156850514"
-    };
-
     if (!firebase.apps.length) {
-      firebase.initializeApp(fbConfig);
+      firebase.initializeApp(SLS_FIREBASE_CONFIG);
     }
-
     console.log('📡 بستمع للقوافل...');
     firebase.database().ref('convoys').on('value', function(snap) {
       console.log('🔥 Firebase:', snap.val() ? 'موجودة' : 'فاضية');

@@ -306,21 +306,9 @@ document.addEventListener('DOMContentLoaded', () => {
   var featuredSection = document.getElementById('featured-convoys');
   var noConvoysEl = document.getElementById('no-convoys');
 
-  if (convoysSection) {
-
-    var fbConfig = {
-      apiKey: "AIzaSyBJ2meQFZuZYeZH7Ie8CQseBjwEV2Phg_4",
-      authDomain: "sls-admin-panel.firebaseapp.com",
-      databaseURL: "https://sls-admin-panel-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "sls-admin-panel",
-      storageBucket: "sls-admin-panel.firebasestorage.app",
-      messagingSenderId: "545641823357",
-      appId: "1:545641823357:web:e0a0ee7f62205156850514"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(fbConfig);
-    }
+  if (!firebase.apps.length) {
+    firebase.initializeApp(SLS_FIREBASE_CONFIG);
+  }
 
     var convoyDb = firebase.database();
 
