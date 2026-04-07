@@ -836,29 +836,3 @@
 
 })();
 </script>
-<script>
-// دوال المنيو الموبايل (fallback)
-function toggleMobileMenu() {
-  var menu = document.getElementById('mobile-menu');
-  var overlay = document.getElementById('mobile-menu-overlay');
-  if (!menu) return;
-  var isOpen = menu.classList.contains('menu-open');
-  if (isOpen) {
-    menu.classList.remove('menu-open');
-    if (overlay) overlay.classList.remove('show');
-    document.body.style.overflow = '';
-  } else {
-    menu.classList.add('menu-open');
-    if (overlay) overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeMobileMenu() {
-  var menu = document.getElementById('mobile-menu');
-  var overlay = document.getElementById('mobile-menu-overlay');
-  if (menu) menu.classList.remove('menu-open');
-  if (overlay) overlay.classList.remove('show');
-  document.body.style.overflow = '';
-}
-</script>

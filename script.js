@@ -56,8 +56,17 @@ window.addEventListener('scroll', () => {
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
   const overlay = document.getElementById('mobile-menu-overlay');
-  if (menu) menu.classList.toggle('menu-open');
-  if (overlay) overlay.classList.toggle('show');
+  if (!menu) return;
+  const isOpen = menu.classList.contains('menu-open');
+  if (isOpen) {
+    menu.classList.remove('menu-open');
+    if (overlay) overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('menu-open');
+    if (overlay) overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeMobileMenu() {
@@ -65,6 +74,7 @@ function closeMobileMenu() {
   const overlay = document.getElementById('mobile-menu-overlay');
   if (menu) menu.classList.remove('menu-open');
   if (overlay) overlay.classList.remove('show');
+  document.body.style.overflow = '';
 }
 
 // ==========================================
