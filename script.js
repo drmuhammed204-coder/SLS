@@ -310,15 +310,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 4. عرض القوافل (صفحة الخدمات فقط)
+  // 4. عرض القوافل (صفحة الخدمات فقط) - مُصلح
   // ==========================================
   var convoysSection = document.getElementById('all-convoys');
   var featuredSection = document.getElementById('featured-convoys');
   var noConvoysEl = document.getElementById('no-convoys');
 
-  if (!firebase.apps.length) {
-    firebase.initializeApp(SLS_FIREBASE_CONFIG);
-  }
+  // ★ التعديل الأساسي: تشغيل الكود فقط لو العناصر موجودة
+  if (convoysSection || featuredSection) {
+    
+    if (!firebase.apps.length) {
+      firebase.initializeApp(SLS_FIREBASE_CONFIG);
+    }
 
     var convoyDb = firebase.database();
 
@@ -374,28 +377,28 @@ document.addEventListener('DOMContentLoaded', () => {
       var data = snapshot.val();
 
       if (!data) {
-        convoysSection.classList.add('hidden');
-        noConvoysEl.classList.remove('hidden');
+        if (convoysSection) convoysSection.classList.add('hidden');
+        if (noConvoysEl) noConvoysEl.classList.remove('hidden');
         return;
       }
 
-      noConvoysEl.classList.add('hidden');
-      convoysSection.classList.remove('hidden');
+      if (noConvoysEl) noConvoysEl.classList.add('hidden');
+      if (convoysSection) convoysSection.classList.remove('hidden');
 
       var allConvoys = Object.values(data).reverse();
       var featured = allConvoys.filter(function(c) { return c.featured === true; });
       var normal = allConvoys.filter(function(c) { return c.featured !== true; });
 
-      if (featured.length > 0) {
+      if (featured.length > 0 && featuredSection) {
         featuredSection.innerHTML = '<h3 class="text-xl font-bold text-sls-blue-900 mb-5 flex items-center gap-2"><span class="text-sls-gold-400">⭐</span> قافلة مميزة</h3>' +
           featured.slice(0, 1).map(buildFeaturedConvoyCard).join('');
-      } else {
+      } else if (featuredSection) {
         featuredSection.innerHTML = '';
       }
 
-      if (normal.length > 0) {
+      if (normal.length > 0 && convoysSection) {
         convoysSection.innerHTML = normal.slice(0, 6).map(buildConvoyCard).join('');
-      } else if (featured.length === 0) {
+      } else if (featured.length === 0 && convoysSection) {
         convoysSection.innerHTML = '';
         convoysSection.classList.add('hidden');
       }
@@ -455,4 +458,4 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.setAttribute('aria-label', 'ساهم معنا');
     document.body.appendChild(btn);
   })();
-});
+})();
