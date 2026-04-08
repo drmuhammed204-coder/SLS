@@ -1,7 +1,7 @@
 // api/upload-image.js
 
 export const config = {
-  runtime: 'nodejs20.x',
+  runtime: 'nodejs',
   maxDuration: 30,
 };
 
