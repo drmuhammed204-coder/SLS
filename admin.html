@@ -935,23 +935,30 @@ var IMGBB_KEY = '';
       });
     }
 
-    function uploadToImgBB(base64DataUrl) {
-      var pureBase64 = base64DataUrl.split(',')[1];
-      var formBody = 'key=' + encodeURIComponent(IMGBB_KEY) + '&image=' + encodeURIComponent(pureBase64);
-
-      return fetch('https://api.imgbb.com/1/upload', {
+    // ===== رفع الصورة عبر API السيرفر (بدل ما نرفع مباشرة من المتصفح) =====
+    async function uploadToImgBB(base64DataUrl) {
+      var response = await fetch('/api/upload-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formBody
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(result) {
-        if (result.success && result.data && result.data.url) {
-          return result.data.url;
-        } else {
-          throw new Error(result.error ? result.error.message : 'رد غير معروف من ImgBB');
-        }
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          image: base64DataUrl
+        })
       });
+
+      if (!response.ok) {
+        var errorData = await response.json().catch(function() { return {}; });
+        throw new Error(errorData.error || 'فشل رفع الصورة (HTTP ' + response.status + ')');
+      }
+
+      var result = await response.json();
+
+      if (result.success && result.url) {
+        return result.url;
+      } else {
+        throw new Error(result.error || 'رد غير معروف من السيرفر');
+      }
     }
 
     // ===== حالة رفع الصورة =====

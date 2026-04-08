@@ -29,27 +29,291 @@
   "logo": "https://sls-rho.vercel.app/images/logo.webp",
   "description": "جمعية الليدرز الاجتماعية تقدم قوافل طبية مجانية وخدمات إنسانية في جميع محافظات مصر",
   "foundingDate": "2013",
-  "foundingLocation": {
-    "@type": "Place",
-    "name": "الإسكندرية، مصر"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق",
-    "addressLocality": "الإسكندرية",
-    "addressCountry": "EG"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+201117629537",
-    "contactType": "customer service",
-    "availableLanguage": ["ar"]
-  },
-  "sameAs": [
-    "https://www.facebook.com/share/1C1RqpGpdJ/"
-  ]
+  "foundingLocation": { "@type": "Place", "name": "الإسكندرية، مصر" },
+  "address": { "@type": "PostalAddress", "streetAddress": "برج الحرية ٢ - ١١ شارع جلال الدسوقي - باب شرق", "addressLocality": "الإسكندرية", "addressCountry": "EG" },
+  "contactPoint": { "@type": "ContactPoint", "telephone": "+201117629537", "contactType": "customer service", "availableLanguage": ["ar"] },
+  "sameAs": ["https://www.facebook.com/share/1C1RqpGpdJ/"]
 }
 </script>
+
+<style>
+  .modern-hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: #f8fafc;
+    overflow: hidden;
+  }
+  .hero-big-year {
+    position: absolute;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    font-size: clamp(10rem, 28vw, 22rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #d0d9e8;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1a365d;
+    box-shadow: 0 1px 3px rgba(15,36,71,0.04);
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #0f2447;
+    letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.9;
+    max-width: 540px;
+  }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 100%);
+    border: 1px solid #d4dfef;
+    border-radius: 12px;
+    padding: 10px 18px;
+    box-shadow: 0 2px 8px rgba(59,130,246,0.06);
+  }
+  .hero-pill-val {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #1a365d;
+  }
+  .hero-pill-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #4a6282;
+  }
+
+  .sec-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+  .sec-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 900;
+    color: #0f2447;
+    line-height: 1.3;
+  }
+  .sec-accent {
+    width: 40px;
+    height: 3px;
+    border-radius: 3px;
+    background: #1a365d;
+  }
+  .body-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #334155;
+    line-height: 1.9;
+  }
+
+  .vm-card {
+    background: white;
+    border-radius: 1.25rem;
+    border: 1px solid #e8ecf2;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .vm-card:hover {
+    box-shadow: 0 16px 40px -12px rgba(15,36,71,0.1);
+    transform: translateY(-3px);
+  }
+  .vm-card .bar {
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 3px;
+  }
+  .vm-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .goal-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    background: white;
+    border: 1px solid #f0f2f5;
+    border-radius: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .goal-row:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px -4px rgba(15,36,71,0.06);
+  }
+  .goal-n {
+    min-width: 30px; height: 30px;
+    border-radius: 8px;
+    background: #eff6ff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: #1a365d;
+  }
+
+  .svc-card {
+    background: white;
+    border: 1px solid #e8ecf2;
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .svc-card:hover {
+    box-shadow: 0 12px 32px -8px rgba(15,36,71,0.08);
+    transform: translateY(-2px);
+  }
+  .svc-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid #f4f6f8;
+  }
+  .svc-line:last-child { border-bottom: none; }
+  .svc-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #3b82f6;
+    flex-shrink: 0;
+  }
+
+  .val-chip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(145deg, #fefefe 0%, #f6f8fb 100%);
+    border: 1px solid #e4e9f0;
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 8px rgba(15,36,71,0.04), 0 1px 2px rgba(15,36,71,0.03);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .val-chip:hover {
+    border-color: #c8d4e3;
+    box-shadow: 0 6px 16px rgba(15,36,71,0.07);
+  }
+  .val-ico {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #eff6ff 0%, #e0ecfa 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  .cta-card {
+    background: linear-gradient(145deg, #fefefe 0%, #f6f8fb 100%);
+    border: 1px solid #e4e9f0;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 12px rgba(15,36,71,0.04), 0 1px 3px rgba(15,36,71,0.03);
+    transition: box-shadow 0.3s ease;
+  }
+  .cta-card:hover {
+    box-shadow: 0 8px 24px rgba(15,36,71,0.07);
+  }
+  .cta-text h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0f2447;
+    margin-bottom: 2px;
+  }
+  .cta-text p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+  .cta-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f59e0b;
+    color: #0f2447;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 10px 22px;
+    border-radius: 12px;
+    transition: background 0.2s;
+  }
+  .btn-gold:hover { background: #d97706; }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    color: #1a365d;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(15,36,71,0.04);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  .rv {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .rv.show { opacity: 1; transform: translateY(0); }
+  .rv-d1 { transition-delay: .08s; }
+  .rv-d2 { transition-delay: .16s; }
+  .rv-d3 { transition-delay: .24s; }
+  .rv-d4 { transition-delay: .32s; }
+  .rv-d5 { transition-delay: .4s; }
+</style>
 </head>
 <body class="bg-white">
 
@@ -76,100 +340,210 @@
 </nav>
 <div id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
 <div id="mobile-menu">
-  <!-- هيدر المنيو -->
   <div class="mobile-menu-header">
     <div class="flex items-center gap-3">
       <img src="images/logo.webp" alt="SLS" class="w-9 h-9 rounded-full object-contain">
-      <div>
-        <p class="text-white font-bold text-sm leading-tight">جمعية الليدرز</p>
-        <p class="text-white/40 text-xs">SLS</p>
-      </div>
+      <div><p class="text-white font-bold text-sm leading-tight">جمعية الليدرز</p><p class="text-white/40 text-xs">SLS</p></div>
     </div>
     <button onclick="closeMobileMenu()" class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/15 transition-all">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
   </div>
-
-  <!-- لينكات المنيو -->
   <div class="mobile-menu-links">
-    <a href="index.html" class="active">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-      الرئيسية
-    </a>
-    <a href="about.html">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      من نحن
-    </a>
-    <a href="services.html">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-      خدماتنا
-    </a>
-    <a href="regions.html">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-      مناطق الخدمة
-    </a>
-    <a href="board.html">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-      مجلس الإدارة
-    </a>
-    <a href="partners.html">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-      شركاؤنا
-    </a>
-    <a href="contact.html">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-      تواصل معنا
-    </a>
-
+    <a href="index.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>الرئيسية</a>
+    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>من نحن</a>
+    <a href="services.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>خدماتنا</a>
+    <a href="regions.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>مناطق الخدمة</a>
+    <a href="board.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>مجلس الإدارة</a>
+    <a href="partners.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>شركاؤنا</a>
+    <a href="contact.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>تواصل معنا</a>
     <div class="mobile-menu-divider"></div>
-
-    <a href="donate.html" style="background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.15)); color: #fbbf24;">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-      ساهم معنا
-    </a>
+    <a href="donate.html" style="background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.15)); color: #fbbf24;"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>ساهم معنا</a>
   </div>
-
-  <!-- فوتر المنيو -->
   <div class="mobile-menu-footer">
     <div class="flex items-center justify-center gap-4 mb-3">
-      <a href="tel:+201117629537" class="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/15 transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/share/1C1RqpGpdJ/" target="_blank" class="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/15 transition-all">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-      </a>
+      <a href="tel:+201117629537" class="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/15 transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></a>
+      <a href="https://www.facebook.com/share/1C1RqpGpdJ/" target="_blank" class="w-10 h-10 rounded-xl bg-white/8 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/15 transition-all"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
     </div>
     <p class="text-center text-white/25 text-xs">© 2025 جمعية الليدرز الاجتماعية</p>
   </div>
 </div>
-<!-- ABOUT CONTENT -->
-<div class="min-h-screen bg-gradient-to-b from-sls-blue-50 to-white pt-24">
-  <div class="max-w-6xl mx-auto px-4 py-12">
-    <div class="text-center mb-12 page-transition">
-      <span class="inline-block bg-sls-blue-100 text-sls-blue-700 font-bold text-sm px-4 py-2 rounded-full mb-4">من نحن</span>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-sls-blue-900 mb-4">رؤية تُحرّك المجتمع</h1>
-      <div class="w-24 h-1 bg-gradient-to-r from-sls-blue-500 to-sls-blue-500 mx-auto rounded-full"></div>
-    </div>
 
-    <div class="grid lg:grid-cols-2 gap-8">
-      <div class="space-y-6">
-        <div class="bg-white rounded-3xl p-8 shadow-xl shadow-sls-blue-100 border-t-4 border-sls-blue-500 card-hover page-transition">
-          <div class="w-16 h-16 bg-gradient-to-br from-sls-blue-400 to-sls-blue-500 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl">🎯</div>
-          <h3 class="text-2xl font-bold text-sls-blue-900 mb-4">الرؤية</h3>
-          <p class="text-gray-600 leading-relaxed"> منذ إنشائها عام 2013 التزمت جمعية الليدرز الاجتماعية بتوفير خدمات صحية على أعلى مستوى وبالمجان... </p>
-        </div>
+<!-- ========== HERO ========== -->
+<section class="modern-hero">
+  <div class="hero-big-year">2013</div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="hero-content max-w-2xl">
+      <div class="hero-tag mb-6 rv">
+        <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+        منذ أكثر من ١٠ سنوات في خدمة المجتمع
       </div>
-      <div class="space-y-4">
-        <div class="info-pill bg-white rounded-2xl p-5 shadow-lg shadow-sls-blue-50 flex items-center gap-4 border-r-4 border-sls-blue-500 page-transition">
-          <div class="w-12 h-12 bg-sls-blue-100 rounded-xl flex items-center justify-center text-2xl">📅</div>
-          <div><h4 class="font-bold text-sls-blue-900">تأسست عام 2013</h4><p class="text-sm text-gray-500">مشهرة برقم ٣٣٧٧</p></div>
+      <h1 class="hero-title mb-5 rv rv-d1">من <span style="color:#3b82f6">نحن</span></h1>
+      <p class="hero-desc mb-8 rv rv-d2">
+        جمعية الليدرز الاجتماعية هي مؤسسة أهلية غير هادفة للربح، تأسست عام ٢٠١٣، وتهدف إلى تقديم خدمات صحية وإنسانية متكاملة بالمجان للفئات الأكثر احتياجًا.
+      </p>
+      <div class="hero-pills rv rv-d3">
+        <div class="hero-pill">
+          <span class="hero-pill-val">٢٠١٣</span>
+          <span class="hero-pill-label">سنة التأسيس</span>
+        </div>
+        <div class="hero-pill">
+          <span class="hero-pill-val">٣٣٧٧</span>
+          <span class="hero-pill-label">رقم المشهرة</span>
+        </div>
+        <div class="hero-pill">
+          <span class="hero-pill-val">١٠+</span>
+          <span class="hero-pill-label">سنوات عطاء</span>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER PROFESSIONAL -->
+<!-- ========== INTRO ========== -->
+<section class="py-14 bg-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 rv">
+    <p class="body-text text-center">
+      منذ انطلاقها، التزمت الجمعية بأن تكون <strong class="text-sls-blue-900 font-bold">يد العون للمجتمع</strong>، من خلال الوصول إلى المناطق النائية وتقديم رعاية طبية بجودة عالية تضمن <strong class="text-sls-blue-900 font-bold">كرامة الإنسان وحقه في العلاج</strong>. نؤمن بأن الصحة حق أساسي لكل إنسان، ونعمل بلا كلل لتحقيق هذا الحق في كل ركن من أركان مصر.
+    </p>
+  </div>
+</section>
+
+<!-- ========== VISION & MISSION ========== -->
+<section class="py-14 bg-[#f8fafc]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="vm-card rv">
+        <div class="bar bg-[#1a365d]"></div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="vm-icon bg-[#eff6ff]">🎯</div>
+          <div>
+            <span class="sec-label">VISION</span>
+            <h3 class="sec-title !text-[1.35rem]">رؤيتنا</h3>
+          </div>
+        </div>
+        <p class="body-text">نسعى إلى مجتمع مصري يتمتع أفراده بـ<strong class="text-sls-blue-900 font-bold">صحة أفضل</strong> و<strong class="text-sls-blue-900 font-bold">حياة كريمة</strong>، من خلال منظومة متكاملة من الخدمات الصحية والإنسانية التي تصل إلى كل محتاج، في كل مكان داخل الجمهورية.</p>
+      </div>
+      <div class="vm-card rv rv-d2">
+        <div class="bar bg-[#f59e0b]"></div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="vm-icon bg-amber-50">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <span class="sec-label" style="color:#d97706">MISSION</span>
+            <h3 class="sec-title !text-[1.35rem]">رسالتنا</h3>
+          </div>
+        </div>
+        <p class="body-text">تقديم خدمات طبية وإنسانية مجانية بأعلى معايير الجودة، مع التركيز على الفئات الأكثر احتياجًا، والمساهمة في تقليل معاناة المرضى والقضاء على قوائم الانتظار، خاصة في المناطق النائية والمحرومة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GOALS ========== -->
+<section class="py-14 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-10 rv">
+      <span class="sec-label">GOALS</span>
+      <h2 class="sec-title mt-1">أهدافنا</h2>
+      <div class="sec-accent mt-3"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="goal-row rv rv-d1">
+        <div class="goal-n">١</div>
+        <p class="body-text !text-[0.95rem]">توفير رعاية صحية متكاملة بالمجان لغير القادرين</p>
+      </div>
+      <div class="goal-row rv rv-d2">
+        <div class="goal-n">٢</div>
+        <p class="body-text !text-[0.95rem]">الوصول إلى المناطق النائية وتغطية أكبر عدد ممكن من المحافظات</p>
+      </div>
+      <div class="goal-row rv rv-d3">
+        <div class="goal-n">٣</div>
+        <p class="body-text !text-[0.95rem]">تقليل قوائم الانتظار في العمليات الجراحية</p>
+      </div>
+      <div class="goal-row rv rv-d2">
+        <div class="goal-n">٤</div>
+        <p class="body-text !text-[0.95rem]">رفع مستوى الوعي الصحي داخل المجتمع</p>
+      </div>
+      <div class="goal-row rv rv-d3">
+        <div class="goal-n">٥</div>
+        <p class="body-text !text-[0.95rem]">دعم الطلاب وتحسين جودة حياتهم الصحية والتعليمية</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section class="py-14 bg-[#f8fafc]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-10 items-start">
+      <div class="lg:col-span-2 rv">
+        <span class="sec-label">SERVICES</span>
+        <h2 class="sec-title mt-1 mb-3">خدماتنا</h2>
+        <div class="sec-accent mb-5"></div>
+        <p class="body-text mb-6">نقدم مجموعة متنوعة من الخدمات الصحية والإنسانية التي تشمل كافة احتياجات المجتمع.</p>
+        <a href="services.html" class="inline-flex items-center gap-2 text-[#1a365d] font-bold text-sm hover:text-[#3b82f6] transition-colors">
+          عرض التفاصيل
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+      <div class="lg:col-span-3 svc-card rv rv-d2">
+        <div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">تنظيم القوافل الطبية والجراحية في مختلف المحافظات</span></div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">إجراء العمليات الجراحية في مختلف التخصصات</span></div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">تقديم الكشف الطبي وصرف العلاج بالمجان</span></div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">خدمة كبار السن وذوي الاحتياجات الخاصة</span></div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">حملات التوعية والمسح الطبي للأمراض المزمنة</span></div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">توفير نظارات طبية ودعم حالات ضعف الإبصار</span></div>
+          <div class="svc-line"><div class="svc-dot"></div><span class="body-text !text-[0.95rem]">تقديم دورات الإسعافات الأولية</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== VALUES ========== -->
+<section class="py-14 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 rv">
+      <span class="sec-label">VALUES</span>
+      <h2 class="sec-title mt-1">قيمنا</h2>
+      <div class="sec-accent mx-auto mt-3"></div>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+      <div class="val-chip rv rv-d1"><div class="val-ico">❤️</div><div><p class="text-[#0f2447] font-bold text-sm">الإنسانية</p><p class="text-[#94a3b8] text-xs font-medium">قبل كل شيء</p></div></div>
+      <div class="val-chip rv rv-d2"><div class="val-ico">⭐</div><div><p class="text-[#0f2447] font-bold text-sm">الجودة</p><p class="text-[#94a3b8] text-xs font-medium">في تقديم الخدمة</p></div></div>
+      <div class="val-chip rv rv-d3"><div class="val-ico">🔍</div><div><p class="text-[#0f2447] font-bold text-sm">الشفافية</p><p class="text-[#94a3b8] text-xs font-medium">والمصداقية</p></div></div>
+      <div class="val-chip rv rv-d4"><div class="val-ico">👥</div><div><p class="text-[#0f2447] font-bold text-sm">العمل الجماعي</p><p class="text-[#94a3b8] text-xs font-medium">قوة في الوحدة</p></div></div>
+      <div class="val-chip rv rv-d5"><div class="val-ico">♾️</div><div><p class="text-[#0f2447] font-bold text-sm">الاستمرارية</p><p class="text-[#94a3b8] text-xs font-medium">في العطاء</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="py-14 bg-[#f8fafc]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="cta-card rv">
+      <div class="cta-text">
+        <h3>كن جزءًا من هذا العطاء</h3>
+        <p>تضافر الجهود يصنع الفرق. ساهم معنا في بناء مجتمع أصح وأكرم.</p>
+      </div>
+      <div class="cta-btns">
+        <a href="donate.html" class="btn-gold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          ساهم الآن
+        </a>
+        <a href="contact.html" class="btn-outline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          تواصل معنا
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="bg-sls-blue-950 text-white pt-12 pb-6" dir="rtl">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-white/10 pb-8">
@@ -210,5 +584,14 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var els = document.querySelectorAll('.rv');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  els.forEach(function(el) { obs.observe(el); });
+});
+</script>
 </body>
 </html>
