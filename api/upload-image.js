@@ -27,10 +27,20 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'لا توجد صورة' });
     }
 
-    // ===== 4. التأكد إنه base64 صالح =====
-    if (typeof image !== 'string' || !image.startsWith('data:image/')) {
-      return res.status(400).json({ error: 'صيغة الصورة مش صحيحة' });
+    // ===== 4. التحقق المحسن من نوع الصورة (بدل من startsWith) =====
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    const match = image.match(/^data:(image\/[a-zA-Z]+);base64,/);
+
+    if (!match) {
+        return res.status(400).json({ error: 'صيغة البيانات غير صحيحة' });
     }
+
+    if (!allowedMimeTypes.includes(match[1])) {
+        return res.status(400).json({ 
+            error: 'نوع الملف غير مدعوم. المسموح: JPG, PNG, WEBP, GIF' 
+        });
+    }
+    // ====================================================================
 
     // ===== 5. فصل الـ base64 عن الـ prefix =====
     const pureBase64 = image.split(',')[1];
@@ -40,7 +50,6 @@ export default async function handler(req, res) {
     }
 
     // ===== 6. التأكد إن الحجم مناسب (5MB max بعد الضغط) =====
-    // base64 حجمه أكبر بـ 33% من الملف الأصلي تقريباً
     const sizeInBytes = (pureBase64.length * 3) / 4;
     const maxBytes = 5 * 1024 * 1024;
 

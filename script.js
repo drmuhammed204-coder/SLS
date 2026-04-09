@@ -87,7 +87,7 @@ var typeIcons = {
   'نشاط توعوي': '📢'
 };
 
-var dateIcons = { 'single': '📅', 'range': '🗓️' };
+var dateIcons = { 'single': '📅', 'range': '🗓' };
 
 function safeText(str) {
   if (!str) return '';
@@ -186,7 +186,7 @@ function openConvoyModal(id) {
           '<div class="max-w-3xl mx-auto px-6 sm:px-10 pt-8 sm:pt-10 pb-6">' +
             '<div class="flex flex-wrap items-center gap-2 mb-5">' +
               '<span class="bg-sls-blue-100 text-sls-blue-800 px-4 py-1.5 rounded-full text-sm font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
-              (c.featured ? '<span class="bg-sls-gold-400 text-sls-blue-900 px-4 py-1.5 rounded-full text-sm font-bold">⭐ قافلة رئيسية</span>' : '') +
+              (c.featured ? '<span class="bg-sls-gold-400 text-sls-blue-900 px-4 py-1.5 rounded-full text-sm font-bold">⭐️ قافلة رئيسية</span>' : '') +
             '</div>' +
             '<h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-sls-blue-900 leading-snug">' + safeText(c.title) + '</h2>' +
           '</div>' +
@@ -310,15 +310,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 4. عرض القوافل (صفحة الخدمات فقط) - مُصلح
+  // 4. عرض القوافل (صفحة الخدمات فقط) — مُصلح
   // ==========================================
   var convoysSection = document.getElementById('all-convoys');
   var featuredSection = document.getElementById('featured-convoys');
   var noConvoysEl = document.getElementById('no-convoys');
 
-  // ★ التعديل الأساسي: تشغيل الكود فقط لو العناصر موجودة
   if (convoysSection || featuredSection) {
-    
+
     if (!firebase.apps.length) {
       firebase.initializeApp(SLS_FIREBASE_CONFIG);
     }
@@ -333,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<div class="h-48 bg-sls-blue-100 overflow-hidden relative">' +
           '<img src="' + safeText(c.image) + '" alt="' + safeText(c.title) + '" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src=\'' + defaultImg + '\'">' +
           '<div class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">' + icon + ' ' + safeText(c.type) + '</div>' +
-          (c.featured ? '<div class="absolute top-3 left-3 bg-sls-gold-400 px-3 py-1 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">⭐ رئيسية</div>' : '') +
+          (c.featured ? '<div class="absolute top-3 left-3 bg-sls-gold-400 px-3 py-1 rounded-full text-sm font-bold text-sls-blue-900 shadow-sm">⭐️ رئيسية</div>' : '') +
         '</div>' +
         '<div class="p-6">' +
           '<h3 class="text-lg font-bold text-sls-blue-900 mb-2 group-hover:text-sls-blue-700 transition-colors line-clamp-2">' + safeText(c.title) + '</h3>' +
@@ -356,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
           '</div>' +
           '<div class="p-6 sm:p-8 flex flex-col justify-center">' +
             '<div class="flex flex-wrap items-center gap-2 mb-4">' +
-              '<span class="bg-sls-gold-400 text-sls-blue-900 text-xs px-3 py-1 rounded-full font-bold">⭐ قافلة رئيسية</span>' +
+              '<span class="bg-sls-gold-400 text-sls-blue-900 text-xs px-3 py-1 rounded-full font-bold">⭐️ قافلة رئيسية</span>' +
               '<span class="bg-sls-blue-100 text-sls-blue-700 text-xs px-3 py-1 rounded-full font-bold">' + icon + ' ' + safeText(c.type) + '</span>' +
             '</div>' +
             '<h3 class="text-xl sm:text-2xl font-black text-sls-blue-900 mb-3">' + safeText(c.title) + '</h3>' +
@@ -373,11 +372,13 @@ document.addEventListener('DOMContentLoaded', () => {
       '</div>';
     }
 
+    // ✅ الإصلاح الأساسي: كل المنطق جوه الـ callback
     convoyDb.ref('convoys').on('value', function(snapshot) {
       var data = snapshot.val();
 
       if (!data) {
         if (convoysSection) convoysSection.classList.add('hidden');
+        if (featuredSection) featuredSection.innerHTML = '';
         if (noConvoysEl) noConvoysEl.classList.remove('hidden');
         return;
       }
@@ -390,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var normal = allConvoys.filter(function(c) { return c.featured !== true; });
 
       if (featured.length > 0 && featuredSection) {
-        featuredSection.innerHTML = '<h3 class="text-xl font-bold text-sls-blue-900 mb-5 flex items-center gap-2"><span class="text-sls-gold-400">⭐</span> قافلة مميزة</h3>' +
+        featuredSection.innerHTML = '<h3 class="text-xl font-bold text-sls-blue-900 mb-5 flex items-center gap-2"><span class="text-sls-gold-400">⭐️</span> قافلة مميزة</h3>' +
           featured.slice(0, 1).map(buildFeaturedConvoyCard).join('');
       } else if (featuredSection) {
         featuredSection.innerHTML = '';
@@ -401,6 +402,18 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (featured.length === 0 && convoysSection) {
         convoysSection.innerHTML = '';
         convoysSection.classList.add('hidden');
+      }
+
+    }, function(error) {
+      console.error("❌ Firebase Error (Services):", error);
+      if (convoysSection) convoysSection.classList.add('hidden');
+      if (featuredSection) featuredSection.innerHTML = '';
+      if (noConvoysEl) {
+        noConvoysEl.classList.remove('hidden');
+        var pEl = noConvoysEl.querySelector('p');
+        var spanEl = noConvoysEl.querySelector('span');
+        if (pEl) pEl.textContent = 'حدث خطأ أثناء تحميل البيانات. يرجى تحديث الصفحة.';
+        if (spanEl) spanEl.textContent = '⚠️';
       }
     });
   }

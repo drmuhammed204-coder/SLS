@@ -969,6 +969,13 @@ var IMGBB_KEY = '';
       var file = e.target.files[0];
       if (!file) return;
 
+      if (typeof IMGBB_KEY === 'undefined' || IMGBB_KEY === '') {
+    toast('نظام الأمان لم يكتمل التحميل بعد، يرجى الانتظار ثوانٍ والمحاولة مرة أخرى.', 'warn');
+      document.getElementById('convoyImg').value = '';
+      // إيقاف العملية
+      return;
+    }
+
       // زيادة الحد لـ 5MB لأننا بنضغط
       if (file.size > 5 * 1024 * 1024) {
         toast('حجم الصورة كبير جداً (الحد 5MB)', 'err');
@@ -1710,7 +1717,7 @@ function formatDateAr(dateStr) {
       });
     }
 
-    function delebluelMsgs() {
+    function deleteAllMsgs() {
       showConfirm('هل أنت متأكد من حذف جميع الرسائل؟ لا يمكن التراجع.', function() {
         db.ref('messages').remove().then(function() {
           toast('تم حذف جميع الرسائل');

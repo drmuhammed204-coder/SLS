@@ -44,11 +44,6 @@
   <priority>0.90</priority>
 </url>
 <url>
-  <loc>https://sls-rho.vercel.app/thank-you.html</loc>
-  <lastmod>2025-01-01</lastmod>
-  <priority>0.50</priority>
-</url>
-<url>
   <loc>https://sls-rho.vercel.app/donate.html</loc>
   <lastmod>2025-01-01</lastmod>
   <priority>0.90</priority>
